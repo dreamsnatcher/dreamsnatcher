@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.Disposable;
+import com.github.dreamsnatcher.entities.GameObject;
 import com.github.dreamsnatcher.utils.Constants;
 
 import java.util.concurrent.TimeUnit;
@@ -51,7 +52,10 @@ public class WorldRenderer implements Disposable {
         worldController.cameraHelper.applyTo(camera);
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
-        worldController.spaceShip.render(batch);
+        worldController.gameWorld.spaceShip.render(batch);
+        for (GameObject object : worldController.gameWorld.objects) {
+            object.render(batch);
+        }
         batch.end();
         renderGUI(batch);
         if (worldController.isDebug()) {

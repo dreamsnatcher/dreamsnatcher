@@ -7,6 +7,9 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.World;
+import com.github.dreamsnatcher.entities.GameObject;
+import com.github.dreamsnatcher.entities.GameWorld;
+import com.github.dreamsnatcher.entities.Planet;
 import com.github.dreamsnatcher.entities.SpaceShip;
 import com.github.dreamsnatcher.screens.ScreenManager;
 import com.github.dreamsnatcher.utils.CameraHelper;
@@ -14,6 +17,8 @@ import com.github.dreamsnatcher.utils.CameraHelper;
 
 public class WorldController extends InputAdapter {
     public static final int MAX_ACCELERATION = 10;
+    private static float MAX_V = 1;
+
     public CameraHelper cameraHelper;
 
     public void setWorldRenderer(WorldRenderer worldRenderer) {
@@ -23,10 +28,9 @@ public class WorldController extends InputAdapter {
     public WorldRenderer worldRenderer;
     public long timeElapsed;
     private World b2World;
+    public GameWorld gameWorld;
     private boolean debug = false;
-    public SpaceShip spaceShip;
     private Vector2 curTouchPos;
-    private static float MAX_V = 1;
 
     public WorldController() {
         init();
@@ -36,15 +40,19 @@ public class WorldController extends InputAdapter {
         ScreenManager.multiplexer.addProcessor(this);
         cameraHelper = new CameraHelper();
         b2World = new World(new Vector2(0, 0f), true);
-        spaceShip = new SpaceShip();
-        spaceShip.init(b2World);
-        cameraHelper.setTarget(spaceShip.getBody());
+        gameWorld = new GameWorld();
+        gameWorld.setUpPlanets(b2World);
+        gameWorld.setUpSpaceship(b2World);
+        cameraHelper.setTarget(gameWorld.spaceShip.getBody());
     }
 
     public void update(float deltaTime) {
         timeElapsed += deltaTime * 1000;
         cameraHelper.update(deltaTime);
-        spaceShip.update(deltaTime);
+        gameWorld.spaceShip.update(deltaTime);
+        for (GameObject object : gameWorld.objects) {
+            object.update(deltaTime);
+        }
         b2World.step(1 / 60f, 3, 8); //timeStep, velocityIteration, positionIteration
         if (Gdx.input.isTouched()) {
             accelerate(curTouchPos.x, curTouchPos.y);
@@ -64,8 +72,9 @@ public class WorldController extends InputAdapter {
                 debug = !debug;
                 break;
             case Input.Keys.R:
-                spaceShip.getBody().setTransform(0,0,0);
-                spaceShip.getBody().setLinearVelocity(0,0);
+                SpaceShip spaceShip = gameWorld.spaceShip;
+                spaceShip.getBody().setTransform(0, 0, 0);
+                spaceShip.getBody().setLinearVelocity(0, 0);
                 break;
         }
         return true;
@@ -99,12 +108,13 @@ public class WorldController extends InputAdapter {
 
     private void accelerate(float screenX, float screenY) {
         Vector3 touch = worldRenderer.camera.unproject(new Vector3(screenX, screenY, 0));
+        SpaceShip spaceShip = gameWorld.spaceShip;
         Vector2 shipPos = spaceShip.getBody().getPosition();
         Vector2 thrustDir = new Vector2(shipPos.x - touch.x, shipPos.y - touch.y);
         Vector2 thrustNormed = new Vector2(thrustDir.x / (thrustDir.len() * MAX_ACCELERATION), thrustDir.y / (thrustDir.len() * MAX_ACCELERATION));
         if (spaceShip.getBody().getLinearVelocity().len() < MAX_V) {
             spaceShip.getBody().applyForceToCenter(thrustNormed, true);
-            spaceShip.getBody().setTransform(shipPos.x,shipPos.y,(thrustNormed.angle()-90) * MathUtils.degreesToRadians);
+            spaceShip.getBody().setTransform(shipPos.x, shipPos.y, (thrustNormed.angle() - 90) * MathUtils.degreesToRadians);
         }
     }
 

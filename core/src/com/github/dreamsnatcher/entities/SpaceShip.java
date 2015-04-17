@@ -10,8 +10,6 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.github.dreamsnatcher.utils.Assets;
 
 public class SpaceShip extends GameObject {
-    private static final float ACCELERATION = 0.5f;
-    private static final float MAX_SPEED = 3f;
 
     // loaded when init is called by GameWorldSerializer
     // not saved to json

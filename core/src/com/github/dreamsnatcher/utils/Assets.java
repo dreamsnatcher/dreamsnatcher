@@ -7,14 +7,17 @@ import com.badlogic.gdx.utils.Disposable;
 public class Assets implements Disposable {
 
     public static TextureRegion spaceShip;
-    public static Texture planet;
+    public static TextureRegion planet;
 
     public static void init(){
+
         spaceShip = new TextureRegion(new Texture("spaceship.png"));
+        planet = new TextureRegion(new Texture("planet.png"));
     }
 
     @Override
     public void dispose() {
         spaceShip.getTexture().dispose();
+        planet.getTexture().dispose();
     }
 }
