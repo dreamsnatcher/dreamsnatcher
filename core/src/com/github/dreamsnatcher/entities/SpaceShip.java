@@ -20,7 +20,7 @@ public class SpaceShip extends GameObject {
     public void init(com.badlogic.gdx.physics.box2d.World world) {
         texture = Assets.spaceShip;
         b2World = world;
-        dimension.set(0.2f, 0.2f);
+        dimension.set(0.4f, 0.4f * 0.5625f);
         origin.x = dimension.x / 2;
         origin.y = dimension.y / 2;
         initPhysics();

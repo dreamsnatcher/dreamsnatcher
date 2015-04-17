@@ -8,11 +8,24 @@ public class Assets implements Disposable {
 
     public static TextureRegion spaceShip;
     public static TextureRegion planet;
+    public static TextureRegion stars0;
+    public static TextureRegion stars1;
+    public static TextureRegion stars2;
+    public static TextureRegion stars3;
 
     public static void init(){
-
-        spaceShip = new TextureRegion(new Texture("spaceship.png"));
+        spaceShip = new TextureRegion(new Texture("spaceship_speed0.png"));
+        spaceShip.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         planet = new TextureRegion(new Texture("planet.png"));
+        planet.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        stars0 = new TextureRegion(new Texture("space_1_v2.png"));
+        stars0.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        stars1 = new TextureRegion(new Texture("space_2_v2.png"));
+        stars1.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        stars2 = new TextureRegion(new Texture("space_3_v2.png"));
+        stars2.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        stars3 = new TextureRegion(new Texture("space_4_v2.png"));
+        stars3.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
     }
 
     @Override
