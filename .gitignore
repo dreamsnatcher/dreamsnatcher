@@ -6,3 +6,4 @@ build/
 .project
 .settings
 local.properties
+.gradle
