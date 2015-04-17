@@ -3,6 +3,7 @@ package com.github.dreamsnatcher.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -99,7 +100,9 @@ public class EditorScreen extends Screen {
 
     private void newWorld() {
         world = new GameWorld();
+        World b2World = new World(new Vector2(0, -9), true);
         world.spaceShip = new SpaceShip();
+        world.spaceShip.init(b2World);
     }
 
     private void saveWorld() {
@@ -118,8 +121,7 @@ public class EditorScreen extends Screen {
         camera.update();
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
-
-        batch.draw(Assets.planet, world.spaceShip.position.x, world.spaceShip.position.y);
+        batch.draw(Assets.spaceShip, world.spaceShip.position.x, world.spaceShip.position.y, world.spaceShip.dimension.x, world.spaceShip.dimension.y);
         for(GameObject object: world.objects) {
             if(object instanceof Planet) {
                 batch.draw(Assets.planet, object.position.x, object.position.y);
