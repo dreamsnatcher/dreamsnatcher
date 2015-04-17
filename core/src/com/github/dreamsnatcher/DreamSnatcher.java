@@ -3,9 +3,9 @@ package com.github.dreamsnatcher;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.github.dreamsnatcher.screens.GameScreen;
 import com.github.dreamsnatcher.screens.Screen;
 import com.github.dreamsnatcher.screens.ScreenManager;
-import com.github.dreamsnatcher.screens.TestScreen;
 
 public class DreamSnatcher implements ApplicationListener {
 	ScreenManager manager;
@@ -14,12 +14,13 @@ public class DreamSnatcher implements ApplicationListener {
 	public void create () {
 		manager = new ScreenManager();
 		// SET START SCREEN HERE!
-		Screen screen = new TestScreen(manager);
+		Screen screen = new GameScreen(manager);
 		manager.setScreen(screen);
 	}
 
 	@Override
 	public void resize (int width, int height) {
+        manager.resize( width, height);
 	}
 
 	@Override

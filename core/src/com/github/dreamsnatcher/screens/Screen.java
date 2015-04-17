@@ -46,4 +46,8 @@ public abstract class Screen {
 		
 		return keyPressed;
 	}
+
+    public void resize(int width, int height) {
+
+    }
 }
