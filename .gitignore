@@ -6,3 +6,5 @@ build/
 .project
 .settings
 local.properties
+*.iws
+.gradle
