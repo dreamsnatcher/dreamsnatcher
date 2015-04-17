@@ -67,10 +67,10 @@ public class WorldController extends InputAdapter {
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         //TODO calculate vector between spaceship and touch point
-        Vector3 touch = worldRenderer.camera.project(new Vector3(screenX,screenX,0));
+        Vector3 touch = worldRenderer.camera.unproject(new Vector3(screenX,screenY,0));
         Vector2 shipPos = spaceShip.getBody().getPosition();
-        Vector2 thrustDir = new Vector2(touch.x - shipPos.x, touch.y - shipPos.y);
-        spaceShip.getBody().applyForceToCenter(thrustDir,true);
+        Vector2 thrustDir = new Vector2(shipPos.x- touch.x, shipPos.y- touch.y );
+        spaceShip.getBody().applyForceToCenter(thrustDir, true);
         return true;
     }
 
