@@ -3,6 +3,7 @@ package com.github.dreamsnatcher.desktop;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
+import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.graphics.GL20;
 import com.github.dreamsnatcher.screens.EditorScreen;
 import com.github.dreamsnatcher.screens.GameScreen;
@@ -51,6 +52,9 @@ public class Editor implements ApplicationListener {
     }
 
     public static void main (String[] args) throws Exception {
+        LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+        config.width = 500;
+        config.height = 500;
         new LwjglApplication(new Editor());
     }
 }
