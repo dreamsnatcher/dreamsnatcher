@@ -20,6 +20,8 @@ public abstract class GameObject {
         rotation = 0;
     }
 
+    public abstract void init(com.badlogic.gdx.physics.box2d.World world);
+
     public void update(float deltaTime) {
     }
 
