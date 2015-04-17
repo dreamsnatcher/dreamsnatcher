@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.github.dreamsnatcher.utils.Assets;
 
 public class SpaceShip extends GameObject {
     private static final float ACCELERATION = 0.5f;
@@ -22,6 +23,7 @@ public class SpaceShip extends GameObject {
 
 
     private void init() {
+        texture = Assets.spaceShip;
         dimension.set(0.2f, 0.2f);
         origin.x = dimension.x / 2;
         origin.y = dimension.y / 2;

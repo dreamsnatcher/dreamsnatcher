@@ -3,6 +3,7 @@ package com.github.dreamsnatcher.screens;
 import com.badlogic.gdx.Gdx;
 import com.github.dreamsnatcher.WorldController;
 import com.github.dreamsnatcher.WorldRenderer;
+import com.github.dreamsnatcher.utils.Assets;
 
 
 public class GameScreen extends Screen {
@@ -11,8 +12,10 @@ public class GameScreen extends Screen {
 
     public GameScreen(ScreenManager manager) {
         super(manager);
+        Assets.init();
         worldController = new WorldController();
         worldRenderer = new WorldRenderer(worldController);
+        worldController.setWorldRenderer(worldRenderer);
     }
 
     @Override
@@ -21,9 +24,11 @@ public class GameScreen extends Screen {
         worldRenderer.render();
     }
 
-
-
-
+    @Override
+    public void resize(int width, int height) {
+        super.resize(width, height);
+        worldRenderer.resize(width, height);
+    }
 
     @Override
     public void dispose() {
