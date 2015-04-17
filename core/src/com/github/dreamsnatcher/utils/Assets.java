@@ -14,7 +14,7 @@ public class Assets implements Disposable {
     public static TextureRegion stars3;
 
     public static void init(){
-        spaceShip = new TextureRegion(new Texture("spaceship.png"));
+        spaceShip = new TextureRegion(new Texture("spaceship_speed0.png"));
         spaceShip.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         stars0 = new TextureRegion(new Texture("space_1_v2.png"));
         stars0.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
