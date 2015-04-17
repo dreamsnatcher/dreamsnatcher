@@ -10,7 +10,6 @@ public abstract class GameObject {
     public Vector2 origin;
     public Vector2 scale;
     public float rotation;
-    protected Assets assets;
 
     public GameObject() {
         position = new Vector2();
