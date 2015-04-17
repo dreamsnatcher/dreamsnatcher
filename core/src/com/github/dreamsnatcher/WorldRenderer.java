@@ -68,10 +68,6 @@ public class WorldRenderer implements Disposable {
         worldController.cameraHelper.applyTo(camera);
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
-        worldController.gameWorld.spaceShip.render(batch);
-        for (GameObject object : worldController.gameWorld.objects) {
-            object.render(batch);
-        }
         int k = 0;
         for(int i = -10; i< 10;i++){
             for(int j = -10; j< 10;j++){
@@ -144,6 +140,10 @@ public class WorldRenderer implements Disposable {
                 batch.draw(textureRegion, i, j, 1, 1);
             }
         }
+        for (GameObject object : worldController.gameWorld.objects) {
+            object.render(batch);
+        }
+        worldController.gameWorld.spaceShip.render(batch);
         batch.end();
         renderGUI(batch);
         if (worldController.isDebug()) {

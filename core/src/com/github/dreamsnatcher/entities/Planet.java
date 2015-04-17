@@ -21,7 +21,7 @@ public class Planet extends GameObject {
     private void initPhysics() {
         //create body definition
         BodyDef bodyDef = new BodyDef();
-        bodyDef.type = BodyDef.BodyType.DynamicBody;
+        bodyDef.type = BodyDef.BodyType.StaticBody;
         bodyDef.position.set(position.x, position.y);
 
         //create body in world
@@ -40,7 +40,6 @@ public class Planet extends GameObject {
 
         b2Body.createFixture(fixtureDef);
         b2Body.setLinearDamping(1f);
-        b2Body.setBullet(true);
 
         circleShape.dispose(); //clean up!!
         b2Body.setUserData(this);
