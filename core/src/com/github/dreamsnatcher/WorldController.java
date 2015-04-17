@@ -3,6 +3,7 @@ package com.github.dreamsnatcher;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.World;
@@ -12,6 +13,7 @@ import com.github.dreamsnatcher.utils.CameraHelper;
 
 
 public class WorldController extends InputAdapter {
+    public static final int MAX_ACCELERATION = 10;
     public CameraHelper cameraHelper;
 
     public void setWorldRenderer(WorldRenderer worldRenderer) {
@@ -61,6 +63,8 @@ public class WorldController extends InputAdapter {
                 debug = !debug;
                 break;
             case Input.Keys.R:
+                spaceShip.getBody().setTransform(0,0,0);
+                spaceShip.getBody().setLinearVelocity(0,0);
                 break;
         }
         return true;
@@ -96,9 +100,10 @@ public class WorldController extends InputAdapter {
         Vector3 touch = worldRenderer.camera.unproject(new Vector3(screenX, screenY, 0));
         Vector2 shipPos = spaceShip.getBody().getPosition();
         Vector2 thrustDir = new Vector2(shipPos.x - touch.x, shipPos.y - touch.y);
-        Vector2 thrustNormed = new Vector2(thrustDir.x / thrustDir.len(), thrustDir.y / thrustDir.len());
+        Vector2 thrustNormed = new Vector2(thrustDir.x / (thrustDir.len() * MAX_ACCELERATION), thrustDir.y / (thrustDir.len() * MAX_ACCELERATION));
         if (spaceShip.getBody().getLinearVelocity().len() < MAX_V) {
             spaceShip.getBody().applyForceToCenter(thrustNormed, true);
+            spaceShip.getBody().setTransform(shipPos.x,shipPos.y,(thrustNormed.angle()-90) * MathUtils.degreesToRadians);
         }
     }
 
