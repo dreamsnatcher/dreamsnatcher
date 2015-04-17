@@ -1,0 +1,7 @@
+build/
+.iml
+.idea/
+.classpath
+.project
+.settings
+local.properties
