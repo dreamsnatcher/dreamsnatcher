@@ -23,6 +23,8 @@ public class WorldController extends InputAdapter {
     private World b2World;
     private boolean debug = false;
     public SpaceShip spaceShip;
+    private Vector2 curTouchPos;
+    private static float MAX_V = 1;
 
     public WorldController() {
         init();
@@ -41,6 +43,9 @@ public class WorldController extends InputAdapter {
         cameraHelper.update(deltaTime);
         spaceShip.update(deltaTime);
         b2World.step(1 / 60f, 3, 8); //timeStep, velocityIteration, positionIteration
+        if (Gdx.input.isTouched()) {
+            accelerate(curTouchPos.x, curTouchPos.y);
+        }
     }
 
     @Override
@@ -64,7 +69,7 @@ public class WorldController extends InputAdapter {
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         //TODO calculate vector between spaceship and touch point
-        accelerate(screenX, screenY);
+        curTouchPos = new Vector2(screenX, screenX);
         return true;
     }
 
@@ -75,7 +80,7 @@ public class WorldController extends InputAdapter {
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        accelerate(screenX, screenY);
+        curTouchPos = new Vector2(screenX, screenX);
         return true;
     }
 
@@ -87,11 +92,14 @@ public class WorldController extends InputAdapter {
         return b2World;
     }
 
-    private void accelerate(int screenX, int screenY) {
+    private void accelerate(float screenX, float screenY) {
         Vector3 touch = worldRenderer.camera.unproject(new Vector3(screenX, screenY, 0));
         Vector2 shipPos = spaceShip.getBody().getPosition();
         Vector2 thrustDir = new Vector2(shipPos.x - touch.x, shipPos.y - touch.y);
-        spaceShip.getBody().applyForceToCenter(thrustDir, true);
+        Vector2 thrustNormed = new Vector2(thrustDir.x / thrustDir.len(), thrustDir.y / thrustDir.len());
+        if (spaceShip.getBody().getLinearVelocity().len() < MAX_V) {
+            spaceShip.getBody().applyForceToCenter(thrustNormed, true);
+        }
     }
 
 }
