@@ -46,8 +46,6 @@ public class ScreenManager {
 	}
 
     public void resize(int width, int height) {
-        if(current instanceof  GameScreen){
             current.resize(width,height);
-        }
     }
 }

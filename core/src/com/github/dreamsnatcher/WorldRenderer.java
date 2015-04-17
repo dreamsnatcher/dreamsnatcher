@@ -10,7 +10,7 @@ import com.github.dreamsnatcher.utils.Constants;
 import java.util.concurrent.TimeUnit;
 
 public class WorldRenderer implements Disposable {
-    private OrthographicCamera camera;
+    public OrthographicCamera camera;
     private OrthographicCamera cameraGUI;
     private SpriteBatch batch;
     private WorldController worldController;
@@ -51,6 +51,7 @@ public class WorldRenderer implements Disposable {
         worldController.cameraHelper.applyTo(camera);
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
+        worldController.spaceShip.render(batch);
         batch.end();
         renderGUI(batch);
         if (worldController.isDebug()) {
