@@ -1,11 +1,11 @@
-package com.github.dreamsnatcher.desktop;
+package com.github.dreamsnatcher;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.Disposable;
-import com.github.dreamsnatcher.desktop.utils.Constants;
+import com.github.dreamsnatcher.utils.Constants;
 
 import java.util.concurrent.TimeUnit;
 

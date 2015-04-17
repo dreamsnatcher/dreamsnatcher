@@ -1,12 +1,13 @@
-package com.github.dreamsnatcher.desktop;
+package com.github.dreamsnatcher;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
-import com.github.dreamsnatcher.desktop.entities.SpaceShip;
-import com.github.dreamsnatcher.desktop.utils.CameraHelper;
+import com.github.dreamsnatcher.entities.SpaceShip;
+import com.github.dreamsnatcher.utils.CameraHelper;
+
 
 public class WorldController extends InputAdapter {
     public CameraHelper cameraHelper;

@@ -1,4 +1,4 @@
-package com.github.dreamsnatcher.desktop.utils;
+package com.github.dreamsnatcher.utils;
 
 public class Constants {
     //5 Meters

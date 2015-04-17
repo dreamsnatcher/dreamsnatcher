@@ -1,4 +1,4 @@
-package com.github.dreamsnatcher.desktop.utils;
+package com.github.dreamsnatcher.utils;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.MathUtils;

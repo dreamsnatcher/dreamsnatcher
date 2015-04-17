@@ -1,4 +1,4 @@
-package com.github.dreamsnatcher.desktop.entities;
+package com.github.dreamsnatcher.entities;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
