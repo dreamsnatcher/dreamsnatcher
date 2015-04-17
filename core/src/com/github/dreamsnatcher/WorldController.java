@@ -69,7 +69,7 @@ public class WorldController extends InputAdapter {
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         //TODO calculate vector between spaceship and touch point
-        curTouchPos = new Vector2(screenX, screenX);
+        curTouchPos = new Vector2(screenX, screenY);
         return true;
     }
 
@@ -80,7 +80,7 @@ public class WorldController extends InputAdapter {
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        curTouchPos = new Vector2(screenX, screenX);
+        curTouchPos = new Vector2(screenX, screenY);
         return true;
     }
 
