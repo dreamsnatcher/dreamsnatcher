@@ -10,7 +10,6 @@ import com.github.dreamsnatcher.desktop.utils.CameraHelper;
 public class WorldController extends InputAdapter {
     public CameraHelper cameraHelper;
     public long timeElapsed;
-    int coinCount = 0;
     private World b2World;
     private boolean debug = false;
 

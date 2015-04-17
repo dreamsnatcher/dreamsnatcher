@@ -1,13 +1,10 @@
 package com.github.dreamsnatcher.desktop;
 
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.Disposable;
-import com.github.dreamsnatcher.desktop.utils.Assets;
 import com.github.dreamsnatcher.desktop.utils.Constants;
 
 import java.util.concurrent.TimeUnit;
@@ -19,7 +16,6 @@ public class WorldRenderer implements Disposable {
     private WorldController worldController;
     private Box2DDebugRenderer debugRenderer;
     private BitmapFont font;
-    private TextureRegion coinTexture;
 
     public WorldRenderer(WorldController worldController) {
         this.worldController = worldController;
@@ -40,7 +36,6 @@ public class WorldRenderer implements Disposable {
         cameraGUI.update();
 
         font = new BitmapFont(true); //default 15pt Arial
-        coinTexture = Assets.getInstance(new AssetManager()).findRegion("coinGold");
     }
 
     public void renderGUI(SpriteBatch batch) {
@@ -49,8 +44,6 @@ public class WorldRenderer implements Disposable {
         String mmss = String.format("%02d:%02d", TimeUnit.MILLISECONDS.toMinutes(worldController.timeElapsed) % TimeUnit.HOURS.toMinutes(1),
                 TimeUnit.MILLISECONDS.toSeconds(worldController.timeElapsed) % TimeUnit.MINUTES.toSeconds(1));
         font.draw(batch, mmss, 10, 10);
-        batch.draw(coinTexture, 10, 40, 20, 20);
-        font.draw(batch, Integer.toString(worldController.coinCount), 35, 40);
         batch.end();
     }
 
