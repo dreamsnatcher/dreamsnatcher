@@ -8,3 +8,5 @@ build/
 local.properties
 *.iws
 .gradle
+local.properties~
+html/war/
