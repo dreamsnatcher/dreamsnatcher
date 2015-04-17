@@ -31,8 +31,8 @@ public class WorldController extends InputAdapter {
         ScreenManager.multiplexer.addProcessor(this);
         cameraHelper = new CameraHelper();
         b2World = new World(new Vector2(0, 0f), true);
-        spaceShip = new SpaceShip(new Vector2(0,0),b2World);
-
+        spaceShip = new SpaceShip();
+        spaceShip.init(b2World);
     }
 
     public void update(float deltaTime) {
