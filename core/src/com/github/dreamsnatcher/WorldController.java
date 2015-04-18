@@ -81,10 +81,7 @@ public class WorldController extends InputAdapter implements ContactListener {
                 debug = !debug;
                 break;
             case Input.Keys.R:
-                SpaceShip spaceShip = gameWorld.spaceShip;
-                spaceShip.getBody().setTransform(0, 0, 0);
-                spaceShip.getBody().setLinearVelocity(0, 0);
-                spaceShip.setEnergy(100f);
+                reset();
                 break;
         }
         return true;
@@ -128,6 +125,18 @@ public class WorldController extends InputAdapter implements ContactListener {
             spaceShip.getBody().applyForceToCenter(thrustNormed, true);
             spaceShip.getBody().setTransform(shipPos.x, shipPos.y, (thrustNormed.angle() - 90) * MathUtils.degreesToRadians);
             spaceShip.drainEnergy();
+        }
+    }
+
+    private void reset(){
+        SpaceShip spaceShip = gameWorld.spaceShip;
+        spaceShip.getBody().setTransform(0, 0, 0);
+        spaceShip.getBody().setLinearVelocity(0, 0);
+        spaceShip.setEnergy(100f);
+        // reinit gameobjects
+        spaceShip.init(getB2World());
+        for (GameObject object : gameWorld.objects) {
+            object.init(getB2World());
         }
     }
 

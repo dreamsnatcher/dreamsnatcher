@@ -3,6 +3,7 @@ package com.github.dreamsnatcher.screens;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -30,12 +31,23 @@ public class MainMenuScreen extends com.github.dreamsnatcher.screens.Screen {
         skin = new Skin(Gdx.files.internal("editor/uiskin.json"));
         stage = new Stage();
         table = new Table();
+        table.row();
 
-        Label title = new Label("Dreamsnatcher",skin);
-        table.add(title).padBottom(40).row();
 
-        TextButton button  = new TextButton("Play", skin);
-        button.addListener(new ClickListener(){
+        TextButton button = new TextButton("Editor", skin);
+
+        button.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                manager.setScreen(new EditorScreen(manager));
+            }
+        });
+
+        table.add(button).size(150, 60).pad(10);
+
+        button  = new TextButton("Play", skin);
+        button.setColor(Color.GREEN);
+        button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 //Same way we moved here from the Splash Screen
@@ -44,16 +56,7 @@ public class MainMenuScreen extends com.github.dreamsnatcher.screens.Screen {
                 manager.setScreen(new GameScreen(manager));
             }
         });
-        table.add(button).size(150,60).padBottom(20).row();
-
-        button = new TextButton("Editor", skin);
-        button.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                manager.setScreen(new EditorScreen(manager));
-            }
-        });
-        table.add(button).size(150, 60).padBottom(20).row();
+        table.add(button).size(150,60).pad(10);
 
         button = new TextButton("Exit", skin);
         button.addListener(new ClickListener(){
@@ -63,14 +66,12 @@ public class MainMenuScreen extends com.github.dreamsnatcher.screens.Screen {
                 // or System.exit(0);
             }
         });
-        table.add(button).size(150,60).padBottom(20).row();
-
-
+        table.add(button).size(150,60).pad(10);
         table.setFillParent(true);
         stage.addActor(table);
 
-        Texture texture = new Texture("alienstart.png");
-        TextureRegion region = new TextureRegion(texture, 0, 0, 500, 500);
+        Texture texture = new Texture("mainscreen.png");
+        TextureRegion region = new TextureRegion(texture, 0, 0, texture.getWidth(), texture.getHeight());
         table.setBackground(new TextureRegionDrawable(region));
 
         ScreenManager.multiplexer.addProcessor(stage);
