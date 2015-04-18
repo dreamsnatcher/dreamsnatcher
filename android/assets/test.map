@@ -1,0 +1,108 @@
+{
+objects: [
+	{
+		class: com.github.dreamsnatcher.entities.Planet
+		position: {
+			x: -1.046875
+			y: 0.7499999
+		}
+		dimension: {
+			x: 0.8
+			y: 0.4
+		}
+		origin: {
+			x: 0.4
+			y: 0.2
+		}
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Planet
+		position: {
+			x: -1.3515625
+			y: -1.3854167
+		}
+		dimension: {
+			x: 0.8
+			y: 0.4
+		}
+		origin: {
+			x: 0.4
+			y: 0.2
+		}
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Planet
+		position: {
+			x: 1.5078125
+			y: -1.4583335
+		}
+		dimension: {
+			x: 0.8
+			y: 0.4
+		}
+		origin: {
+			x: 0.4
+			y: 0.2
+		}
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Planet
+		position: {
+			x: 1.7421875
+			y: 1.0104167
+		}
+		dimension: {
+			x: 0.8
+			y: 0.4
+		}
+		origin: {
+			x: 0.4
+			y: 0.2
+		}
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Planet
+		position: {
+			x: -0.10156244
+			y: 1.8020833
+		}
+		dimension: {
+			x: 0.8
+			y: 0.4
+		}
+		origin: {
+			x: 0.4
+			y: 0.2
+		}
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Planet
+		position: {
+			x: -0.43750003
+			y: -1.8125
+		}
+		dimension: {
+			x: 0.8
+			y: 0.4
+		}
+		origin: {
+			x: 0.4
+			y: 0.2
+		}
+	}
+]
+spaceShip: {
+	position: {
+		x: 0.2734375
+		y: -0.27083337
+	}
+	dimension: {
+		x: 0.4
+		y: 0.22500001
+	}
+	origin: {
+		x: 0.2
+		y: 0.112500004
+	}
+}
+}

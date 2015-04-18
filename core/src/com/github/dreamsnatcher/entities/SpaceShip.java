@@ -13,9 +13,9 @@ public class SpaceShip extends GameObject {
 
     // loaded when init is called by GameWorldSerializer
     // not saved to json
-    private volatile TextureRegion texture;
-    private volatile com.badlogic.gdx.physics.box2d.World b2World;
-    private volatile Body b2Body;
+    private transient TextureRegion texture;
+    private transient com.badlogic.gdx.physics.box2d.World b2World;
+    private transient Body b2Body;
 
     public void init(com.badlogic.gdx.physics.box2d.World world) {
         texture = Assets.spaceShip;

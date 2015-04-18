@@ -9,22 +9,16 @@ import java.util.List;
  * Created by badlogic on 17/04/15.
  */
 public class GameWorld {
-
     public List<GameObject> objects = new ArrayList<GameObject>();
     public SpaceShip spaceShip;
 
-    public void setUpPlanets(World world){
-        objects.add(new Planet());
-        objects.add(new Planet());
-        objects.add(new Planet());
-        objects.add(new Planet());
+    /**
+     * Call this after you loaded a map via GameWorldSerializer.
+     */
+    public void init(World b2World) {
+        spaceShip.init(b2World);
         for (GameObject object : objects) {
-            object.init(world);
+            object.init(b2World);
         }
-    }
-
-    public void setUpSpaceship(World world){
-        spaceShip = new SpaceShip();
-        spaceShip.init(world);
     }
 }

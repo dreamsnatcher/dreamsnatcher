@@ -1,5 +1,6 @@
 package com.github.dreamsnatcher.entities;
 
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.Json;
 
@@ -14,32 +15,15 @@ public class GameWorldSerializer {
         String output = json.toJson(world);
         try {
             FileWriter writer = new FileWriter(file);
-            writer.write(output);
+            writer.write(json.prettyPrint(output));
             writer.close();
         } catch (IOException e) {
             throw new GdxRuntimeException("Couldn't write file '" + file + "'", e);
         }
     }
 
-    public static GameWorld deserialize(File file) {
+    public static GameWorld deserialize(FileHandle file) {
         Json json = new Json();
-
-        try {
-            FileReader reader = new FileReader(file);
-            GameWorld world = json.fromJson(GameWorld.class, reader);
-            reader.close();
-            return world;
-        } catch (Throwable e) {
-            throw new GdxRuntimeException("Couldn't read file '" + file + "'", e);
-        }
-    }
-
-    public static void main(String[] argv) {
-        GameWorld world = new GameWorld();
-        world.spaceShip = new SpaceShip();
-        world.objects.add(new Planet());
-
-        serialize(world, new File("test.map"));
-        deserialize(new File("test.map"));
+        return json.fromJson(GameWorld.class, file.readString());
     }
 }

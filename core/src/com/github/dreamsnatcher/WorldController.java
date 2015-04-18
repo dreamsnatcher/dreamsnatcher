@@ -7,10 +7,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.World;
-import com.github.dreamsnatcher.entities.GameObject;
-import com.github.dreamsnatcher.entities.GameWorld;
-import com.github.dreamsnatcher.entities.Planet;
-import com.github.dreamsnatcher.entities.SpaceShip;
+import com.github.dreamsnatcher.entities.*;
 import com.github.dreamsnatcher.screens.ScreenManager;
 import com.github.dreamsnatcher.utils.CameraHelper;
 
@@ -40,9 +37,11 @@ public class WorldController extends InputAdapter {
         ScreenManager.multiplexer.addProcessor(this);
         cameraHelper = new CameraHelper();
         b2World = new World(new Vector2(0, 0f), true);
-        gameWorld = new GameWorld();
-        gameWorld.setUpPlanets(b2World);
-        gameWorld.setUpSpaceship(b2World);
+        // You can open this file and edit it via
+        // Editor in the desktop project. You can of course
+        // also create new files.
+        gameWorld = GameWorldSerializer.deserialize(Gdx.files.internal("test.map"));
+        gameWorld.init(b2World);
         cameraHelper.setTarget(gameWorld.spaceShip.getBody());
     }
 

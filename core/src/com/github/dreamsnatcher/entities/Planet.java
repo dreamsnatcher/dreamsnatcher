@@ -14,9 +14,9 @@ public class Planet extends GameObject {
 
     // loaded when init is called by GameWorldSerializer
     // not saved to json
-    private volatile TextureRegion texture;
-    private volatile com.badlogic.gdx.physics.box2d.World b2World;
-    private volatile Body b2Body;
+    private transient TextureRegion texture;
+    private transient com.badlogic.gdx.physics.box2d.World b2World;
+    private transient Body b2Body;
 
     private void initPhysics() {
         //create body definition
@@ -49,7 +49,6 @@ public class Planet extends GameObject {
     public void init(World world) {
         texture = Assets.planet;
         b2World = world;
-        position = new Vector2((float)Math.random(), (float)Math.random());
         dimension.set(0.8f, 0.4f);
         origin.x = dimension.x / 2;
         origin.y = dimension.y / 2;
