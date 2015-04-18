@@ -67,10 +67,11 @@ public class WorldRenderer implements Disposable {
         String mmss = String.format("%02d:%02d", TimeUnit.MILLISECONDS.toMinutes(worldController.timeElapsed) % TimeUnit.HOURS.toMinutes(1),
                 TimeUnit.MILLISECONDS.toSeconds(worldController.timeElapsed) % TimeUnit.MINUTES.toSeconds(1));
         font.draw(batch, mmss, 10, 10);
-        batch.draw(new TextureRegion(energybar), 760, 300, 40, 200);
-        for(int i = 0;i<=this.worldController.gameWorld.spaceShip.getEnergy(); i++){
-            batch.draw(new TextureRegion(energypixel), 760, 500-i*2, 40, 2);
+
+        for(int i = 1;i<=this.worldController.gameWorld.spaceShip.getEnergy(); i++){
+            batch.draw(new TextureRegion(energypixel), 760, 500-i*4, 40, 4);
         }
+        batch.draw(new TextureRegion(energybar), 760, 100, 40, 400);
         batch.end();
     }
 
