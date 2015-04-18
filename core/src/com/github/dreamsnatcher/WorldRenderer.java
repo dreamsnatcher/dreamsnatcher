@@ -13,8 +13,10 @@ import com.badlogic.gdx.utils.Disposable;
 import com.github.dreamsnatcher.entities.GameObject;
 import com.github.dreamsnatcher.utils.Assets;
 import com.github.dreamsnatcher.utils.Constants;
+import com.github.dreamsnatcher.utils.HighscoreHelper;
 
 import java.util.concurrent.TimeUnit;
+import java.util.logging.LoggingMXBean;
 
 public class WorldRenderer implements Disposable {
     public OrthographicCamera camera;
@@ -83,7 +85,15 @@ public class WorldRenderer implements Disposable {
         batch.begin();
         String mmss = String.format("%02d:%02d", TimeUnit.MILLISECONDS.toMinutes(worldController.timeElapsed) % TimeUnit.HOURS.toMinutes(1),
                 TimeUnit.MILLISECONDS.toSeconds(worldController.timeElapsed) % TimeUnit.MINUTES.toSeconds(1));
+        String lastHighscore = HighscoreHelper.readHighscore(worldController.getMap());
+
+        if (!lastHighscore.contains("no")){
+            long highscore = Long.parseLong(lastHighscore);
+            lastHighscore = String.format("%02d:%02d", TimeUnit.MILLISECONDS.toMinutes(highscore) % TimeUnit.HOURS.toMinutes(1),
+                    TimeUnit.MILLISECONDS.toSeconds(highscore) % TimeUnit.MINUTES.toSeconds(1));
+        }
         font.draw(batch, mmss, 10, 10);
+        font.draw(batch, "Highscore: " + lastHighscore, 50, 10);
         batch.draw(Assets.indicator, 10, 20, Assets.indicator.getRegionWidth() / 2, Assets.indicator.getRegionHeight() / 2,
                 Assets.indicator.getRegionWidth(), Assets.indicator.getRegionHeight(), 0.5f, 0.5f, getCurrentIndicatorAngle());
 
