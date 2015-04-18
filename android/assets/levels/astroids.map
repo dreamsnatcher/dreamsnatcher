@@ -1,0 +1,170 @@
+{
+objects: [
+	{
+		class: com.github.dreamsnatcher.entities.AsteroidRotating
+		position: {
+			x: 0.48750013
+			y: 1.2416667
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 163.3944
+	}
+	{
+		class: com.github.dreamsnatcher.entities.AsteroidRotating
+		position: {
+			x: 1.0624999
+			y: 0.5916667
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 216.36543
+	}
+	{
+		class: com.github.dreamsnatcher.entities.AsteroidRotating
+		position: {
+			x: 1.43125
+			y: 1.2
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 25.728304
+	}
+	{
+		class: com.github.dreamsnatcher.entities.AsteroidRotating
+		position: {
+			x: 1.74375
+			y: -0.25833338
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 309.71988
+	}
+	{
+		class: com.github.dreamsnatcher.entities.AsteroidRotating
+		position: {
+			x: -0.41875005
+			y: 0.8833334
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 322.82394
+	}
+	{
+		class: com.github.dreamsnatcher.entities.AsteroidRotating
+		position: {
+			x: 1.2812501
+			y: -0.65
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 271.89172
+	}
+	{
+		class: com.github.dreamsnatcher.entities.AsteroidRotating
+		position: {
+			x: -0.45000002
+			y: -0.79999995
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 22.701483
+	}
+	{
+		class: com.github.dreamsnatcher.entities.AsteroidRotating
+		position: {
+			x: -0.94375
+			y: -0.024999976
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 266.959
+	}
+	{
+		class: com.github.dreamsnatcher.entities.AsteroidRotating
+		position: {
+			x: 0.9812501
+			y: -1.3583332
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 88.10761
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Spacebar
+		position: {
+			x: -1.5
+			y: 1.625
+		}
+		origin: {
+			x: 0.5
+			y: 0.5
+		}
+	}
+]
+spaceShip: {
+	dimension: {
+		x: 0.4
+		y: 0.5
+	}
+	origin: {
+		x: 0.2
+		y: 0.25
+	}
+	counter: 42.71705
+}
+}
