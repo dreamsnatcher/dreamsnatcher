@@ -147,6 +147,7 @@ public class WorldController extends InputAdapter implements ContactListener {
         if (asteroid != null && spaceShip != null) {
             AudioManager.ahit.play();
             spaceShip.setEnergy(spaceShip.getEnergy() - 20f);
+            asteroid.hit();
         }
 
         if (spaceShip != null && spacebar != null) {
