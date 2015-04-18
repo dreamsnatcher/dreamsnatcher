@@ -79,6 +79,10 @@ public class WorldController extends InputAdapter implements ContactListener {
         if (zoomIn) {
             cameraHelper.setZoom(cameraHelper.getZoom() - 0.002f);
         }
+        if(gameWorld.spaceShip.getEnergy() <= 0f && gameWorld.spaceShip.getBody().getLinearVelocity().len() <= 0.01f ){
+            finalAnimationFinished = true;
+            AudioManager.stopAll();
+        }
     }
 
     @Override

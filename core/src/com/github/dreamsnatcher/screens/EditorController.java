@@ -5,13 +5,9 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.physics.box2d.Fixture;
-import com.badlogic.gdx.physics.box2d.QueryCallback;
-import com.badlogic.gdx.physics.box2d.RayCastCallback;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.github.dreamsnatcher.entities.GameObject;
@@ -49,9 +45,12 @@ public class EditorController extends InputAdapter {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                JFileChooser fileChooser = new JFileChooser(new File("."));
+                JFileChooser fileChooser = new JFileChooser(new File("levels/"));
                 if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
                     File file = fileChooser.getSelectedFile();
+                    if(!file.getName().endsWith(".map")){
+                        file  = new File(file +".map");
+                    }
                     GameWorldSerializer.serialize(world, file);
                 }
             }
@@ -62,7 +61,7 @@ public class EditorController extends InputAdapter {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                JFileChooser fileChooser = new JFileChooser(new File("."));
+                JFileChooser fileChooser = new JFileChooser(new File("levels/"));
                 if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
                     final File file = fileChooser.getSelectedFile();
                     // this stuff needs to run on the libGDX UI thread

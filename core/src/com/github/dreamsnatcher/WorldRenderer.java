@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.utils.Disposable;
 import com.github.dreamsnatcher.entities.GameObject;
 import com.github.dreamsnatcher.utils.Assets;
@@ -228,6 +227,9 @@ public class WorldRenderer implements Disposable {
 
     public void showNightmare(float energy) {
         float alpha = 0.0f;
+        if(energy<0f){
+            energy =0f;
+        }
         if (!worldController.isFinish() && energy < 20) {
             alpha = (20 - energy)/20f;
         } else if (worldController.isFinish()){
