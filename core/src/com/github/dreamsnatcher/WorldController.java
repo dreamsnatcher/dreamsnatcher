@@ -59,7 +59,7 @@ public class WorldController extends InputAdapter implements ContactListener {
             object.update(deltaTime);
         }
         b2World.step(1 / 60f, 3, 8); //timeStep, velocityIteration, positionIteration
-        if (Gdx.input.isTouched() && gameWorld.spaceShip.getEnergy() > 0) {
+        if (Gdx.input.isTouched() && gameWorld.spaceShip.getEnergy() > 0 && !finish) {
             accelerate(curTouchPos.x, curTouchPos.y);
         }
         if (zoomIn) {
@@ -149,7 +149,8 @@ public class WorldController extends InputAdapter implements ContactListener {
         if (spaceShip != null && spacebar != null) {
             cameraHelper.setTarget(spacebar.getBody());
             finish = true;
-            spacebar.hasLanded();
+            spaceShip.hasLanded();
+            spacebar.hasBeenLandedOn();
             zoomIn = true;
         }
     }
