@@ -110,6 +110,7 @@ public class WorldController extends InputAdapter implements ContactListener {
     }
 
     private void accelerate(float screenX, float screenY) {
+        gameWorld.spaceShip.endHarvest();
         Vector3 touch = worldRenderer.camera.unproject(new Vector3(screenX, screenY, 0));
         SpaceShip spaceShip = gameWorld.spaceShip;
         Vector2 shipPos = spaceShip.getBody().getPosition();
@@ -127,7 +128,7 @@ public class WorldController extends InputAdapter implements ContactListener {
         SpaceShip spaceShip = CollisionObjectHelper.getSpaceship(contact);
         Planet planet = CollisionObjectHelper.getPlanet(contact);
         Asteroid asteroid  = CollisionObjectHelper.getAsteroid(contact);
-        if(planet!=null && spaceShip != null){
+        if(planet!=null && spaceShip != null && planet.getEnergy() >0f){
             spaceShip.getBody().setLinearVelocity(0,0);
             spaceShip.beginHarvest(planet);
             AudioManager.landing.play();
@@ -148,9 +149,6 @@ public class WorldController extends InputAdapter implements ContactListener {
 
     @Override
     public void preSolve(Contact contact, Manifold oldManifold) {
-        if(CollisionObjectHelper.getPlanet(contact)!= null && CollisionObjectHelper.getSpaceship(contact)!=null){
-            contact.setEnabled(false);
-        }
     }
 
     @Override

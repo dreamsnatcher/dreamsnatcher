@@ -13,6 +13,7 @@ import com.github.dreamsnatcher.utils.Assets;
  */
 public class Planet extends GameObject {
 
+    public static final float MAX_ENERGY = 50f;
     // loaded when init is called by GameWorldSerializer
     // not saved to json
     private transient TextureRegion texture;
@@ -20,7 +21,11 @@ public class Planet extends GameObject {
     private TextureRegion textureLow;
     private transient com.badlogic.gdx.physics.box2d.World b2World;
     private transient Body b2Body;
-    private transient float energy = 100f;
+    private transient float energy = MAX_ENERGY;
+
+
+
+    public transient  float cooldown = 0f;
 
     private void initPhysics() {
         //create body definition
@@ -64,10 +69,10 @@ public class Planet extends GameObject {
     @Override
     public void render(SpriteBatch batch) {
         TextureRegion textureRegion = Assets.planet;
-        if(energy< 50f){
+        if(energy< MAX_ENERGY/2f){
             textureRegion = Assets.planetLow;
         }
-        if(energy < 0f){
+        if(energy <= 0f){
             textureRegion = Assets.planetDead;
         }
 
@@ -89,14 +94,17 @@ public class Planet extends GameObject {
 
     public float gainEnergy() {
         energy += WorldController.DRAIN_ENERGY_STEP;
-        if (energy > 100) {
-            energy = 100;
+        if (energy >= MAX_ENERGY) {
+            energy = MAX_ENERGY;
         }
         return energy;
     }
 
 
     public void update(float deltaTime) {
+        if(cooldown>=0){
+            cooldown -= deltaTime;
+        }
         position = b2Body.getPosition();
         rotation = b2Body.getAngle() * MathUtils.radiansToDegrees;
     }
@@ -104,5 +112,13 @@ public class Planet extends GameObject {
 
     public Body getBody() {
         return b2Body;
+    }
+
+    public float getEnergy() {
+        return energy;
+    }
+
+    public void setCooldown(float cooldown) {
+        this.cooldown = cooldown;
     }
 }
