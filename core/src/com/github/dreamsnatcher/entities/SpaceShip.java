@@ -32,7 +32,7 @@ public class SpaceShip extends GameObject {
         texture = Assets.spaceShip0;
         b2World = world;
         dimension.set(0.4f, 0.5f);
-        energy = 50;
+        energy = 100f;
         origin.x = dimension.x / 2;
         origin.y = dimension.y / 2;
         initPhysics();
@@ -213,6 +213,7 @@ public class SpaceShip extends GameObject {
             currentPlanet.setCooldown(2f);
             currentPlanet = null;
         }
+        AudioManager.landing.stop();
         AudioManager.starting.play();
     }
 

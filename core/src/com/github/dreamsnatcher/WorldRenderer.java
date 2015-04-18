@@ -78,8 +78,8 @@ public class WorldRenderer implements Disposable {
                 spaceBarIndicator.getRegionWidth(), spaceBarIndicator.getRegionHeight(), 0.5f, 0.5f, getCurrentIndicatorAngle());
 
         batch.draw(new TextureRegion(energybar), 760, 100, 40, 400);
-        for(int i = 1;i<=this.worldController.gameWorld.spaceShip.getEnergy(); i++){
-            batch.draw(new TextureRegion(energypixel), 760, 500-i*4, 40, 4);
+        for (int i = 1; i <= this.worldController.gameWorld.spaceShip.getEnergy(); i++) {
+            batch.draw(new TextureRegion(energypixel), 760, 500 - i * 4, 40, 4);
         }
         if(worldController.isFinish()){
             finishFont.draw(batch, "GAME FINISHED", 500, 500);
@@ -101,8 +101,8 @@ public class WorldRenderer implements Disposable {
 
 
         int k = 0;
-        for(int i = -20; i< 20;i++){
-            for(int j = -20; j< 20;j++){
+        for (int i = -20; i < 20; i++) {
+            for (int j = -20; j < 20; j++) {
                 TextureRegion textureRegion;
                 switch (rotation[k % rotation.length]) {
                     case 1:
