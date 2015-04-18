@@ -30,6 +30,8 @@ public class SpaceShip extends GameObject {
     private transient boolean landed;
     private float counter = 0;
 
+    private float penaltyTime = 0f;
+
     public void init(com.badlogic.gdx.physics.box2d.World world) {
         texture = Assets.spaceShip0;
         b2World = world;
@@ -164,6 +166,7 @@ public class SpaceShip extends GameObject {
                     if(currentPlanet.getEnergy() == 0){
                         energy = 4*energy / 5;
                         AudioManager.suckDryMusic();
+                        penaltyTime = penaltyTime > 0 ? penaltyTime + 2f : 2f;
                     }
                     endHarvest();
                 }
@@ -230,5 +233,17 @@ public class SpaceShip extends GameObject {
 
     public void hasLanded() {
         landed = true;
+    }
+
+    public float getPenaltyTime() {
+        return penaltyTime;
+    }
+
+    public void setPenaltyTime(float penaltyTime) {
+        this.penaltyTime = penaltyTime;
+    }
+
+    public void lowerPenaltyTime(float penaltyTime) {
+        this.penaltyTime =  this.penaltyTime - penaltyTime < 0 ? 0f : this.penaltyTime - penaltyTime;
     }
 }

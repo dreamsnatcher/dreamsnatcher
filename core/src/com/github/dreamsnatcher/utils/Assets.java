@@ -29,6 +29,7 @@ public class Assets implements Disposable {
 
     public static TextureRegion energyBar;
     public static TextureRegion energyPixel;
+    public static TextureRegion penaltyPixel;
     public static TextureRegion spaceShipHarvest;
     public static TextureRegion planetDead;
     public static TextureRegion planetLow;
@@ -100,6 +101,7 @@ public class Assets implements Disposable {
         asteroid3 = new TextureRegion(new Texture("asteriod_small04.png"));
         energyBar = new TextureRegion(new Texture("energybar_container.png"));
         energyPixel = new TextureRegion(new Texture("pixel.png"));
+        penaltyPixel = new TextureRegion(new Texture("penaltypixel.png"));
         indicator = new TextureRegion(new Texture("indicator.png"));
         indicator.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         spaceBar = new TextureRegion(new Texture("spacebar.png"));

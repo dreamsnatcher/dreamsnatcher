@@ -32,6 +32,7 @@ public class WorldRenderer implements Disposable {
     private TextureRegion energybar;
     private TextureRegion energypixel;
     private TextureRegion beerpixel;
+    private TextureRegion penaltypixel;
     private TextureRegion schaumkrone;
 
     private int[] rotation;
@@ -40,6 +41,7 @@ public class WorldRenderer implements Disposable {
     public int beercounter = 0;
     public float timer = 0;
     public final float MAXTIMER = 0.02f;
+    ;
 
     public WorldRenderer(WorldController worldController) {
         this.worldController = worldController;
@@ -65,6 +67,7 @@ public class WorldRenderer implements Disposable {
         background3 = Assets.stars3;
         energybar = Assets.energyBar;
         energypixel = Assets.energyPixel;
+        penaltypixel = Assets.penaltyPixel;
         beerpixel = Assets.bierpixel;
         schaumkrone = Assets.schaumkrone;
 
@@ -100,7 +103,14 @@ public class WorldRenderer implements Disposable {
 
         if (!worldController.isFinish()) {
             for (int i = 1; i <= this.worldController.gameWorld.spaceShip.getEnergy(); i++) {
-                batch.draw(new TextureRegion(energypixel), 760, 500 - i * 4, 40, 4);
+                if(this.worldController.gameWorld.spaceShip.getPenaltyTime() > 0) {
+                    batch.draw(new TextureRegion(energypixel), 760, 500 - i * 4, 40, 4);
+                } else {
+                    batch.draw(new TextureRegion(penaltypixel), 760, 500 - i * 4, 40, 4);
+                }
+            }
+            if(this.worldController.gameWorld.spaceShip.getPenaltyTime() > 0) {
+                this.worldController.gameWorld.spaceShip.lowerPenaltyTime(worldController.timeElapsed);
             }
         }
         if (worldController.isFinish()) {
