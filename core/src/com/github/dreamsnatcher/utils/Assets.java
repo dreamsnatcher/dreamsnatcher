@@ -18,6 +18,10 @@ public class Assets implements Disposable {
     public static TextureRegion asteroid0;
     public static TextureRegion asteroid1;
     public static TextureRegion spaceBar;
+    public static TextureRegion asteroid2;
+
+    public static TextureRegion energyBar;
+    public static TextureRegion energyPixel;
 
 
     public static void init(){
@@ -29,7 +33,7 @@ public class Assets implements Disposable {
         spaceShip2.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         spaceShip3 = new TextureRegion(new Texture("spaceship_speed3.png"));
         spaceShip3.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        planet = new TextureRegion(new Texture("planet.png"));
+        planet = new TextureRegion(new Texture("planet_high_pop.png"));
         planet.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         stars0 = new TextureRegion(new Texture("space_1_v2.png"));
         stars0.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -42,6 +46,9 @@ public class Assets implements Disposable {
 
         asteroid0 = new TextureRegion(new Texture("asteriod_small01.png"));
         asteroid1 = new TextureRegion(new Texture("asteriod_small02.png"));
+        asteroid2 = new TextureRegion(new Texture("asteriod_big01.png"));
+        energyBar = new TextureRegion(new Texture("energybar_container.png"));
+        energyPixel = new TextureRegion(new Texture("pixel.png"));
         spaceBar = new TextureRegion(new Texture("spacebar.png"));
         spaceBar.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
     }

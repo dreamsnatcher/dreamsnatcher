@@ -15,12 +15,14 @@ public class Asteroid extends GameObject {
     // not saved to json
     private transient TextureRegion texture0;
     private transient TextureRegion texture1;
+    private transient TextureRegion texture2;
     private transient com.badlogic.gdx.physics.box2d.World b2World;
     private transient Body b2Body;
 
     public void init(com.badlogic.gdx.physics.box2d.World world) {
         texture0 = Assets.asteroid0;
         texture1 = Assets.asteroid1;
+        texture2 = Assets.asteroid2;
         b2World = world;
         dimension.set(0.2f, 0.2f);
         origin.x = dimension.x / 2;
