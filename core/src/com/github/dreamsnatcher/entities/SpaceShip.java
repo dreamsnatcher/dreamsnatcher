@@ -16,10 +16,7 @@ public class SpaceShip extends GameObject {
 
     // loaded when init is called by GameWorldSerializer
     // not saved to json
-    private transient TextureRegion texture0;
-    private transient TextureRegion texture1;
-    private transient TextureRegion texture2;
-    private transient TextureRegion texture3;
+    private transient TextureRegion texture;
     private transient com.badlogic.gdx.physics.box2d.World b2World;
     private transient Body b2Body;
     private volatile transient float energy;
@@ -27,15 +24,10 @@ public class SpaceShip extends GameObject {
     private transient boolean transist;
     private transient float transistTime;
     private transient boolean harvest = false;
-    private transient TextureRegion textureHarvest;
     private transient Planet currentPlanet;
 
     public void init(com.badlogic.gdx.physics.box2d.World world) {
-        texture0 = Assets.spaceShip0;
-        texture1 = Assets.spaceShip1;
-        texture2 = Assets.spaceShip2;
-        texture3 = Assets.spaceShip3;
-        textureHarvest = Assets.spaceShipHarvest;
+        texture = Assets.spaceShip0;
         b2World = world;
         dimension.set(0.4f, 0.5f);
         energy = 50;
@@ -76,31 +68,21 @@ public class SpaceShip extends GameObject {
 
     @Override
     public void render(SpriteBatch batch) {
-        TextureRegion textureRegion = texture0;
-        if(b2Body.getLinearVelocity().len()>0.2f){
-            textureRegion = texture1;
+        if (b2Body.getLinearVelocity().len() > 0.2f) {
+            texture = Assets.spaceShip1;
         }
 
-        if(b2Body.getLinearVelocity().len()>0.5f){
-            textureRegion = texture2;
+        if (b2Body.getLinearVelocity().len() > 0.5f) {
+            texture = Assets.spaceShip2;
         }
 
-        if(b2Body.getLinearVelocity().len()>0.7f){
-            textureRegion = texture3;
+        if (b2Body.getLinearVelocity().len() > 0.7f) {
+            texture = Assets.spaceShip3;
         }
-        if(b2Body.getLinearVelocity().len()<=0.1f){
+        if (harvest) {
+            texture = Assets.spaceShipHarvest;
         }
-        if(harvest){
-            textureRegion = textureHarvest;
-            //AudioManager.harvest();
-
-
-        }
-
-
-
-        batch.draw(textureRegion,
-                position.x - dimension.x / 2, position.y - dimension.y / 2,
+        batch.draw(texture, position.x - dimension.x / 2, position.y - dimension.y / 2,
                 origin.x, origin.y,
                 dimension.x, dimension.y,
                 scale.x, scale.y,
@@ -109,42 +91,42 @@ public class SpaceShip extends GameObject {
 
 
     public void update(float deltaTime) {
-        if(b2Body.getLinearVelocity().len()>0.2f){
+        if (b2Body.getLinearVelocity().len() > 0.2f) {
             AudioManager.moveSlow();
         }
 
-        if(b2Body.getLinearVelocity().len()>0.5f){
+        if (b2Body.getLinearVelocity().len() > 0.5f) {
             AudioManager.moveRegular();
         }
 
-        if(b2Body.getLinearVelocity().len()>0.7f){
+        if (b2Body.getLinearVelocity().len() > 0.7f) {
             AudioManager.moveFast();
         }
-        if(b2Body.getLinearVelocity().len()<=0.1f){
+        if (b2Body.getLinearVelocity().len() <= 0.1f) {
             AudioManager.stop();
         }
-        if(harvest){
+        if (harvest) {
             AudioManager.stop();
             //AudioManager.harvest();
 
 
         }
-        if(transist){
+        if (transist) {
             transistTime -= deltaTime;
-            if(transistTime <= 0){
+            if (transistTime <= 0) {
                 transist = false;
                 harvest = true;
             }
-            b2Body.setTransform(b2Body.getPosition().x,b2Body.getPosition().y, (float) (angle - Math.PI /2f));
-        }else{
+            b2Body.setTransform(b2Body.getPosition().x, b2Body.getPosition().y, (float) (angle - Math.PI / 2f));
+        } else {
             transistTime = 1f;
         }
 
-        if(harvest){
-            if(currentPlanet!=null){
-                if(currentPlanet.drainEnergy() > 0 && energy <= 99f ){
+        if (harvest) {
+            if (currentPlanet != null) {
+                if (currentPlanet.drainEnergy() > 0 && energy <= 99f) {
                     gainEnergy();
-                }else{
+                } else {
                     harvest = false;
                     currentPlanet.setCooldown(2f);
                 }
@@ -184,24 +166,28 @@ public class SpaceShip extends GameObject {
         this.energy = energy;
     }
 
-    public void beginHarvest(Planet planet){
+    public void beginHarvest(Planet planet) {
         Vector2 shipPos = b2Body.getWorldCenter();
         Vector2 thrustDir = new Vector2(shipPos.x - planet.getBody().getWorldCenter().x, shipPos.y - planet.getBody().getWorldCenter().y);
 
-        angle = (float) ((thrustDir.angleRad() % (2 * Math.PI)) );
+        angle = (float) ((thrustDir.angleRad() % (2 * Math.PI)));
         transist = true;
         currentPlanet = planet;
 
     }
 
-    public void endHarvest(){
+    public void endHarvest() {
         harvest = false;
-        if(currentPlanet!=null) {
+        if (currentPlanet != null) {
             currentPlanet.setCooldown(2f);
             Vector2 shipPos = b2Body.getWorldCenter();
             Vector2 thrustDir = new Vector2(shipPos.x - currentPlanet.getBody().getWorldCenter().x, shipPos.y - currentPlanet.getBody().getWorldCenter().y);
             currentPlanet = null;
-            b2Body.applyForceToCenter(thrustDir,true);
+            b2Body.applyForceToCenter(thrustDir, true);
         }
+    }
+
+    public void hasLanded() {
+        texture = Assets.spaceShipEmpty;
     }
 }

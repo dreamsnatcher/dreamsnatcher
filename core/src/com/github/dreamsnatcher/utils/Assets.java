@@ -11,6 +11,7 @@ public class Assets implements Disposable {
     public static TextureRegion spaceShip1;
     public static TextureRegion spaceShip2;
     public static TextureRegion spaceShip3;
+    public static TextureRegion spaceShipEmpty;
     public static TextureRegion planet;
     public static TextureRegion stars0;
     public static TextureRegion stars1;
@@ -29,7 +30,7 @@ public class Assets implements Disposable {
     public static TextureRegion planetLow;
     public static TextureRegion indicator;
 
-    public static void init(){
+    public static void init() {
         spaceShip0 = new TextureRegion(new Texture("spaceship_speed0.png"));
         spaceShip0.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         spaceShip1 = new TextureRegion(new Texture("spaceship_speed1.png"));
@@ -38,6 +39,9 @@ public class Assets implements Disposable {
         spaceShip2.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         spaceShip3 = new TextureRegion(new Texture("spaceship_speed3.png"));
         spaceShip3.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        spaceShipEmpty = new TextureRegion(new Texture("spaceship_empty.png"));
+        spaceShipEmpty.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         spaceShipHarvest = new TextureRegion(new Texture("spaceship_extract_energy.png"));
         spaceShipHarvest.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
