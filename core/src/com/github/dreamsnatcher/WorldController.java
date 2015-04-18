@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
 import com.github.dreamsnatcher.entities.*;
 import com.github.dreamsnatcher.screens.ScreenManager;
+import com.github.dreamsnatcher.utils.AudioManager;
 import com.github.dreamsnatcher.utils.CameraHelper;
 import com.github.dreamsnatcher.utils.CollisionObjectHelper;
 
@@ -125,15 +126,24 @@ public class WorldController extends InputAdapter implements ContactListener {
     public void beginContact(Contact contact) {
         SpaceShip spaceShip = CollisionObjectHelper.getSpaceship(contact);
         Planet planet = CollisionObjectHelper.getPlanet(contact);
+        Asteroid asteroid  = CollisionObjectHelper.getAsteroid(contact);
         if(planet!=null && spaceShip != null){
             spaceShip.getBody().setLinearVelocity(0,0);
             spaceShip.beginHarvest(planet);
+            AudioManager.landing.play();
+        }
+        if(asteroid!=null && spaceShip != null){
+            AudioManager.ahit.play();
         }
     }
 
     @Override
     public void endContact(Contact contact) {
-
+        SpaceShip spaceShip = CollisionObjectHelper.getSpaceship(contact);
+        Planet planet = CollisionObjectHelper.getPlanet(contact);
+        if(planet!=null && spaceShip != null){
+            AudioManager.starting.play();
+        }
     }
 
     @Override

@@ -17,6 +17,9 @@ public class AudioManager {
         public static Sound move_slow;
         public static Music mainloop;
         public static Music fearloop;
+        public static Sound ahit;
+        public static Sound landing;
+        public static Sound starting;
 
         public static Array<Sound> allSounds = new Array<Sound>();
 
@@ -28,15 +31,23 @@ public class AudioManager {
             fearloop = Gdx.audio.newMusic(Gdx.files.internal("sounds/fearloop.wav"));
             mainloop.setLooping(true);
             fearloop.setLooping(true);
+            mainloop.play();
 
             move_fast = Gdx.audio.newSound(Gdx.files.internal("sounds/ufo-move-oh-fast.wav"));
             move_regular = Gdx.audio.newSound(Gdx.files.internal("sounds/ufo-move-oh-regular.wav"));
             move_slow = Gdx.audio.newSound(Gdx.files.internal("sounds/ufo-move-oh-slow.wav"));
+            ahit = Gdx.audio.newSound(Gdx.files.internal("sounds/landen.wav")); //TODO DUMMY SOUND - ALTER HAT NICHT FUNKTIONIERT
+            landing = Gdx.audio.newSound(Gdx.files.internal("sounds/landen.wav"));
+            starting = Gdx.audio.newSound(Gdx.files.internal("sounds/abheben.wav"));
+
+
 
             allSounds.add(move_fast);
             allSounds.add(move_regular);
             allSounds.add(move_slow);
-
+            allSounds.add(ahit);
+            allSounds.add(landing);
+            allSounds.add(starting);
         }
 
         public static void update(float deltaTime) {
