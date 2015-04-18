@@ -4,15 +4,12 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.Disposable;
 import com.github.dreamsnatcher.entities.GameObject;
-import com.github.dreamsnatcher.entities.SpaceShip;
 import com.github.dreamsnatcher.utils.Assets;
 import com.github.dreamsnatcher.utils.Constants;
 
-import java.util.Vector;
 import java.util.concurrent.TimeUnit;
 
 public class WorldRenderer implements Disposable {
@@ -28,7 +25,6 @@ public class WorldRenderer implements Disposable {
     private TextureRegion background3;
     private TextureRegion energybar;
     private TextureRegion energypixel;
-    private TextureRegion spaceBarIndicator;
 
     private int[] rotation;
 
@@ -45,8 +41,8 @@ public class WorldRenderer implements Disposable {
         camera.update();
 
         rotation = new int[100];
-        for (int i = 0; i < rotation.length; i++) {
-            rotation[i] = (int) (Math.random() * 16) + 1;
+        for(int i = 0; i < rotation.length; i++ ){
+            rotation[i] = (int) (Math.random()* 16) + 1;
         }
 
         background0 = Assets.stars0;
@@ -55,7 +51,6 @@ public class WorldRenderer implements Disposable {
         background3 = Assets.stars3;
         energybar = Assets.energyBar;
         energypixel = Assets.energyPixel;
-        spaceBarIndicator = Assets.indicator;
 
         //GUI camera
         cameraGUI = new OrthographicCamera(Constants.VIEWPORT_GUI_WIDTH, Constants.VIEWPORT_GUI_HEIGHT);
@@ -72,21 +67,11 @@ public class WorldRenderer implements Disposable {
         String mmss = String.format("%02d:%02d", TimeUnit.MILLISECONDS.toMinutes(worldController.timeElapsed) % TimeUnit.HOURS.toMinutes(1),
                 TimeUnit.MILLISECONDS.toSeconds(worldController.timeElapsed) % TimeUnit.MINUTES.toSeconds(1));
         font.draw(batch, mmss, 10, 10);
-
-        batch.draw(new TextureRegion(spaceBarIndicator), 10, 20, spaceBarIndicator.getRegionWidth() / 2, spaceBarIndicator.getRegionHeight() / 2,
-                spaceBarIndicator.getRegionWidth(), spaceBarIndicator.getRegionHeight(), 0.5f, 0.5f, getCurrentIndicatorAngle());
         batch.draw(new TextureRegion(energybar), 760, 300, 40, 200);
-        for (int i = 0; i <= this.worldController.gameWorld.spaceShip.getEnergy(); i++) {
-            batch.draw(new TextureRegion(energypixel), 760, 500 - i * 2, 40, 2);
+        for(int i = 0;i<=this.worldController.gameWorld.spaceShip.getEnergy(); i++){
+            batch.draw(new TextureRegion(energypixel), 760, 500-i*2, 40, 2);
         }
         batch.end();
-    }
-
-    private float getCurrentIndicatorAngle() {
-        Vector2 shipPos = worldController.gameWorld.spaceShip.getBody().getPosition();
-        Vector2 barPos = worldController.gameWorld.spacebar.getBody().getPosition();
-        Vector2 shipBarDistance = new Vector2(shipPos.x - barPos.x, shipPos.y - barPos.y);
-        return 180 - shipBarDistance.angle();
     }
 
     public void render() {
@@ -96,69 +81,69 @@ public class WorldRenderer implements Disposable {
 
 
         int k = 0;
-        for (int i = -10; i < 10; i++) {
-            for (int j = -10; j < 10; j++) {
+        for(int i = -10; i< 10;i++){
+            for(int j = -10; j< 10;j++){
                 TextureRegion textureRegion;
-                switch (rotation[k % rotation.length]) {
+                switch (rotation[k%rotation.length]){
                     case 1:
                         textureRegion = new TextureRegion(background0);
                         break;
                     case 2:
                         textureRegion = new TextureRegion(background0);
-                        textureRegion.flip(true, false);
+                        textureRegion.flip(true,false);
                         break;
                     case 3:
                         textureRegion = new TextureRegion(background0);
-                        textureRegion.flip(true, true);
+                        textureRegion.flip(true,true);
                         break;
                     case 4:
                         textureRegion = new TextureRegion(background0);
-                        textureRegion.flip(false, true);
+                        textureRegion.flip(false,true);
                         break;
                     case 5:
                         textureRegion = new TextureRegion(background1);
                         break;
                     case 6:
                         textureRegion = new TextureRegion(background1);
-                        textureRegion.flip(true, false);
+                        textureRegion.flip(true,false);
                         break;
                     case 7:
                         textureRegion = new TextureRegion(background1);
-                        textureRegion.flip(true, true);
+                        textureRegion.flip(true,true);
                         break;
                     case 8:
                         textureRegion = new TextureRegion(background1);
-                        textureRegion.flip(false, true);
+                        textureRegion.flip(false,true);
                         break;
                     case 9:
                         textureRegion = new TextureRegion(background2);
                         break;
                     case 10:
                         textureRegion = new TextureRegion(background2);
-                        textureRegion.flip(true, false);
+                        textureRegion.flip(true,false);
                         break;
                     case 11:
                         textureRegion = new TextureRegion(background2);
-                        textureRegion.flip(true, true);
+                        textureRegion.flip(true,true);
                         break;
                     case 12:
                         textureRegion = new TextureRegion(background2);
-                        textureRegion.flip(false, true);
+                        textureRegion.flip(false,true);
                         break;
                     case 13:
                         textureRegion = new TextureRegion(background3);
                         break;
                     case 14:
                         textureRegion = new TextureRegion(background3);
-                        textureRegion.flip(true, false);
+                        textureRegion.flip(true,false);
                         break;
                     case 15:
                         textureRegion = new TextureRegion(background3);
-                        textureRegion.flip(true, true);
+                        textureRegion.flip(true,true);
                         break;
                     case 16:
                         textureRegion = new TextureRegion(background3);
-                        textureRegion.flip(false, true);
+                        textureRegion.flip(false,true);
                         break;
                     default:
                         textureRegion = background0;
