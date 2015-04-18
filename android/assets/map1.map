@@ -1,10 +1,10 @@
 {
 objects: [
 	{
-		class: com.github.dreamsnatcher.entities.PlanetBonus
+		class: com.github.dreamsnatcher.entities.PlanetBonusRotating
 		position: {
-			x: -1.45625
-			y: 0.74166656
+			x: -1.56875
+			y: 0.30833334
 		}
 		origin: {
 			x: 0.5
@@ -16,10 +16,10 @@ objects: [
 		}
 	}
 	{
-		class: com.github.dreamsnatcher.entities.PlanetBonus
+		class: com.github.dreamsnatcher.entities.PlanetRotating
 		position: {
-			x: 1.4437499
-			y: 1.0083332
+			x: 1.8125
+			y: 0.80000013
 		}
 		origin: {
 			x: 0.5
@@ -31,10 +31,10 @@ objects: [
 		}
 	}
 	{
-		class: com.github.dreamsnatcher.entities.PlanetBonus
+		class: com.github.dreamsnatcher.entities.PlanetBonusRotating
 		position: {
-			x: -1.4812499
-			y: -1.375
+			x: -0.925
+			y: -1.225
 		}
 		origin: {
 			x: 0.5
@@ -48,8 +48,8 @@ objects: [
 	{
 		class: com.github.dreamsnatcher.entities.Spacebar
 		position: {
-			x: 1.5875
-			y: -1.1
+			x: 1.43125
+			y: -1.4333333
 		}
 		origin: {
 			x: 0.5

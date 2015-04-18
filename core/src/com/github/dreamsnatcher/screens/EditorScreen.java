@@ -100,6 +100,14 @@ public class EditorScreen extends Screen {
             }
         });
 
+        button = new TextButton("Planet Bonus (rotating)", skin);
+        root.add(button);
+        button.addListener(new ChangeListener() {
+            public void changed(ChangeEvent event, Actor actor) {
+                controller.place(PlanetBonusRotating.class);
+            }
+        });
+
         button = new TextButton("Planet (rotating)", skin);
         root.add(button);
         button.addListener(new ChangeListener() {
