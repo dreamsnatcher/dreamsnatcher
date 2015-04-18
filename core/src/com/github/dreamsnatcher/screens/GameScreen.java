@@ -14,7 +14,6 @@ public class GameScreen extends Screen {
     public GameScreen(ScreenManager manager) {
         super(manager);
         Assets.init();
-        AudioManager.init();
         worldController = new WorldController();
         worldRenderer = new WorldRenderer(worldController);
         worldController.setWorldRenderer(worldRenderer);
@@ -23,6 +22,7 @@ public class GameScreen extends Screen {
     @Override
     public void render() {
         worldController.update(Gdx.graphics.getDeltaTime());
+        AudioManager.update(Gdx.graphics.getDeltaTime());
         worldRenderer.render();
     }
 
