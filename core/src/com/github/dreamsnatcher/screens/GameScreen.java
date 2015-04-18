@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.github.dreamsnatcher.WorldController;
 import com.github.dreamsnatcher.WorldRenderer;
 import com.github.dreamsnatcher.utils.Assets;
+import com.github.dreamsnatcher.utils.AudioManager;
 
 
 public class GameScreen extends Screen {
@@ -13,6 +14,7 @@ public class GameScreen extends Screen {
     public GameScreen(ScreenManager manager) {
         super(manager);
         Assets.init();
+        AudioManager.init();
         worldController = new WorldController();
         worldRenderer = new WorldRenderer(worldController);
         worldController.setWorldRenderer(worldRenderer);

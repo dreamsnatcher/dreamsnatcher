@@ -1,5 +1,6 @@
 package com.github.dreamsnatcher.utils;
 
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Disposable;
@@ -25,7 +26,6 @@ public class Assets implements Disposable {
     public static TextureRegion spaceShipHarvest;
     public static TextureRegion planetDead;
     public static TextureRegion planetLow;
-
 
     public static void init(){
         spaceShip0 = new TextureRegion(new Texture("spaceship_speed0.png"));
