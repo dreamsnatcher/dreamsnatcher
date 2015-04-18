@@ -20,6 +20,7 @@ public class WorldController extends InputAdapter implements ContactListener {
     public static final float DRAIN_ENERGY_STEP = 0.1f;
 
     public CameraHelper cameraHelper;
+    private boolean zoomIn =false;
 
     public void setWorldRenderer(WorldRenderer worldRenderer) {
         this.worldRenderer = worldRenderer;
@@ -59,6 +60,9 @@ public class WorldController extends InputAdapter implements ContactListener {
         b2World.step(1 / 60f, 3, 8); //timeStep, velocityIteration, positionIteration
         if (Gdx.input.isTouched() && gameWorld.spaceShip.getEnergy() > 0) {
             accelerate(curTouchPos.x, curTouchPos.y);
+        }
+        if(zoomIn){
+            cameraHelper.setZoom(cameraHelper.getZoom()-0.002f);
         }
     }
 
@@ -128,6 +132,7 @@ public class WorldController extends InputAdapter implements ContactListener {
         SpaceShip spaceShip = CollisionObjectHelper.getSpaceship(contact);
         Planet planet = CollisionObjectHelper.getPlanet(contact);
         Asteroid asteroid  = CollisionObjectHelper.getAsteroid(contact);
+        Spacebar spacebar  = CollisionObjectHelper.getSpaceBar(contact);
         if(planet!=null && spaceShip != null && planet.getEnergy() >0f){
             spaceShip.getBody().setLinearVelocity(0,0);
             spaceShip.beginHarvest(planet);
@@ -135,7 +140,15 @@ public class WorldController extends InputAdapter implements ContactListener {
         }
         if(asteroid!=null && spaceShip != null){
             AudioManager.ahit.play();
+            spaceShip.setEnergy(spaceShip.getEnergy()-20f);
         }
+
+        if(spaceShip!=null && spacebar != null){
+            cameraHelper.setTarget(spacebar.getBody());
+            zoomIn = true;
+        }
+
+
     }
 
     @Override

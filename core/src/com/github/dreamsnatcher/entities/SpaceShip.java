@@ -26,8 +26,8 @@ public class SpaceShip extends GameObject {
     private transient float angle;
     private transient boolean transist;
     private transient float transistTime;
-    private boolean harvest = false;
-    private TextureRegion textureHarvest;
+    private transient boolean harvest = false;
+    private transient TextureRegion textureHarvest;
     private transient Planet currentPlanet;
 
     public void init(com.badlogic.gdx.physics.box2d.World world) {
@@ -79,24 +79,19 @@ public class SpaceShip extends GameObject {
         TextureRegion textureRegion = texture0;
         if(b2Body.getLinearVelocity().len()>0.2f){
             textureRegion = texture1;
-            AudioManager.moveSlow();
         }
 
         if(b2Body.getLinearVelocity().len()>0.5f){
             textureRegion = texture2;
-            AudioManager.moveRegular();
         }
 
         if(b2Body.getLinearVelocity().len()>0.7f){
             textureRegion = texture3;
-            AudioManager.moveFast();
         }
         if(b2Body.getLinearVelocity().len()<=0.1f){
-            AudioManager.stop();
         }
         if(harvest){
             textureRegion = textureHarvest;
-            AudioManager.stop();
             //AudioManager.harvest();
 
 
@@ -114,6 +109,26 @@ public class SpaceShip extends GameObject {
 
 
     public void update(float deltaTime) {
+        if(b2Body.getLinearVelocity().len()>0.2f){
+            AudioManager.moveSlow();
+        }
+
+        if(b2Body.getLinearVelocity().len()>0.5f){
+            AudioManager.moveRegular();
+        }
+
+        if(b2Body.getLinearVelocity().len()>0.7f){
+            AudioManager.moveFast();
+        }
+        if(b2Body.getLinearVelocity().len()<=0.1f){
+            AudioManager.stop();
+        }
+        if(harvest){
+            AudioManager.stop();
+            //AudioManager.harvest();
+
+
+        }
         if(transist){
             transistTime -= deltaTime;
             if(transistTime <= 0){
