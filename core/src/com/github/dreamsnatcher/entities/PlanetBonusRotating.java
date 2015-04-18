@@ -7,7 +7,7 @@ public class PlanetBonusRotating extends Planet{
 
     public PlanetBonusRotating() {
         super();
-        MAX_ENERGY = 200f;
+        MAX_ENERGY = MAX_ENERGY_BONUS;
         this.doRotation = true;
     }
 }
