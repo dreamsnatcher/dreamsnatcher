@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 
 public class Assets implements Disposable {
@@ -26,6 +25,7 @@ public class Assets implements Disposable {
     public static TextureRegion spaceBar;
     public static TextureRegion spaceBarFinish;
     public static TextureRegion asteroid2;
+    public static TextureRegion asteroid3;
 
     public static TextureRegion energyBar;
     public static TextureRegion energyPixel;
@@ -37,6 +37,7 @@ public class Assets implements Disposable {
 
     public static TextureRegion bierpixel;
     public static TextureRegion schaumkrone;
+    public static TextureRegion finishWookie;
 
     public static TextureRegion nightmare;
 
@@ -96,6 +97,7 @@ public class Assets implements Disposable {
         asteroid0 = new TextureRegion(new Texture("asteriod_small01.png"));
         asteroid1 = new TextureRegion(new Texture("asteriod_small02.png"));
         asteroid2 = new TextureRegion(new Texture("asteriod_big01.png"));
+        asteroid3 = new TextureRegion(new Texture("asteriod_small04.png"));
         energyBar = new TextureRegion(new Texture("energybar_container.png"));
         energyPixel = new TextureRegion(new Texture("pixel.png"));
         indicator = new TextureRegion(new Texture("indicator.png"));
@@ -110,7 +112,10 @@ public class Assets implements Disposable {
         schaumkrone = new TextureRegion(new Texture("schaumkrone.png"));
         schaumkrone.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-        nightmare = new TextureRegion(new Texture("bloodframe.png"));
+
+        finishWookie = new TextureRegion(new Texture("wookie.png"));
+        finishWookie.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        nightmare = new TextureRegion(new Texture("nightmare.png"));
         nightmare.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
 
