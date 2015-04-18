@@ -127,10 +127,12 @@ public class SpaceShip extends GameObject {
 
         if(harvest){
             if(currentPlanet!=null){
-                if(currentPlanet.drainEnergy() >0 ){
+                if(currentPlanet.drainEnergy() > 0 && energy <= 99f ){
+                    System.out.println(energy);
                     gainEnergy();
                 }else{
                     harvest = false;
+                    currentPlanet.setCooldown(2f);
                 }
 
             }
@@ -177,5 +179,16 @@ public class SpaceShip extends GameObject {
         transist = true;
         currentPlanet = planet;
 
+    }
+
+    public void endHarvest(){
+        harvest = false;
+        if(currentPlanet!=null) {
+            currentPlanet.setCooldown(2f);
+            Vector2 shipPos = b2Body.getWorldCenter();
+            Vector2 thrustDir = new Vector2(shipPos.x - currentPlanet.getBody().getWorldCenter().x, shipPos.y - currentPlanet.getBody().getWorldCenter().y);
+            currentPlanet = null;
+            b2Body.applyForceToCenter(thrustDir,true);
+        }
     }
 }
