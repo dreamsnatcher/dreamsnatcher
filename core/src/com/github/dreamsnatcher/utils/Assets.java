@@ -54,12 +54,12 @@ public class Assets implements Disposable {
         shipAnimationSpeed3 = loadAnimation("animations/spaceship_speed_2_", 3, 0.3f);
         spaceShip0 = new TextureRegion(new Texture("spaceship_speed0.png"));
         spaceShip0.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        spaceShip1 = new TextureRegion(new Texture("spaceship_speed1.png"));
-        spaceShip1.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        spaceShip2 = new TextureRegion(new Texture("spaceship_speed2.png"));
-        spaceShip2.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        spaceShip3 = new TextureRegion(new Texture("spaceship_speed3.png"));
-        spaceShip3.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+
+
+
+
+
 
         spaceShipEmpty = new TextureRegion(new Texture("spaceship_empty.png"));
         spaceShipEmpty.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
