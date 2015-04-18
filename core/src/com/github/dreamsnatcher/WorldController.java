@@ -22,6 +22,8 @@ public class WorldController extends InputAdapter implements ContactListener {
     public CameraHelper cameraHelper;
     private boolean zoomIn;
     private boolean finish;
+    public boolean finalAnimationFinished;
+    public boolean switchToMainMenu;
 
     public void setWorldRenderer(WorldRenderer worldRenderer) {
         this.worldRenderer = worldRenderer;
@@ -99,6 +101,10 @@ public class WorldController extends InputAdapter implements ContactListener {
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         curTouchPos = new Vector2(screenX, screenY);
+        if(this.finalAnimationFinished) {
+            this.switchToMainMenu = true;
+            ScreenManager.multiplexer.removeProcessor(this);
+        }
         return true;
     }
 

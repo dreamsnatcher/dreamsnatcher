@@ -23,6 +23,11 @@ public class GameScreen extends Screen {
         worldController.update(Gdx.graphics.getDeltaTime());
         AudioManager.update(Gdx.graphics.getDeltaTime());
         worldRenderer.render();
+        if(worldController.switchToMainMenu){
+            AudioManager.havana.stop();
+            AudioManager.init();
+            manager.setScreen(new MainMenuScreen(manager));
+        }
     }
 
     @Override

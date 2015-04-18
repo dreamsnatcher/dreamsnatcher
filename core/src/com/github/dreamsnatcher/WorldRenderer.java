@@ -91,22 +91,24 @@ public class WorldRenderer implements Disposable {
                 batch.draw(new TextureRegion(energypixel), 760, 500 - i * 4, 40, 4);
             }
         }
-            if (worldController.isFinish()) {
-                timer += Gdx.graphics.getDeltaTime();
-                if (timer > MAXTIMER) {
-                    timer = 0;
-                    if (beercounter <= 400) {
-                        beercounter++;
-                    }
+        if (worldController.isFinish()) {
+            timer += Gdx.graphics.getDeltaTime();
+            if (timer > MAXTIMER) {
+                timer = 0;
+                if (beercounter <= 400) {
+                    beercounter++;
                 }
-                for (int i = 1; i <= beercounter; i++) {
-                    batch.draw(new TextureRegion(beerpixel), 760, 500 - i, 40, 4);
-                }
-                batch.draw(new TextureRegion(schaumkrone), 755, 500 - beercounter - 3, 50, 20);
             }
-        if(worldController.isFinish()){
-            batch.draw(new TextureRegion(finishPicture), 100, 100, 400, 400);
+            for (int i = 1; i <= beercounter; i++) {
+                batch.draw(new TextureRegion(beerpixel), 760, 500 - i, 40, 4);
+            }
+            batch.draw(new TextureRegion(schaumkrone), 755, 500 - beercounter - 3, 50, 20);
         }
+        if(beercounter >= 400) {
+            batch.draw(new TextureRegion(finishPicture), 100, 300, finishPicture.getRegionWidth(), finishPicture.getRegionHeight());
+            worldController.finalAnimationFinished = true;
+        }
+
         batch.end();
     }
 
