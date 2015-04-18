@@ -73,9 +73,9 @@ public class WorldRenderer implements Disposable {
         batch.draw(new TextureRegion(spaceBarIndicator), 10, 20, spaceBarIndicator.getRegionWidth() / 2, spaceBarIndicator.getRegionHeight() / 2,
                 spaceBarIndicator.getRegionWidth(), spaceBarIndicator.getRegionHeight(), 0.5f, 0.5f, getCurrentIndicatorAngle());
 
-        batch.draw(new TextureRegion(energybar), 760, 300, 40, 200);
-        for (int i = 0; i <= this.worldController.gameWorld.spaceShip.getEnergy(); i++) {
-            batch.draw(new TextureRegion(energypixel), 760, 500 - i * 2, 40, 2);
+        batch.draw(new TextureRegion(energybar), 760, 100, 40, 400);
+        for(int i = 1;i<=this.worldController.gameWorld.spaceShip.getEnergy(); i++){
+            batch.draw(new TextureRegion(energypixel), 760, 500-i*4, 40, 4);
         }
         batch.end();
     }

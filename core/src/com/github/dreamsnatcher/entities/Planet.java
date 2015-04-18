@@ -17,15 +17,17 @@ public class Planet extends GameObject {
     // loaded when init is called by GameWorldSerializer
     // not saved to json
     private transient TextureRegion texture;
-    private transient TextureRegion textureDead;
-    private transient TextureRegion textureLow;
     private transient com.badlogic.gdx.physics.box2d.World b2World;
     private transient Body b2Body;
     private transient float energy = MAX_ENERGY;
+    private static transient float RADIUS = 2f ;
+    private static transient float RTT = 20f ;
+    private transient Vector2 center;
 
 
 
     public transient  float cooldown = 0f;
+    private float angleNew = 0f;
 
     private void initPhysics() {
         //create body definition
@@ -56,8 +58,9 @@ public class Planet extends GameObject {
 
     @Override
     public void init(World world) {
+        angleNew = (float) Math.random() * 360;
         texture = Assets.planet;
-
+        center = new Vector2(position.x,position.y-RADIUS);
         b2World = world;
         dimension.set(1f, 1f);
         origin.x = dimension.x / 2;
@@ -107,6 +110,14 @@ public class Planet extends GameObject {
         }
         position = b2Body.getPosition();
         rotation = b2Body.getAngle() * MathUtils.radiansToDegrees;
+
+
+        angleNew += (float) (deltaTime * (2* Math.PI / RTT));
+        float cos = MathUtils.cos(angleNew);
+        float sin = MathUtils.sin(angleNew);
+        Vector2 vector2 = new Vector2(center.x +cos, center.y+sin);
+
+        b2Body.setTransform(vector2,b2Body.getAngle());
     }
 
 
