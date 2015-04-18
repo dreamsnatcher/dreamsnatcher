@@ -37,7 +37,7 @@ public class WorldRenderer implements Disposable {
 
     public int beercounter = 0;
     public float timer = 0;
-    public final float MAXTIMER = 0.5f;
+    public final float MAXTIMER = 0.02f;
 
     public WorldRenderer(WorldController worldController) {
         this.worldController = worldController;
@@ -88,25 +88,24 @@ public class WorldRenderer implements Disposable {
 
 
         batch.draw(new TextureRegion(energybar), 760, 100, 40, 400);
-        if(worldController.isFinish()){
-        for (int i = 1; i <= this.worldController.gameWorld.spaceShip.getEnergy(); i++) {
-            batch.draw(new TextureRegion(energypixel), 760, 500 - i * 4, 40, 4);
+        if(!worldController.isFinish()) {
+            for (int i = 1; i <= this.worldController.gameWorld.spaceShip.getEnergy(); i++) {
+                batch.draw(new TextureRegion(energypixel), 760, 500 - i * 4, 40, 4);
+            }
         }
-        if(worldController.isFinish()){
-            finishFont.draw(batch, "GAME FINISHED", 500, 500);
-        }}
-        {
-            timer+= Gdx.graphics.getDeltaTime();
-            if(timer>MAXTIMER){
-                timer = 0;
-                if(beercounter<= 400){
-                    beercounter++;
+            if (worldController.isFinish()) {
+                finishFont.draw(batch, "GAME FINISHED", 500, 500);
+                timer += Gdx.graphics.getDeltaTime();
+                if (timer > MAXTIMER) {
+                    timer = 0;
+                    if (beercounter <= 400) {
+                        beercounter++;
+                    }
                 }
-            }
-            for (int i = 1; i <= beercounter; i++) {
-                batch.draw(new TextureRegion(beerpixel), 760, 500 - i * 4, 40, 4);
-            }
-            batch.draw(new TextureRegion(schaumkrone), 755, 500 - beercounter * 4, 50, 20);
+                for (int i = 1; i <= beercounter; i++) {
+                    batch.draw(new TextureRegion(beerpixel), 760, 500 - i, 40, 4);
+                }
+                batch.draw(new TextureRegion(schaumkrone), 755, 500 - beercounter-3, 50, 20);
         }
         batch.end();
     }
