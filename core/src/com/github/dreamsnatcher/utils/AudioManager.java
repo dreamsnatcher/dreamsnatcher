@@ -135,6 +135,14 @@ public class AudioManager {
             move_slow.stop();
         }
 
+        public static void stopAll(){
+            for(Sound sound: allSounds) {
+                sound.stop();
+            }
+            havana.stop();
+            fearloop.stop();
+            mainloop.stop();
+        }
 
         public static void dispose() {
             mainloop.dispose();
