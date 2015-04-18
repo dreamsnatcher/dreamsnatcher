@@ -15,7 +15,7 @@ public class HighscoreHelper {
             FileHandle fileHandle = Gdx.files.local(level + ".hsc");
             score = fileHandle.readString();
         } catch (GdxRuntimeException ex) {
-            ex.printStackTrace();
+            System.out.println("No Highscore set yet for level: " + level);
         }
         return score;
     }
