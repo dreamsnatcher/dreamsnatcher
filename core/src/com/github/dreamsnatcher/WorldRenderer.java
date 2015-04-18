@@ -12,10 +12,8 @@ import com.badlogic.gdx.utils.Disposable;
 import com.github.dreamsnatcher.entities.GameObject;
 import com.github.dreamsnatcher.utils.Assets;
 import com.github.dreamsnatcher.utils.Constants;
-import com.github.dreamsnatcher.utils.HighscoreHelper;
 
 import java.util.concurrent.TimeUnit;
-import java.util.logging.LoggingMXBean;
 
 public class WorldRenderer implements Disposable {
     public OrthographicCamera camera;
@@ -41,7 +39,7 @@ public class WorldRenderer implements Disposable {
     public int beercounter = 0;
     public float timer = 0;
     public final float MAXTIMER = 0.02f;
-    ;
+
 
     public WorldRenderer(WorldController worldController) {
         this.worldController = worldController;
@@ -102,14 +100,14 @@ public class WorldRenderer implements Disposable {
 
         if (!worldController.isFinish()) {
             for (int i = 1; i <= this.worldController.gameWorld.spaceShip.getEnergy(); i++) {
-                if(this.worldController.gameWorld.spaceShip.getPenaltyTime() > 0) {
+                if (this.worldController.gameWorld.spaceShip.getPenaltyTime() <= 0) {
                     batch.draw(new TextureRegion(energypixel), 760, 500 - i * 4, 40, 4);
                 } else {
                     batch.draw(new TextureRegion(penaltypixel), 760, 500 - i * 4, 40, 4);
                 }
             }
-            if(this.worldController.gameWorld.spaceShip.getPenaltyTime() > 0) {
-                this.worldController.gameWorld.spaceShip.lowerPenaltyTime(worldController.timeElapsed);
+            if (this.worldController.gameWorld.spaceShip.getPenaltyTime() > 0) {
+                this.worldController.gameWorld.spaceShip.lowerPenaltyTime(Gdx.graphics.getDeltaTime());
             }
         }
         if (worldController.isFinish()) {
