@@ -3,6 +3,7 @@ package com.github.dreamsnatcher.entities;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
@@ -21,6 +22,9 @@ public class SpaceShip extends GameObject {
     private transient com.badlogic.gdx.physics.box2d.World b2World;
     private transient Body b2Body;
     private volatile transient float energy;
+    private transient float angle;
+    private transient boolean transist;
+    private transient float transistTime;
 
     public void init(com.badlogic.gdx.physics.box2d.World world) {
         texture0 = Assets.spaceShip0;
@@ -92,6 +96,12 @@ public class SpaceShip extends GameObject {
 
 
     public void update(float deltaTime) {
+        if(transist){
+            transistTime -= deltaTime;
+            b2Body.getAngle();
+        }else{
+            transistTime = 1000f;
+        }
         position = b2Body.getPosition();
         rotation = b2Body.getAngle() * MathUtils.radiansToDegrees;
     }
@@ -123,5 +133,11 @@ public class SpaceShip extends GameObject {
 
     public void setEnergy(float energy) {
         this.energy = energy;
+    }
+
+    public void beginHarvest(Planet planet){
+        Vector2 shipPos = b2Body.getPosition();
+        Vector2 thrustDir = new Vector2(shipPos.x - planet.getBody().getPosition().x, shipPos.y - planet.getBody().getPosition().y);
+        thrustDir.angleRad();
     }
 }

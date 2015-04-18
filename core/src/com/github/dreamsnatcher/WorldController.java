@@ -7,10 +7,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
-import com.github.dreamsnatcher.entities.GameObject;
-import com.github.dreamsnatcher.entities.GameWorld;
-import com.github.dreamsnatcher.entities.GameWorldSerializer;
-import com.github.dreamsnatcher.entities.SpaceShip;
+import com.github.dreamsnatcher.entities.*;
 import com.github.dreamsnatcher.screens.ScreenManager;
 import com.github.dreamsnatcher.utils.CameraHelper;
 import com.github.dreamsnatcher.utils.CollisionObjectHelper;
@@ -88,7 +85,6 @@ public class WorldController extends InputAdapter implements ContactListener {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        //TODO calculate vector between spaceship and touch point
         curTouchPos = new Vector2(screenX, screenY);
         return true;
     }
@@ -127,6 +123,11 @@ public class WorldController extends InputAdapter implements ContactListener {
 
     @Override
     public void beginContact(Contact contact) {
+        SpaceShip spaceShip = CollisionObjectHelper.getSpaceship(contact);
+        Planet planet = CollisionObjectHelper.getPlanet(contact);
+        if(planet!=null && spaceShip != null){
+            spaceShip.getBody().setLinearVelocity(0,0);
+        }
     }
 
     @Override
