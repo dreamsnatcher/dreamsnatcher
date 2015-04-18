@@ -162,6 +162,7 @@ public class SpaceShip extends GameObject {
                     gainEnergy();
                 }else{
                     if(currentPlanet.getEnergy() == 0){
+                        energy = 4*energy / 5;
                         AudioManager.suckDryMusic();
                     }
                     endHarvest();
