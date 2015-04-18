@@ -213,6 +213,7 @@ public class SpaceShip extends GameObject {
             currentPlanet.setCooldown(2f);
             currentPlanet = null;
         }
+        AudioManager.landing.stop();
         AudioManager.starting.play();
     }
 

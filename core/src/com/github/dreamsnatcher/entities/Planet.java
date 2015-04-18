@@ -108,7 +108,7 @@ public class Planet extends GameObject {
     }
 
     public float gainEnergy() {
-        energy += WorldController.DRAIN_ENERGY_STEP;
+        energy += WorldController.DRAIN_ENERGY_STEP /100f;
         if (energy >= MAX_ENERGY) {
             energy = MAX_ENERGY;
         }
