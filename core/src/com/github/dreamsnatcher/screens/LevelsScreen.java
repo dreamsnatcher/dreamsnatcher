@@ -39,7 +39,7 @@ public class LevelsScreen extends Screen {
                 finalButton.addListener(new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
-                        manager.setScreen(new GameScreen(manager, finalButton.getText().toString() + ".map"));
+                        manager.setScreen(new GameScreen(manager, "levels/"+finalButton.getText().toString() + ".map"));
                     }
                 });
 
