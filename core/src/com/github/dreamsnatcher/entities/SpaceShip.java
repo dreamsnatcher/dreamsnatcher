@@ -1,5 +1,6 @@
 package com.github.dreamsnatcher.entities;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
@@ -27,12 +28,13 @@ public class SpaceShip extends GameObject {
     private transient Joint joint;
     private transient boolean destroyJoint;
     private transient boolean landed;
+    private float counter = 0;
 
     public void init(com.badlogic.gdx.physics.box2d.World world) {
         texture = Assets.spaceShip0;
         b2World = world;
         dimension.set(0.4f, 0.5f);
-        energy = 100f;
+        energy = 50f;
         origin.x = dimension.x / 2;
         origin.y = dimension.y / 2;
         initPhysics();
@@ -71,17 +73,25 @@ public class SpaceShip extends GameObject {
 
     @Override
     public void render(SpriteBatch batch) {
+        counter+=Gdx.graphics.getDeltaTime();
+        if(counter>=95415613840f){
+            counter=0;
+        }
         texture = Assets.spaceShip0;
         if (b2Body.getLinearVelocity().len() > 0.2f) {
-            texture = Assets.spaceShip1;
+            //texture = Assets.spaceShip1;
+            texture = Assets.shipAnimationSpeed1.getKeyFrame(counter, true);
         }
 
         if (b2Body.getLinearVelocity().len() > 0.5f) {
-            texture = Assets.spaceShip2;
+            //texture = Assets.spaceShip2;
+            texture = Assets.shipAnimationSpeed2.getKeyFrame(counter, true);
+
         }
 
         if (b2Body.getLinearVelocity().len() > 0.7f) {
-            texture = Assets.spaceShip3;
+            //texture = Assets.spaceShip3;
+            texture = Assets.shipAnimationSpeed3.getKeyFrame(counter, true);
         }
         if (harvest) {
             texture = Assets.spaceShipHarvest;

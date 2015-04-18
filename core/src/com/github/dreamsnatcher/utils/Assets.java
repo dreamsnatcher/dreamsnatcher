@@ -1,11 +1,13 @@
 package com.github.dreamsnatcher.utils;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Disposable;
 
 public class Assets implements Disposable {
-
+    //DO THIS WITH ASSETMANAGER LATER TODO
     public static TextureRegion spaceShip0;
     public static TextureRegion spaceShip1;
     public static TextureRegion spaceShip2;
@@ -23,6 +25,7 @@ public class Assets implements Disposable {
     public static TextureRegion spaceBar;
     public static TextureRegion spaceBarFinish;
     public static TextureRegion asteroid2;
+    public static TextureRegion asteroid3;
 
     public static TextureRegion energyBar;
     public static TextureRegion energyPixel;
@@ -38,7 +41,17 @@ public class Assets implements Disposable {
 
     public static TextureRegion nightmare;
 
+    //Animations
+    public static Animation shipAnimationSpeed1;
+    public static Animation shipAnimationSpeed2;
+    public static Animation shipAnimationSpeed3;
+    //static Array<Animation> allAnimations = new Array<Animation>();
+
+
     public static void init() {
+        shipAnimationSpeed1 = loadAnimation("animations/spaceship_speed_0_", 3, 0.3f);
+        shipAnimationSpeed2 = loadAnimation("animations/spaceship_speed_1_", 3, 0.3f);
+        shipAnimationSpeed3 = loadAnimation("animations/spaceship_speed_2_", 3, 0.3f);
         spaceShip0 = new TextureRegion(new Texture("spaceship_speed0.png"));
         spaceShip0.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         spaceShip1 = new TextureRegion(new Texture("spaceship_speed1.png"));
@@ -84,6 +97,7 @@ public class Assets implements Disposable {
         asteroid0 = new TextureRegion(new Texture("asteriod_small01.png"));
         asteroid1 = new TextureRegion(new Texture("asteriod_small02.png"));
         asteroid2 = new TextureRegion(new Texture("asteriod_big01.png"));
+        asteroid3 = new TextureRegion(new Texture("asteriod_small04.png"));
         energyBar = new TextureRegion(new Texture("energybar_container.png"));
         energyPixel = new TextureRegion(new Texture("pixel.png"));
         indicator = new TextureRegion(new Texture("indicator.png"));
@@ -104,6 +118,18 @@ public class Assets implements Disposable {
         nightmare = new TextureRegion(new Texture("bloodframe.png"));
         nightmare.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
+
+
+    }
+
+    private static Animation loadAnimation(String path, int frames, float frameDuration) {
+        TextureRegion[] regions = new TextureRegion[frames];
+
+        for(int i = 0; i < frames; i++) {
+            Texture tex = new Texture(Gdx.files.internal(path + i + ".png"));
+            regions[i] = new TextureRegion(tex);
+        }
+        return new Animation(frameDuration, regions);
     }
 
     @Override
@@ -114,5 +140,6 @@ public class Assets implements Disposable {
         stars1.getTexture().dispose();
         stars2.getTexture().dispose();
         stars3.getTexture().dispose();
+        //allAnimations.dispose();
     }
 }

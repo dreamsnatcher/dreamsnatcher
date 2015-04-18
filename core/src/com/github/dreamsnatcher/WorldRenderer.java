@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.utils.Disposable;
 import com.github.dreamsnatcher.entities.GameObject;
 import com.github.dreamsnatcher.utils.Assets;
@@ -19,6 +20,7 @@ public class WorldRenderer implements Disposable {
     public OrthographicCamera camera;
     private OrthographicCamera cameraGUI;
     private SpriteBatch batch;
+    private SpriteBatch nightmareBatch;
     private WorldController worldController;
     private Box2DDebugRenderer debugRenderer;
     private BitmapFont font;
@@ -46,6 +48,7 @@ public class WorldRenderer implements Disposable {
     private void init() {
         debugRenderer = new Box2DDebugRenderer();
         batch = new SpriteBatch();
+        nightmareBatch = new SpriteBatch();
         camera = new OrthographicCamera(Constants.VIEWPORT_WIDTH, Constants.VIEWPORT_HEIGHT);
         camera.position.set(0, 0, 0);
         camera.update();
@@ -86,7 +89,7 @@ public class WorldRenderer implements Disposable {
 
         batch.draw(energybar, 760, 100, 40, 400);
 
-        if(!worldController.isFinish()) {
+        if (!worldController.isFinish()) {
             for (int i = 1; i <= this.worldController.gameWorld.spaceShip.getEnergy(); i++) {
                 batch.draw(new TextureRegion(energypixel), 760, 500 - i * 4, 40, 4);
             }
@@ -205,6 +208,7 @@ public class WorldRenderer implements Disposable {
         if (worldController.isDebug()) {
             debugRenderer.render(worldController.getB2World(), camera.combined);
         }
+        showNightmare(worldController.gameWorld.spaceShip.getEnergy());
     }
 
     public void resize(int width, int height) {
@@ -213,17 +217,22 @@ public class WorldRenderer implements Disposable {
     }
 
     public void showNightmare(float energy) {
-        float alpha = 0f;
+        float alpha = 0.0f;
         if (energy < 20 && energy >= 15) {
-            alpha = 75f;
+            alpha = 0.3f;
         } else if (energy < 15 && energy >= 10) {
-            alpha = 60f;
+            alpha = 0.5f;
         } else if (energy < 10 && energy >= 5) {
-            alpha = 30f;
-        } else if (energy < 5 && energy >= 0) {
-            alpha = 10f;
+            alpha = 0.75f;
+        } else if (energy < 5) {
+            alpha = 1f;
         }
-        batch.draw(Assets.nightmare, 0, 0, Assets.nightmare.getRegionWidth(), Assets.nightmare.getRegionHeight());
+        nightmareBatch.setProjectionMatrix(cameraGUI.combined);
+        nightmareBatch.begin();
+        Color c = nightmareBatch.getColor();
+        nightmareBatch.setColor(c.r, c.g, c.b, alpha);
+        nightmareBatch.draw(Assets.nightmare, 0, 0, cameraGUI.viewportWidth, cameraGUI.viewportHeight);
+        nightmareBatch.end();
     }
 
     @Override
