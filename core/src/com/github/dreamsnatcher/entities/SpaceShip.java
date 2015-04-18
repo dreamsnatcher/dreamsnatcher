@@ -156,6 +156,9 @@ public class SpaceShip extends GameObject {
                 if(currentPlanet.drainEnergy() > 0 && energy <= 99f ){
                     gainEnergy();
                 }else{
+                    if(currentPlanet.getEnergy() == 0){
+                        AudioManager.suckDryMusic();
+                    }
                     endHarvest();
                 }
             }

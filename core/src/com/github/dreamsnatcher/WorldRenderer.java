@@ -81,8 +81,8 @@ public class WorldRenderer implements Disposable {
 
 
         int k = 0;
-        for(int i = -10; i< 10;i++){
-            for(int j = -10; j< 10;j++){
+        for(int i = -20; i< 20;i++){
+            for(int j = -20; j< 20;j++){
                 TextureRegion textureRegion;
                 switch (rotation[k%rotation.length]){
                     case 1:
