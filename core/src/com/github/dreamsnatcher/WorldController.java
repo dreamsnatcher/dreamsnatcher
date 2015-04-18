@@ -42,7 +42,7 @@ public class WorldController extends InputAdapter implements ContactListener {
     public WorldController(String level) {
         this.map = level;
         String highscore = HighscoreHelper.readHighscore(getMap());
-        this.highscore = highscore.contains("no") ? 0 : Long.parseLong(highscore);
+        this.highscore = highscore.contains("No") ? -1 : Long.parseLong(highscore);
         init();
     }
 
@@ -63,6 +63,10 @@ public class WorldController extends InputAdapter implements ContactListener {
         return map.substring(0, map.lastIndexOf("."));
     }
 
+    public long getHighscore(){
+        return highscore;
+    }
+
     public void update(float deltaTime) {
         if (!finish) {
             timeElapsed += deltaTime * 1000;
@@ -79,7 +83,7 @@ public class WorldController extends InputAdapter implements ContactListener {
         if (zoomIn) {
             cameraHelper.setZoom(cameraHelper.getZoom() - 0.002f);
         }
-        if(gameWorld.spaceShip.getEnergy() <= 0f && gameWorld.spaceShip.getBody().getLinearVelocity().len() <= 0.01f ){
+        if(gameWorld.spaceShip.getEnergy() <= 0f && gameWorld.spaceShip.getBody().getLinearVelocity().len() <= 0.001f ){
             finalAnimationFinished = true;
             AudioManager.stopAll();
         }
@@ -181,7 +185,7 @@ public class WorldController extends InputAdapter implements ContactListener {
             spacebar.hasBeenLandedOn();
             AudioManager.havanaMusic();
             zoomIn = true;
-            if (timeElapsed <= highscore){
+            if (timeElapsed <= highscore || highscore == -1){
                 HighscoreHelper.writeHighscore(timeElapsed, getMap());
             }
         }

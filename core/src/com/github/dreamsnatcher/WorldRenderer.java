@@ -87,12 +87,11 @@ public class WorldRenderer implements Disposable {
         batch.begin();
         String mmss = String.format("%02d:%02d", TimeUnit.MILLISECONDS.toMinutes(worldController.timeElapsed) % TimeUnit.HOURS.toMinutes(1),
                 TimeUnit.MILLISECONDS.toSeconds(worldController.timeElapsed) % TimeUnit.MINUTES.toSeconds(1));
-        String lastHighscore = HighscoreHelper.readHighscore(worldController.getMap());
-
-        if (!lastHighscore.contains("no")){
-            long highscore = Long.parseLong(lastHighscore);
-            lastHighscore = String.format("%02d:%02d", TimeUnit.MILLISECONDS.toMinutes(highscore) % TimeUnit.HOURS.toMinutes(1),
-                    TimeUnit.MILLISECONDS.toSeconds(highscore) % TimeUnit.MINUTES.toSeconds(1));
+        String lastHighscore = "No highscore yet";
+        long highScoreVal = worldController.getHighscore();
+        if (highScoreVal > -1) {
+            lastHighscore = String.format("%02d:%02d", TimeUnit.MILLISECONDS.toMinutes(highScoreVal) % TimeUnit.HOURS.toMinutes(1),
+                    TimeUnit.MILLISECONDS.toSeconds(highScoreVal) % TimeUnit.MINUTES.toSeconds(1));
         }
         font.draw(batch, mmss, 10, 10);
         font.draw(batch, "Highscore: " + lastHighscore, 50, 10);
@@ -237,12 +236,12 @@ public class WorldRenderer implements Disposable {
 
     public void showNightmare(float energy) {
         float alpha = 0.0f;
-        if(energy<0f){
-            energy =0f;
+        if (energy < 0f) {
+            energy = 0f;
         }
         if (!worldController.isFinish() && energy < 20) {
-            alpha = (20 - energy)/20f;
-        } else if (worldController.isFinish()){
+            alpha = (20 - energy) / 20f;
+        } else if (worldController.isFinish()) {
             alpha = 0.0f;
         }
         nightmareBatch.setProjectionMatrix(cameraGUI.combined);
