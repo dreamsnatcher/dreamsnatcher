@@ -215,4 +215,10 @@ public class EditorController extends InputAdapter {
         }
         return true;
     }
+
+    @Override
+    public boolean scrolled(int amount) {
+        camera.zoom += amount / 10.0f;
+        return true;
+    }
 }

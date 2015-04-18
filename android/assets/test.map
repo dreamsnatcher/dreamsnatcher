@@ -3,8 +3,8 @@ objects: [
 	{
 		class: com.github.dreamsnatcher.entities.Planet
 		position: {
-			x: -1.046875
-			y: 0.7499999
+			x: -3.1382809
+			y: 0.070833474
 		}
 		dimension: {
 			x: 0.8
@@ -18,8 +18,8 @@ objects: [
 	{
 		class: com.github.dreamsnatcher.entities.Planet
 		position: {
-			x: -1.3515625
-			y: -1.3854167
+			x: -1.6382811
+			y: 1.1374999
 		}
 		dimension: {
 			x: 0.8
@@ -33,8 +33,8 @@ objects: [
 	{
 		class: com.github.dreamsnatcher.entities.Planet
 		position: {
-			x: 1.5078125
-			y: -1.4583335
+			x: 0.23671901
+			y: -1.8624996
 		}
 		dimension: {
 			x: 0.8
@@ -48,8 +48,8 @@ objects: [
 	{
 		class: com.github.dreamsnatcher.entities.Planet
 		position: {
-			x: 1.7421875
-			y: 1.0104167
+			x: -1.2882812
+			y: -2.8624992
 		}
 		dimension: {
 			x: 0.8
@@ -63,8 +63,8 @@ objects: [
 	{
 		class: com.github.dreamsnatcher.entities.Planet
 		position: {
-			x: -0.10156244
-			y: 1.8020833
+			x: -0.31328106
+			y: -2.8624992
 		}
 		dimension: {
 			x: 0.8
@@ -78,8 +78,128 @@ objects: [
 	{
 		class: com.github.dreamsnatcher.entities.Planet
 		position: {
-			x: -0.43750003
-			y: -1.8125
+			x: -2.7070324
+			y: 0.88750046
+		}
+		dimension: {
+			x: 0.8
+			y: 0.4
+		}
+		origin: {
+			x: 0.4
+			y: 0.2
+		}
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Planet
+		position: {
+			x: 3.8117182
+			y: 3.537499
+		}
+		dimension: {
+			x: 0.8
+			y: 0.4
+		}
+		origin: {
+			x: 0.4
+			y: 0.2
+		}
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Planet
+		position: {
+			x: 2.6117184
+			y: 4.8041663
+		}
+		dimension: {
+			x: 0.8
+			y: 0.4
+		}
+		origin: {
+			x: 0.4
+			y: 0.2
+		}
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Planet
+		position: {
+			x: 1.7867181
+			y: 4.4374995
+		}
+		dimension: {
+			x: 0.8
+			y: 0.4
+		}
+		origin: {
+			x: 0.4
+			y: 0.2
+		}
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Planet
+		position: {
+			x: 1.8617187
+			y: 3.4041657
+		}
+		dimension: {
+			x: 0.8
+			y: 0.4
+		}
+		origin: {
+			x: 0.4
+			y: 0.2
+		}
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Planet
+		position: {
+			x: 2.9367182
+			y: 2.9041662
+		}
+		dimension: {
+			x: 0.8
+			y: 0.4
+		}
+		origin: {
+			x: 0.4
+			y: 0.2
+		}
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Planet
+		position: {
+			x: 3.5867178
+			y: 4.370833
+		}
+		dimension: {
+			x: 0.8
+			y: 0.4
+		}
+		origin: {
+			x: 0.4
+			y: 0.2
+		}
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Planet
+		position: {
+			x: -0.7882813
+			y: 0.8041669
+		}
+		dimension: {
+			x: 0.8
+			y: 0.4
+		}
+		origin: {
+			x: 0.4
+			y: 0.2
+		}
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Planet
+		position: {
+			x: 0.06171894
+			y: -0.7958331
 		}
 		dimension: {
 			x: 0.8
@@ -93,8 +213,8 @@ objects: [
 ]
 spaceShip: {
 	position: {
-		x: 0.2734375
-		y: -0.27083337
+		x: -1.8914073
+		y: -0.07499993
 	}
 	dimension: {
 		x: 0.4
