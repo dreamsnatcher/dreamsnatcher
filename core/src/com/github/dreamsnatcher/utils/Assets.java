@@ -1,6 +1,5 @@
 package com.github.dreamsnatcher.utils;
 
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Disposable;
@@ -13,6 +12,8 @@ public class Assets implements Disposable {
     public static TextureRegion spaceShip3;
     public static TextureRegion spaceShipEmpty;
     public static TextureRegion planet;
+    public static TextureRegion planetBonus;
+    public static TextureRegion planetBonusLow;
     public static TextureRegion stars0;
     public static TextureRegion stars1;
     public static TextureRegion stars2;
@@ -52,6 +53,12 @@ public class Assets implements Disposable {
         planetLow = new TextureRegion(new Texture("planet_small_pop.png"));
         planetLow.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
+        planetBonus = new TextureRegion(new Texture("planet_3_high_pop.png"));
+        planetBonus.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        planetBonusLow = new TextureRegion(new Texture("planet_3_small_pop.png"));
+        planetBonusLow.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
         planetDead = new TextureRegion(new Texture("dead_planet.png"));
         planetDead.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
@@ -70,6 +77,7 @@ public class Assets implements Disposable {
         energyBar = new TextureRegion(new Texture("energybar_container.png"));
         energyPixel = new TextureRegion(new Texture("pixel.png"));
         indicator = new TextureRegion(new Texture("indicator.png"));
+        indicator.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         spaceBar = new TextureRegion(new Texture("spacebar.png"));
         spaceBar.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         spaceBarFinish = new TextureRegion(new Texture("spacebar_landed.png"));

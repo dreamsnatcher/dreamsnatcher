@@ -53,7 +53,9 @@ public class WorldController extends InputAdapter implements ContactListener {
     }
 
     public void update(float deltaTime) {
-        timeElapsed += deltaTime * 1000;
+        if(!finish) {
+            timeElapsed += deltaTime * 1000;
+        }
         cameraHelper.update(deltaTime);
         gameWorld.spaceShip.update(deltaTime);
         for (GameObject object : gameWorld.objects) {
@@ -147,6 +149,7 @@ public class WorldController extends InputAdapter implements ContactListener {
         if (asteroid != null && spaceShip != null) {
             AudioManager.ahit.play();
             spaceShip.setEnergy(spaceShip.getEnergy() - 20f);
+            asteroid.hit();
         }
 
         if (spaceShip != null && spacebar != null) {
@@ -154,6 +157,7 @@ public class WorldController extends InputAdapter implements ContactListener {
             finish = true;
             spaceShip.hasLanded();
             spacebar.hasBeenLandedOn();
+            AudioManager.havanaMusic();
             zoomIn = true;
         }
     }
