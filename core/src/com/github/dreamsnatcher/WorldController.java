@@ -136,7 +136,9 @@ public class WorldController extends InputAdapter implements ContactListener {
         Planet planet = CollisionObjectHelper.getPlanet(contact);
         Asteroid asteroid = CollisionObjectHelper.getAsteroid(contact);
         Spacebar spacebar = CollisionObjectHelper.getSpaceBar(contact);
-        if (planet != null && spaceShip != null && planet.getEnergy() > 0f) {
+
+        if (planet != null && spaceShip != null && planet.getEnergy() > 1f && planet.cooldown <= 0 ) {
+            System.out.println(planet.getEnergy());
             spaceShip.getBody().setLinearVelocity(0, 0);
             spaceShip.beginHarvest(planet);
             AudioManager.landing.play();
@@ -157,11 +159,6 @@ public class WorldController extends InputAdapter implements ContactListener {
 
     @Override
     public void endContact(Contact contact) {
-        SpaceShip spaceShip = CollisionObjectHelper.getSpaceship(contact);
-        Planet planet = CollisionObjectHelper.getPlanet(contact);
-        if (planet != null && spaceShip != null) {
-            AudioManager.starting.play();
-        }
     }
 
     @Override
