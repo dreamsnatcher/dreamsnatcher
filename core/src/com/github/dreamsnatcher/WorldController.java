@@ -19,7 +19,7 @@ import com.github.dreamsnatcher.utils.CollisionObjectHelper;
 public class WorldController extends InputAdapter implements ContactListener {
     public static final int MAX_ACCELERATION = 10;
     private static final float MAX_V = 1;
-    public static final float DRAIN_ENERGY_STEP = 0.5f;
+    public static final float DRAIN_ENERGY_STEP = 0.1f;
 
     public CameraHelper cameraHelper;
 

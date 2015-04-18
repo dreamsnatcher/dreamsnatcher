@@ -3,6 +3,7 @@ package com.github.dreamsnatcher.entities;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.github.dreamsnatcher.utils.Assets;
 
@@ -51,6 +52,7 @@ public class Planet extends GameObject {
         dimension.set(1f, 1f);
         origin.x = dimension.x / 2;
         origin.y = dimension.y / 2;
+        scale= new Vector2(1.3f, 1.3f);
         initPhysics();
     }
 
