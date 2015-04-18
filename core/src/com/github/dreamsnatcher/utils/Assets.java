@@ -97,7 +97,7 @@ public class Assets implements Disposable {
         asteroid0 = new TextureRegion(new Texture("asteriod_small01.png"));
         asteroid1 = new TextureRegion(new Texture("asteriod_small02.png"));
         asteroid2 = new TextureRegion(new Texture("asteriod_big01.png"));
-        asteroid3 = new TextureRegion(new Texture("asteriod_small04.png"));
+        asteroid3 = new TextureRegion(new Texture("asteriod_small_04.png"));
         energyBar = new TextureRegion(new Texture("energybar_container.png"));
         energyPixel = new TextureRegion(new Texture("pixel.png"));
         indicator = new TextureRegion(new Texture("indicator.png"));
@@ -115,7 +115,7 @@ public class Assets implements Disposable {
 
         finishWookie = new TextureRegion(new Texture("wookie.png"));
         finishWookie.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        nightmare = new TextureRegion(new Texture("bloodframe.png"));
+        nightmare = new TextureRegion(new Texture("nightmare.png"));
         nightmare.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
 
