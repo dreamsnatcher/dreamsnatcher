@@ -33,6 +33,7 @@ public class WorldController extends InputAdapter implements ContactListener {
     public GameWorld gameWorld;
     private boolean debug = false;
     private Vector2 curTouchPos;
+    private String map = "map1.map";
 
     public WorldController() {
         init();
@@ -46,7 +47,7 @@ public class WorldController extends InputAdapter implements ContactListener {
         // You can open this file and edit it via
         // Editor in the desktop project. You can of course
         // also create new files.
-        gameWorld = GameWorldSerializer.deserialize(Gdx.files.internal("map1.map"));
+        gameWorld = GameWorldSerializer.deserialize(Gdx.files.internal(map));
         gameWorld.init(b2World);
         cameraHelper.setTarget(gameWorld.spaceShip.getBody());
     }
@@ -59,7 +60,7 @@ public class WorldController extends InputAdapter implements ContactListener {
             object.update(deltaTime);
         }
         b2World.step(1 / 60f, 3, 8); //timeStep, velocityIteration, positionIteration
-        if (Gdx.input.isTouched() && gameWorld.spaceShip.getEnergy() > 0) {
+        if (Gdx.input.isTouched() && gameWorld.spaceShip.getEnergy() > 0 && !finish) {
             accelerate(curTouchPos.x, curTouchPos.y);
         }
         if (zoomIn) {
@@ -136,7 +137,9 @@ public class WorldController extends InputAdapter implements ContactListener {
         Planet planet = CollisionObjectHelper.getPlanet(contact);
         Asteroid asteroid = CollisionObjectHelper.getAsteroid(contact);
         Spacebar spacebar = CollisionObjectHelper.getSpaceBar(contact);
-        if (planet != null && spaceShip != null && planet.getEnergy() > 0f) {
+
+        if (planet != null && spaceShip != null && planet.getEnergy() > 1f && planet.cooldown <= 0 ) {
+            System.out.println(planet.getEnergy());
             spaceShip.getBody().setLinearVelocity(0, 0);
             spaceShip.beginHarvest(planet);
             AudioManager.landing.play();
@@ -149,18 +152,14 @@ public class WorldController extends InputAdapter implements ContactListener {
         if (spaceShip != null && spacebar != null) {
             cameraHelper.setTarget(spacebar.getBody());
             finish = true;
-            spacebar.hasLanded();
+            spaceShip.hasLanded();
+            spacebar.hasBeenLandedOn();
             zoomIn = true;
         }
     }
 
     @Override
     public void endContact(Contact contact) {
-        SpaceShip spaceShip = CollisionObjectHelper.getSpaceship(contact);
-        Planet planet = CollisionObjectHelper.getPlanet(contact);
-        if (planet != null && spaceShip != null) {
-            AudioManager.starting.play();
-        }
     }
 
     @Override

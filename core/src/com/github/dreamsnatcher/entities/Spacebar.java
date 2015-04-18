@@ -72,7 +72,7 @@ public class Spacebar extends GameObject {
         return b2Body;
     }
 
-    public void hasLanded(){
+    public void hasBeenLandedOn(){
         texture = Assets.spaceBarFinish;
     }
 }
