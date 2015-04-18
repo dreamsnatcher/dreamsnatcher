@@ -13,6 +13,9 @@ public class Assets implements Disposable {
     public static TextureRegion stars2;
     public static TextureRegion stars3;
 
+    public static TextureRegion energyBar;
+    public static TextureRegion energyPixel;
+
     public static void init(){
         spaceShip = new TextureRegion(new Texture("spaceship_speed0.png"));
         spaceShip.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -26,6 +29,12 @@ public class Assets implements Disposable {
         stars2.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         stars3 = new TextureRegion(new Texture("space_4_v2.png"));
         stars3.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        energyBar = new TextureRegion(new Texture("energybar_container.png"));
+        energyBar.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        energyPixel = new TextureRegion(new Texture("pixel.png"));
+        energyPixel.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
     }
 
     @Override
@@ -36,6 +45,9 @@ public class Assets implements Disposable {
         stars1.getTexture().dispose();
         stars2.getTexture().dispose();
         stars3.getTexture().dispose();
+
+        energyBar.getTexture().dispose();
+        energyPixel.getTexture().dispose();
 
 
     }

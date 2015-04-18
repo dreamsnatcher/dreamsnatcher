@@ -23,6 +23,9 @@ public class WorldRenderer implements Disposable {
     private TextureRegion background1;
     private TextureRegion background2;
     private TextureRegion background3;
+    private TextureRegion energybar;
+    private TextureRegion energypixel;
+
     private int[] rotation;
 
     public WorldRenderer(WorldController worldController) {
@@ -46,6 +49,9 @@ public class WorldRenderer implements Disposable {
         background1 = Assets.stars1;
         background2 = Assets.stars2;
         background3 = Assets.stars3;
+        energybar = Assets.energyBar;
+        energypixel = Assets.energyPixel;
+
         //GUI camera
         cameraGUI = new OrthographicCamera(Constants.VIEWPORT_GUI_WIDTH, Constants.VIEWPORT_GUI_HEIGHT);
         cameraGUI.position.set(0, 0, 0);
@@ -61,6 +67,10 @@ public class WorldRenderer implements Disposable {
         String mmss = String.format("%02d:%02d", TimeUnit.MILLISECONDS.toMinutes(worldController.timeElapsed) % TimeUnit.HOURS.toMinutes(1),
                 TimeUnit.MILLISECONDS.toSeconds(worldController.timeElapsed) % TimeUnit.MINUTES.toSeconds(1));
         font.draw(batch, mmss, 10, 10);
+        batch.draw(new TextureRegion(energybar), 760, 1, 40, 200);
+        //for(int i = 1;i<=this.worldController.gameWorld.spaceShip.energy; i+=2){
+        //    batch.draw(new TextureRegion(energypixel), 760, i, 40, 2);
+        //}
         batch.end();
     }
 
@@ -68,6 +78,8 @@ public class WorldRenderer implements Disposable {
         worldController.cameraHelper.applyTo(camera);
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
+
+
         int k = 0;
         for(int i = -10; i< 10;i++){
             for(int j = -10; j< 10;j++){
