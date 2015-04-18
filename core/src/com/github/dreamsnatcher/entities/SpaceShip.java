@@ -32,7 +32,7 @@ public class SpaceShip extends GameObject {
         texture = Assets.spaceShip0;
         b2World = world;
         dimension.set(0.4f, 0.5f);
-        energy = 100f;
+        energy = 50f;
         origin.x = dimension.x / 2;
         origin.y = dimension.y / 2;
         initPhysics();
