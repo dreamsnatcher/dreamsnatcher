@@ -30,7 +30,7 @@ public class WorldRenderer implements Disposable {
     private TextureRegion spaceBarIndicator;
 
     private int[] rotation;
-    private BitmapFont finishFont;
+    private TextureRegion finishPicture;
 
     public WorldRenderer(WorldController worldController) {
         this.worldController = worldController;
@@ -64,8 +64,8 @@ public class WorldRenderer implements Disposable {
         cameraGUI.update();
 
         font = new BitmapFont(true); //default 15pt Arial
-        finishFont = new BitmapFont(true);
-        finishFont.setColor(Color.RED);
+        finishPicture = Assets.finishWookie;
+        finishPicture.flip(false, true);
     }
 
     public void renderGUI(SpriteBatch batch) {
@@ -82,7 +82,7 @@ public class WorldRenderer implements Disposable {
             batch.draw(new TextureRegion(energypixel), 760, 500 - i * 4, 40, 4);
         }
         if(worldController.isFinish()){
-            finishFont.draw(batch, "GAME FINISHED", 500, 500);
+            batch.draw(new TextureRegion(finishPicture), 100, 100, 400, 400);
         }
         batch.end();
     }

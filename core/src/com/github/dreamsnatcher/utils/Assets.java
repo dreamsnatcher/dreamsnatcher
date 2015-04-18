@@ -33,6 +33,7 @@ public class Assets implements Disposable {
 
     public static TextureRegion bierpixel;
     public static TextureRegion schaumkrone;
+    public static TextureRegion finishWookie;
 
     public static void init() {
         spaceShip0 = new TextureRegion(new Texture("spaceship_speed0.png"));
@@ -91,6 +92,9 @@ public class Assets implements Disposable {
         schaumkrone = new TextureRegion(new Texture("schaumkrone.png"));
         schaumkrone.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
+
+        finishWookie = new TextureRegion(new Texture("wookie.png"));
+        finishWookie.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
 
     }
