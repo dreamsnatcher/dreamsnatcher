@@ -20,14 +20,38 @@ public class CollisionObjectHelper {
         return null;
     }
 
-    public static GameObject getCollisionPartner(Contact contact) {
+    public static Planet getPlanet(Contact contact) {
 
         Object objectA = contact.getFixtureA().getBody().getUserData();
         Object objectB = contact.getFixtureB().getBody().getUserData();
-        if (objectA instanceof Planet || objectA instanceof Asteroid || objectA instanceof Spacebar) {
-            return (GameObject) objectA;
-        } else if (objectB instanceof SpaceShip) {
-            return (SpaceShip) objectB;
+        if (objectA instanceof Planet ) {
+            return (Planet) objectA;
+        } else if (objectB instanceof Planet){
+            return (Planet) objectB;
+        }
+        return null;
+    }
+
+    public static Asteroid getAsteroid(Contact contact) {
+
+        Object objectA = contact.getFixtureA().getBody().getUserData();
+        Object objectB = contact.getFixtureB().getBody().getUserData();
+        if (objectA instanceof Asteroid ) {
+            return (Asteroid) objectA;
+        } else if (objectB instanceof Asteroid){
+            return (Asteroid) objectB;
+        }
+        return null;
+    }
+
+    public static Spacebar getSpaceBar(Contact contact) {
+
+        Object objectA = contact.getFixtureA().getBody().getUserData();
+        Object objectB = contact.getFixtureB().getBody().getUserData();
+        if (objectA instanceof Spacebar ) {
+            return (Spacebar) objectA;
+        } else if (objectB instanceof Spacebar){
+            return (Spacebar) objectB;
         }
         return null;
     }
