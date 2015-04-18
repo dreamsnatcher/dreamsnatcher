@@ -193,9 +193,6 @@ public class SpaceShip extends GameObject {
     }
 
     public void beginHarvest(Planet planet){
-        if(joint!=null){
-            destroyJoint = true;
-        }
         harvestStarted = true;
         Vector2 shipPos = b2Body.getWorldCenter();
         Vector2 thrustDir = new Vector2(shipPos.x - planet.getBody().getWorldCenter().x, shipPos.y - planet.getBody().getWorldCenter().y);
@@ -207,6 +204,9 @@ public class SpaceShip extends GameObject {
     }
 
     public void endHarvest(){
+        if(harvestStarted){
+            return;
+        }
         destroyJoint = true;
         harvest = false;
         if (currentPlanet != null) {
