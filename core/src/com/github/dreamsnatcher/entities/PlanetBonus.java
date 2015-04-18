@@ -7,6 +7,6 @@ public class PlanetBonus extends Planet{
 
     public PlanetBonus() {
         super();
-        MAX_ENERGY = 200f;
+        MAX_ENERGY = MAX_ENERGY_BONUS;
     }
 }

@@ -11,14 +11,13 @@ public class GameScreen extends Screen {
     WorldRenderer worldRenderer;
     WorldController worldController;
 
-    public GameScreen(ScreenManager manager) {
+    public GameScreen(ScreenManager manager, String level) {
         super(manager);
         Assets.init();
-        worldController = new WorldController();
+        worldController = new WorldController(level);
         worldRenderer = new WorldRenderer(worldController);
         worldController.setWorldRenderer(worldRenderer);
     }
-
     @Override
     public void render() {
         worldController.update(Gdx.graphics.getDeltaTime());

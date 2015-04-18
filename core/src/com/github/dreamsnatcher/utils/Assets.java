@@ -30,6 +30,7 @@ public class Assets implements Disposable {
     public static TextureRegion planetDead;
     public static TextureRegion planetLow;
     public static TextureRegion indicator;
+    public static TextureRegion planetBonusDead;
 
     public static TextureRegion bierpixel;
     public static TextureRegion schaumkrone;
@@ -63,6 +64,9 @@ public class Assets implements Disposable {
 
         planetBonusLow = new TextureRegion(new Texture("planet_3_small_pop.png"));
         planetBonusLow.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        planetBonusDead = new TextureRegion(new Texture("dead_planet_3.png"));
+        planetBonusDead.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         planetDead = new TextureRegion(new Texture("dead_planet.png"));
         planetDead.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);

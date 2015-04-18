@@ -1,5 +1,7 @@
 package com.github.dreamsnatcher;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -26,8 +28,15 @@ public class WorldRenderer implements Disposable {
     private TextureRegion background3;
     private TextureRegion energybar;
     private TextureRegion energypixel;
+    private TextureRegion beerpixel;
+    private TextureRegion schaumkrone;
 
     private int[] rotation;
+    private BitmapFont finishFont;
+
+    public int beercounter = 0;
+    public float timer = 0;
+    public final float MAXTIMER = 0.02f;
 
     public WorldRenderer(WorldController worldController) {
         this.worldController = worldController;
@@ -52,6 +61,8 @@ public class WorldRenderer implements Disposable {
         background3 = Assets.stars3;
         energybar = Assets.energyBar;
         energypixel = Assets.energyPixel;
+        beerpixel = Assets.bierpixel;
+        schaumkrone = Assets.schaumkrone;
 
         //GUI camera
         cameraGUI = new OrthographicCamera(Constants.VIEWPORT_GUI_WIDTH, Constants.VIEWPORT_GUI_HEIGHT);
@@ -60,6 +71,8 @@ public class WorldRenderer implements Disposable {
         cameraGUI.update();
 
         font = new BitmapFont(true); //default 15pt Arial
+        finishFont = new BitmapFont(true);
+        finishFont.setColor(Color.RED);
     }
 
     public void renderGUI(SpriteBatch batch) {
@@ -72,8 +85,25 @@ public class WorldRenderer implements Disposable {
                 Assets.indicator.getRegionWidth(), Assets.indicator.getRegionHeight(), 0.5f, 0.5f, getCurrentIndicatorAngle());
 
         batch.draw(energybar, 760, 100, 40, 400);
-        for (int i = 1; i <= this.worldController.gameWorld.spaceShip.getEnergy(); i++) {
-            batch.draw(energypixel, 760, 500 - i * 4, 40, 4);
+
+        if(!worldController.isFinish()) {
+            for (int i = 1; i <= this.worldController.gameWorld.spaceShip.getEnergy(); i++) {
+                batch.draw(new TextureRegion(energypixel), 760, 500 - i * 4, 40, 4);
+            }
+        }
+            if (worldController.isFinish()) {
+                finishFont.draw(batch, "GAME FINISHED", 500, 500);
+                timer += Gdx.graphics.getDeltaTime();
+                if (timer > MAXTIMER) {
+                    timer = 0;
+                    if (beercounter <= 400) {
+                        beercounter++;
+                    }
+                }
+                for (int i = 1; i <= beercounter; i++) {
+                    batch.draw(new TextureRegion(beerpixel), 760, 500 - i, 40, 4);
+                }
+                batch.draw(new TextureRegion(schaumkrone), 755, 500 - beercounter-3, 50, 20);
         }
         batch.end();
     }
