@@ -35,7 +35,7 @@ public class AudioManager {
 
 
         public static void init(){
-            empty = Gdx.audio.newMusic(Gdx.files.internal("sounds/empty_planet.wav"));
+            empty = Gdx.audio.newMusic(Gdx.files.internal("sounds/empty_planet.mp3"));
 		    mainloop = Gdx.audio.newMusic(Gdx.files.internal("sounds/mainloop.wav"));
             fearloop = Gdx.audio.newMusic(Gdx.files.internal("sounds/fearloop.wav"));
             mainloop.setLooping(true);
