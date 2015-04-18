@@ -51,7 +51,7 @@ public class EditorScreen extends Screen {
     private void initUI() {
         stage = new Stage();
 
-        skin = new Skin(Gdx.files.internal("uiskin.json"));
+        skin = new Skin(Gdx.files.internal("editor/uiskin.json"));
 
         Table root = new Table();
         root.setFillParent(true);
