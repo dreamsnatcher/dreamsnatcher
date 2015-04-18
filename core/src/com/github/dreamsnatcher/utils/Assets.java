@@ -111,7 +111,7 @@ public class Assets implements Disposable {
         schaumkrone = new TextureRegion(new Texture("schaumkrone.png"));
         schaumkrone.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-        nightmare = new TextureRegion(new Texture("bloodframe.png"));
+        nightmare = new TextureRegion(new Texture("nightmare.png"));
         nightmare.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
 
