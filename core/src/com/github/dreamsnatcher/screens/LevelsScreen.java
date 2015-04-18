@@ -33,9 +33,9 @@ public class LevelsScreen extends Screen {
 
         FileHandle dirHandle = Gdx.files.internal("levels");
         int i = 0;
-        for(FileHandle entry : dirHandle.list()) {
-            if(entry.extension().equals("map")) {
-                if(i%5 >= 4){
+        for (FileHandle entry : dirHandle.list()) {
+            if (entry.extension().equals("map")) {
+                if (i % 5 >= 4) {
                     table.row();
                 }
                 i++;
@@ -43,7 +43,7 @@ public class LevelsScreen extends Screen {
                 finalButton.addListener(new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
-                        manager.setScreen(new GameScreen(manager, "levels/"+finalButton.getText().toString() + ".map"));
+                        manager.setScreen(new GameScreen(manager, "levels/" + finalButton.getText().toString() + ".map"));
                     }
                 });
 
