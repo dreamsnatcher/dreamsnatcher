@@ -70,6 +70,7 @@ public class SpaceShip extends GameObject {
 
     @Override
     public void render(SpriteBatch batch) {
+        texture = Assets.spaceShip0;
         if (b2Body.getLinearVelocity().len() > 0.2f) {
             texture = Assets.spaceShip1;
         }
@@ -201,11 +202,9 @@ public class SpaceShip extends GameObject {
         harvest = false;
         if (currentPlanet != null) {
             currentPlanet.setCooldown(2f);
-            Vector2 shipPos = b2Body.getWorldCenter();
-            Vector2 thrustDir = new Vector2(shipPos.x - currentPlanet.getBody().getWorldCenter().x, shipPos.y - currentPlanet.getBody().getWorldCenter().y);
             currentPlanet = null;
-            b2Body.applyForceToCenter(thrustDir, true);
         }
+        AudioManager.starting.play();
     }
 
     public void hasLanded() {
