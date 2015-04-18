@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.github.dreamsnatcher.WorldController;
 import com.github.dreamsnatcher.utils.Assets;
 
 /**
@@ -16,6 +17,7 @@ public class Planet extends GameObject {
     // not saved to json
     private transient TextureRegion texture;
     private transient TextureRegion textureDead;
+    private TextureRegion textureLow;
     private transient com.badlogic.gdx.physics.box2d.World b2World;
     private transient Body b2Body;
     private transient float energy = 100f;
@@ -50,12 +52,7 @@ public class Planet extends GameObject {
     @Override
     public void init(World world) {
         texture = Assets.planet;
-        if(energy< 50f){
-            textureDead = Assets.planetLow;
-        }
-        if(energy < 0f){
-            textureDead = Assets.planetDead;
-        }
+
         b2World = world;
         dimension.set(1f, 1f);
         origin.x = dimension.x / 2;
@@ -66,12 +63,15 @@ public class Planet extends GameObject {
 
     @Override
     public void render(SpriteBatch batch) {
-        TextureRegion textureRegion;
-        if(energy<= 0f){
-            textureRegion = textureDead;
+        TextureRegion textureRegion = Assets.planet;
+        if(energy< 50f){
+            textureRegion = Assets.planetLow;
+        }
+        if(energy < 0f){
+            textureRegion = Assets.planetDead;
         }
 
-        batch.draw(texture,
+        batch.draw(textureRegion,
                 position.x - dimension.x / 2, position.y - dimension.y / 2,
                 origin.x, origin.y,
                 dimension.x, dimension.y,
@@ -79,9 +79,24 @@ public class Planet extends GameObject {
                 rotation);
     }
 
+    public float drainEnergy() {
+        energy -= WorldController.DRAIN_ENERGY_STEP;
+        if (energy < 0) {
+            energy = 0;
+        }
+        return energy;
+    }
+
+    public float gainEnergy() {
+        energy += WorldController.DRAIN_ENERGY_STEP;
+        if (energy > 100) {
+            energy = 100;
+        }
+        return energy;
+    }
+
 
     public void update(float deltaTime) {
-        energy -= 0.1f;
         position = b2Body.getPosition();
         rotation = b2Body.getAngle() * MathUtils.radiansToDegrees;
     }

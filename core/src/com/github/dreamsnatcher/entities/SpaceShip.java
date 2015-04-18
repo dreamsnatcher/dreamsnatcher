@@ -27,6 +27,7 @@ public class SpaceShip extends GameObject {
     private transient float transistTime;
     private boolean harvest = false;
     private TextureRegion textureHarvest;
+    private transient Planet currentPlanet;
 
     public void init(com.badlogic.gdx.physics.box2d.World world) {
         texture0 = Assets.spaceShip0;
@@ -105,13 +106,24 @@ public class SpaceShip extends GameObject {
     public void update(float deltaTime) {
         if(transist){
             transistTime -= deltaTime;
-            if(transistTime<= 0){
+            if(transistTime <= 0){
                 transist = false;
                 harvest = true;
             }
-            b2Body.setTransform(b2Body.getPosition().x,b2Body.getPosition().y, angle );
+            b2Body.setTransform(b2Body.getPosition().x,b2Body.getPosition().y, (float) (angle - Math.PI /2f));
         }else{
             transistTime = 1f;
+        }
+
+        if(harvest){
+            if(currentPlanet!=null){
+                if(currentPlanet.drainEnergy() >0 ){
+                    gainEnergy();
+                }else{
+                    harvest = false;
+                }
+
+            }
         }
         position = b2Body.getPosition();
         rotation = b2Body.getAngle() * MathUtils.radiansToDegrees;
@@ -147,11 +159,13 @@ public class SpaceShip extends GameObject {
     }
 
     public void beginHarvest(Planet planet){
-        Vector2 shipPos = b2Body.getPosition();
+        Vector2 shipPos = b2Body.getWorldCenter();
         Vector2 thrustDir = new Vector2(shipPos.x - planet.getBody().getWorldCenter().x, shipPos.y - planet.getBody().getWorldCenter().y);
 
-        angle = (float) (((b2Body.getAngle() % (2 * Math.PI) - Math.PI)));
+        angle = (float) ((thrustDir.angleRad() % (2 * Math.PI)) );
+        System.out.println(angle);
         transist = true;
+        currentPlanet = planet;
 
     }
 }
