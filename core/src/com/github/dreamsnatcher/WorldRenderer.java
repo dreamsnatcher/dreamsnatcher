@@ -230,6 +230,8 @@ public class WorldRenderer implements Disposable {
     public void resize(int width, int height) {
         camera.viewportWidth = (Constants.VIEWPORT_HEIGHT / height) * width; //calculate aspect ratio
         camera.update();
+        cameraGUI.viewportWidth = (Constants.VIEWPORT_GUI_HEIGHT / height) * width; //calculate aspect ratio
+        cameraGUI.update();
     }
 
     public void showNightmare(float energy) {
