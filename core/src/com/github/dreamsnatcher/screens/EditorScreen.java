@@ -14,6 +14,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.github.dreamsnatcher.entities.*;
 import com.github.dreamsnatcher.utils.Assets;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by badlogic on 17/04/15.
  */
@@ -51,7 +54,7 @@ public class EditorScreen extends Screen {
         root.top().pad(5).defaults().space(5);
 
         TextButton button = new TextButton("New", skin);
-        root.add(button);
+        root.add(button).colspan(2);
         button.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
                 controller.newWorld();
@@ -83,64 +86,36 @@ public class EditorScreen extends Screen {
                 manager.setScreen(new MainMenuScreen(manager));
             }
         });
-        root.row();
-        button = new TextButton("Planet", skin);
-        root.add(button);
-        button.addListener(new ChangeListener() {
-            public void changed(ChangeEvent event, Actor actor) {
-                controller.place(Planet.class);
-            }
-        });
 
-        button = new TextButton("Planet Bonus", skin);
-        root.add(button);
-        button.addListener(new ChangeListener() {
-            public void changed(ChangeEvent event, Actor actor) {
-                controller.place(PlanetBonus.class);
-            }
-        });
+        Table actions = new Table();
+        actions.setFillParent(true);
+        stage.addActor(actions);
 
-        button = new TextButton("Planet Bonus (rotating)", skin);
-        root.add(button);
-        button.addListener(new ChangeListener() {
-            public void changed(ChangeEvent event, Actor actor) {
-                controller.place(PlanetBonusRotating.class);
-            }
-        });
+        actions.left().pad(5).defaults().space(5);
 
-        button = new TextButton("Planet (rotating)", skin);
-        root.add(button);
-        button.addListener(new ChangeListener() {
-            public void changed(ChangeEvent event, Actor actor) {
-                controller.place(PlanetRotating.class);
-            }
-        });
+        List<Class> classes = new ArrayList<Class>();
+        classes.add(Planet.class);
+        classes.add(PlanetRotating.class);
+        classes.add(PlanetBonus.class);
+        classes.add(PlanetBonusRotating.class);
+        classes.add(Asteroid.class);
+        classes.add(AsteroidRotating.class);
+        classes.add(Spacebar.class);
 
-        button = new TextButton("Spacebar", skin);
-        root.add(button);
-        button.addListener(new ChangeListener() {
-            public void changed(ChangeEvent event, Actor actor) {
-                controller.place(Spacebar.class);
-            }
-        });
+        for(final Class clazz : classes){
+            actions.row().left();
+            button = new TextButton(clazz.getSimpleName(), skin);
+            actions.add(button);
+            button.addListener(new ChangeListener() {
+                public void changed(ChangeEvent event, Actor actor) {
+                    controller.place(clazz);
+                }
+            });
+        }
 
-        button = new TextButton("Asteroid", skin);
-        root.add(button);
-        button.addListener(new ChangeListener() {
-            public void changed(ChangeEvent event, Actor actor) {
-                controller.place(Asteroid.class);
-            }
-        });
-
-        button = new TextButton("Asteroid (moving)", skin);
-        root.add(button);
-        button.addListener(new ChangeListener() {
-            public void changed(ChangeEvent event, Actor actor) {
-                controller.place(AsteroidRotating.class);
-            }
-        });
+        actions.row().left();
         button = new TextButton("Spaceship", skin);
-        root.add(button);
+        actions.add(button);
         button.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
                 controller.camera.position.set(controller.world.spaceShip.position.x, controller.world.spaceShip.position.y, 0);
