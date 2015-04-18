@@ -120,4 +120,8 @@ public class SpaceShip extends GameObject {
         }
         return energy;
     }
+
+    public void setEnergy(float energy) {
+        this.energy = energy;
+    }
 }

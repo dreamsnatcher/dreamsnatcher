@@ -13,12 +13,13 @@ import com.github.dreamsnatcher.entities.GameWorldSerializer;
 import com.github.dreamsnatcher.entities.SpaceShip;
 import com.github.dreamsnatcher.screens.ScreenManager;
 import com.github.dreamsnatcher.utils.CameraHelper;
+import com.github.dreamsnatcher.utils.CollisionObjectHelper;
 
 
 public class WorldController extends InputAdapter implements ContactListener {
     public static final int MAX_ACCELERATION = 10;
     private static final float MAX_V = 1;
-    public static final float DRAIN_ENERGY_STEP = 5;
+    public static final float DRAIN_ENERGY_STEP = 0.5f;
 
     public CameraHelper cameraHelper;
 
@@ -79,6 +80,7 @@ public class WorldController extends InputAdapter implements ContactListener {
                 SpaceShip spaceShip = gameWorld.spaceShip;
                 spaceShip.getBody().setTransform(0, 0, 0);
                 spaceShip.getBody().setLinearVelocity(0, 0);
+                spaceShip.setEnergy(100f);
                 break;
         }
         return true;
@@ -134,7 +136,9 @@ public class WorldController extends InputAdapter implements ContactListener {
 
     @Override
     public void preSolve(Contact contact, Manifold oldManifold) {
-
+        if(CollisionObjectHelper.getPlanet(contact)!= null && CollisionObjectHelper.getSpaceship(contact)!=null){
+            contact.setEnabled(false);
+        }
     }
 
     @Override
