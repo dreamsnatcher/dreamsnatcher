@@ -17,13 +17,11 @@ public class Planet extends GameObject {
     // loaded when init is called by GameWorldSerializer
     // not saved to json
     private transient TextureRegion texture;
-    private transient TextureRegion textureDead;
-    private transient TextureRegion textureLow;
     private transient com.badlogic.gdx.physics.box2d.World b2World;
     private transient Body b2Body;
     private transient float energy = MAX_ENERGY;
     private static transient float RADIUS = 2f ;
-    private static transient float RTT = 10f ;
+    private static transient float RTT = 20f ;
     private transient Vector2 center;
 
 

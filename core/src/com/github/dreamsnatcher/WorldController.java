@@ -114,7 +114,9 @@ public class WorldController extends InputAdapter implements ContactListener {
     }
 
     private void accelerate(float screenX, float screenY) {
-        gameWorld.spaceShip.endHarvest();
+        if(gameWorld.spaceShip.harvest || gameWorld.spaceShip.transist){
+            gameWorld.spaceShip.endHarvest();
+        }
         Vector3 touch = worldRenderer.camera.unproject(new Vector3(screenX, screenY, 0));
         SpaceShip spaceShip = gameWorld.spaceShip;
         Vector2 shipPos = spaceShip.getBody().getPosition();

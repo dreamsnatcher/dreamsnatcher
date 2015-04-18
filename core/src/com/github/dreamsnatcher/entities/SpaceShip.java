@@ -4,10 +4,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.CircleShape;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.physics.box2d.joints.WeldJointDef;
 import com.github.dreamsnatcher.WorldController;
 import com.github.dreamsnatcher.utils.Assets;
 import com.github.dreamsnatcher.utils.AudioManager;
@@ -24,11 +22,14 @@ public class SpaceShip extends GameObject {
     private transient Body b2Body;
     private volatile transient float energy;
     private transient float angle;
-    private transient boolean transist;
+    public transient boolean transist;
     private transient float transistTime;
-    private transient boolean harvest = false;
+    public transient boolean harvest = false;
     private transient TextureRegion textureHarvest;
     private transient Planet currentPlanet;
+    private transient boolean harvestStarted = false;
+    private transient Joint joint;
+    private transient boolean destroyJoint;
 
     public void init(com.badlogic.gdx.physics.box2d.World world) {
         texture0 = Assets.spaceShip0;
@@ -68,6 +69,7 @@ public class SpaceShip extends GameObject {
         b2Body.setLinearDamping(1f);
         b2Body.setAngularDamping(1f);
         b2Body.setBullet(true);
+        b2Body.setSleepingAllowed(false);
 
         circleShape.dispose(); //clean up!!
         b2Body.setUserData(this);
@@ -139,16 +141,30 @@ public class SpaceShip extends GameObject {
             transistTime = 1f;
         }
 
+        if(harvestStarted && currentPlanet != null){
+            WeldJointDef jointDef = new WeldJointDef();
+            jointDef.bodyA = b2Body;
+            jointDef.bodyB = currentPlanet.getBody();
+            Vector2 v = new Vector2(b2Body.getWorldCenter().x-currentPlanet.getBody().getWorldCenter().x, b2Body.getWorldCenter().y - currentPlanet.getBody().getWorldCenter().y);
+            jointDef.localAnchorB.set(v);
+            joint = b2World.createJoint(jointDef);
+            harvestStarted = false;
+        }
         if(harvest){
+            b2Body.setTransform(b2Body.getPosition().x,b2Body.getPosition().y, (float) (angle - Math.PI /2f));
             if(currentPlanet!=null){
                 if(currentPlanet.drainEnergy() > 0 && energy <= 99f ){
-                    System.out.println(energy);
                     gainEnergy();
                 }else{
-                    harvest = false;
-                    currentPlanet.setCooldown(2f);
+                    endHarvest();
                 }
-
+            }
+        }
+        if(destroyJoint){
+            destroyJoint = false;
+            if(joint!=null){
+                b2World.destroyJoint(joint);
+                joint = null;
             }
         }
         position = b2Body.getPosition();
@@ -185,17 +201,18 @@ public class SpaceShip extends GameObject {
     }
 
     public void beginHarvest(Planet planet){
+        harvestStarted = true;
         Vector2 shipPos = b2Body.getWorldCenter();
         Vector2 thrustDir = new Vector2(shipPos.x - planet.getBody().getWorldCenter().x, shipPos.y - planet.getBody().getWorldCenter().y);
 
         angle = (float) ((thrustDir.angleRad() % (2 * Math.PI)) );
-        System.out.println(angle);
         transist = true;
         currentPlanet = planet;
 
     }
 
     public void endHarvest(){
+        destroyJoint = true;
         harvest = false;
         if(currentPlanet!=null) {
             currentPlanet.setCooldown(2f);

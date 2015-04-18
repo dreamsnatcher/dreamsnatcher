@@ -56,6 +56,7 @@ public class Asteroid extends GameObject {
         b2Body.setLinearDamping(0.5f);
         b2Body.setAngularDamping(1f);
         b2Body.setBullet(true);
+        b2Body.setSleepingAllowed(false);
 
         circleShape.dispose(); //clean up!!
         b2Body.setUserData(this);
