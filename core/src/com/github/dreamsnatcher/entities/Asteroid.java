@@ -22,6 +22,7 @@ public class Asteroid extends GameObject {
     private static transient float RTT = 40f ;
     private transient Vector2 center;
     public transient boolean doRotation = false;
+    private transient boolean hit;
 
 
     public void init(com.badlogic.gdx.physics.box2d.World world) {
@@ -86,7 +87,7 @@ public class Asteroid extends GameObject {
     public void update(float deltaTime) {
         position = b2Body.getPosition();
         rotation = b2Body.getAngle() * MathUtils.radiansToDegrees;
-        if(doRotation) {
+        if(doRotation && !hit) {
 
             angleNew += (float) (deltaTime * (2 * Math.PI / RTT));
             float cos = MathUtils.cos(angleNew);
@@ -98,6 +99,9 @@ public class Asteroid extends GameObject {
         }
     }
 
+    public void hit(){
+        this.hit = true;
+    }
 
     public Body getBody() {
         return b2Body;
