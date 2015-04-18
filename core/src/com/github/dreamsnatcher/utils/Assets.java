@@ -112,9 +112,8 @@ public class Assets implements Disposable {
         schaumkrone.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         nightmare = new TextureRegion(new Texture("nightmare.png"));
+        nightmare.flip(false, true);
         nightmare.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-
 
     }
 
