@@ -11,6 +11,7 @@ import java.util.List;
 public class GameWorld {
     public List<GameObject> objects = new ArrayList<GameObject>();
     public SpaceShip spaceShip;
+    public Spacebar spacebar;
 
     /**
      * Call this after you loaded a map via GameWorldSerializer.
@@ -18,6 +19,9 @@ public class GameWorld {
     public void init(World b2World) {
         spaceShip.init(b2World);
         for (GameObject object : objects) {
+            if (object instanceof Spacebar) {
+                spacebar = (Spacebar) object;
+            }
             object.init(b2World);
         }
     }

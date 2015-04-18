@@ -143,7 +143,6 @@ public class SpaceShip extends GameObject {
         if(harvest){
             if(currentPlanet!=null){
                 if(currentPlanet.drainEnergy() > 0 && energy <= 99f ){
-                    System.out.println(energy);
                     gainEnergy();
                 }else{
                     harvest = false;
@@ -190,7 +189,6 @@ public class SpaceShip extends GameObject {
         Vector2 thrustDir = new Vector2(shipPos.x - planet.getBody().getWorldCenter().x, shipPos.y - planet.getBody().getWorldCenter().y);
 
         angle = (float) ((thrustDir.angleRad() % (2 * Math.PI)) );
-        System.out.println(angle);
         transist = true;
         currentPlanet = planet;
 
