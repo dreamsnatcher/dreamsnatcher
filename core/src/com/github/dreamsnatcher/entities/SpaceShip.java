@@ -56,8 +56,8 @@ public class SpaceShip extends GameObject {
         //create fixture to attach shape to body
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = circleShape;
-        fixtureDef.density = 0.5f;
-        fixtureDef.friction = 1f;
+        fixtureDef.density = 0.2f;
+        fixtureDef.friction = 0.5f;
         fixtureDef.restitution = 0;
 
         b2Body.createFixture(fixtureDef);
