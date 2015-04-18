@@ -13,7 +13,7 @@ public class AudioManager {
 //        private static final float MUSIC_VOLUME = 0.7f;
 
 
-        public static final float PLAYEMPTYTIME = 41;
+        public static final float PLAYEMPTYTIME = 5;
 
         public static float timer = 0;
         public static boolean playempty = false;
@@ -36,7 +36,7 @@ public class AudioManager {
 
 
         public static void init(){
-            empty = Gdx.audio.newMusic(Gdx.files.internal("sounds/empty_planet.mp3"));
+            empty = Gdx.audio.newMusic(Gdx.files.internal("sounds/empty_planet_mixdown.mp3"));
 		    mainloop = Gdx.audio.newMusic(Gdx.files.internal("sounds/mainloop.wav"));
             fearloop = Gdx.audio.newMusic(Gdx.files.internal("sounds/fearloop.wav"));
             havana = Gdx.audio.newMusic(Gdx.files.internal("sounds/havana.mp3"));

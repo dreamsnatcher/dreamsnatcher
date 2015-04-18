@@ -108,7 +108,7 @@ public class Planet extends GameObject {
     }
 
     public float gainEnergy() {
-        energy += WorldController.DRAIN_ENERGY_STEP;
+        energy += WorldController.DRAIN_ENERGY_STEP /100f;
         if (energy >= MAX_ENERGY) {
             energy = MAX_ENERGY;
         }
@@ -129,6 +129,9 @@ public class Planet extends GameObject {
             Vector2 vector2 = new Vector2(center.x + cos, center.y + sin);
 
             b2Body.setTransform(vector2, b2Body.getAngle());
+        }
+        if(energy>=0){
+            gainEnergy();
         }
     }
 

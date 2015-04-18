@@ -1,13 +1,9 @@
 package com.github.dreamsnatcher.screens;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -21,13 +17,13 @@ public class MainMenuScreen extends com.github.dreamsnatcher.screens.Screen {
     private Table table;
     private Skin skin;
 
-    public MainMenuScreen(ScreenManager manager){
+    public MainMenuScreen(ScreenManager manager) {
         super(manager);
         initUI();
     }
 
 
-    private void initUI(){
+    private void initUI() {
         skin = new Skin(Gdx.files.internal("editor/uiskin.json"));
         stage = new Stage();
         table = new Table();
@@ -45,7 +41,7 @@ public class MainMenuScreen extends com.github.dreamsnatcher.screens.Screen {
 
         table.add(button).size(150, 60).pad(10);
 
-        button  = new TextButton("Play", skin);
+        button = new TextButton("Play", skin);
         button.setColor(Color.GREEN);
         button.addListener(new ClickListener() {
             @Override
@@ -56,17 +52,17 @@ public class MainMenuScreen extends com.github.dreamsnatcher.screens.Screen {
                 manager.setScreen(new GameScreen(manager));
             }
         });
-        table.add(button).size(150,60).pad(10);
+        table.add(button).size(150, 60).pad(10);
 
         button = new TextButton("Exit", skin);
-        button.addListener(new ClickListener(){
+        button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.exit();
                 // or System.exit(0);
             }
         });
-        table.add(button).size(150,60).pad(10);
+        table.add(button).size(150, 60).pad(10);
         table.setFillParent(true);
         stage.addActor(table);
 
@@ -76,6 +72,7 @@ public class MainMenuScreen extends com.github.dreamsnatcher.screens.Screen {
 
         ScreenManager.multiplexer.addProcessor(stage);
     }
+
     @Override
     public void render() {
         Gdx.gl.glClearColor(0, 0, 0, 1);

@@ -31,6 +31,9 @@ public class Assets implements Disposable {
     public static TextureRegion planetLow;
     public static TextureRegion indicator;
 
+    public static TextureRegion bierpixel;
+    public static TextureRegion schaumkrone;
+
     public static void init() {
         spaceShip0 = new TextureRegion(new Texture("spaceship_speed0.png"));
         spaceShip0.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -77,10 +80,19 @@ public class Assets implements Disposable {
         energyBar = new TextureRegion(new Texture("energybar_container.png"));
         energyPixel = new TextureRegion(new Texture("pixel.png"));
         indicator = new TextureRegion(new Texture("indicator.png"));
+        indicator.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         spaceBar = new TextureRegion(new Texture("spacebar.png"));
         spaceBar.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         spaceBarFinish = new TextureRegion(new Texture("spacebar_landed.png"));
         spaceBarFinish.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        bierpixel = new TextureRegion(new Texture("bierpixel.png"));
+        bierpixel.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        schaumkrone = new TextureRegion(new Texture("schaumkrone.png"));
+        schaumkrone.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+
+
     }
 
     @Override

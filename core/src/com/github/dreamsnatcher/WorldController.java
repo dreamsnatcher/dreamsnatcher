@@ -53,7 +53,9 @@ public class WorldController extends InputAdapter implements ContactListener {
     }
 
     public void update(float deltaTime) {
-        timeElapsed += deltaTime * 1000;
+        if(!finish) {
+            timeElapsed += deltaTime * 1000;
+        }
         cameraHelper.update(deltaTime);
         gameWorld.spaceShip.update(deltaTime);
         for (GameObject object : gameWorld.objects) {
@@ -148,7 +150,6 @@ public class WorldController extends InputAdapter implements ContactListener {
         Spacebar spacebar = CollisionObjectHelper.getSpaceBar(contact);
 
         if (planet != null && spaceShip != null && planet.getEnergy() > 1f && planet.cooldown <= 0 ) {
-            System.out.println(planet.getEnergy());
             spaceShip.getBody().setLinearVelocity(0, 0);
             spaceShip.beginHarvest(planet);
             AudioManager.landing.play();
