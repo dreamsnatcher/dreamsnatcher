@@ -27,7 +27,8 @@ public class Planet extends GameObject {
 
 
     public transient  float cooldown = 0f;
-    private float angleNew = 0f;
+    private transient float angleNew = 0f;
+    public transient boolean doRotation = false;
 
     private void initPhysics() {
         //create body definition
@@ -110,14 +111,14 @@ public class Planet extends GameObject {
         }
         position = b2Body.getPosition();
         rotation = b2Body.getAngle() * MathUtils.radiansToDegrees;
+        if(doRotation) {
+            angleNew += (float) (deltaTime * (2 * Math.PI / RTT));
+            float cos = MathUtils.cos(angleNew);
+            float sin = MathUtils.sin(angleNew);
+            Vector2 vector2 = new Vector2(center.x + cos, center.y + sin);
 
-
-        angleNew += (float) (deltaTime * (2* Math.PI / RTT));
-        float cos = MathUtils.cos(angleNew);
-        float sin = MathUtils.sin(angleNew);
-        Vector2 vector2 = new Vector2(center.x +cos, center.y+sin);
-
-        b2Body.setTransform(vector2,b2Body.getAngle());
+            b2Body.setTransform(vector2, b2Body.getAngle());
+        }
     }
 
 

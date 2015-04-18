@@ -21,7 +21,7 @@ public class Asteroid extends GameObject {
     private static transient float RADIUS = .00002f ;
     private static transient float RTT = 40f ;
     private transient Vector2 center;
-    public boolean doRotation;
+    public transient boolean doRotation = false;
 
 
     public void init(com.badlogic.gdx.physics.box2d.World world) {

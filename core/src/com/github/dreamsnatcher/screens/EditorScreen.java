@@ -11,10 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.github.dreamsnatcher.entities.Asteroid;
-import com.github.dreamsnatcher.entities.GameObject;
-import com.github.dreamsnatcher.entities.Planet;
-import com.github.dreamsnatcher.entities.Spacebar;
+import com.github.dreamsnatcher.entities.*;
 import com.github.dreamsnatcher.utils.Assets;
 
 /**
@@ -77,19 +74,29 @@ public class EditorScreen extends Screen {
             }
         });
 
-        button = new TextButton("Spaceship", skin);
+        button = new TextButton("Return to Main Menu", skin);
         root.add(button);
         button.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
-                controller.camera.position.set(controller.world.spaceShip.position.x, controller.world.spaceShip.position.y, 0);
+                ScreenManager.multiplexer.removeProcessor(stage);
+                ScreenManager.multiplexer.removeProcessor(controller);
+                manager.setScreen(new MainMenuScreen(manager));
             }
         });
-
+        root.row();
         button = new TextButton("Planet", skin);
         root.add(button);
         button.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
                 controller.place(Planet.class);
+            }
+        });
+
+        button = new TextButton("Planet (rotating)", skin);
+        root.add(button);
+        button.addListener(new ChangeListener() {
+            public void changed(ChangeEvent event, Actor actor) {
+                controller.place(PlanetRotating.class);
             }
         });
 
@@ -108,6 +115,22 @@ public class EditorScreen extends Screen {
                 controller.place(Asteroid.class);
             }
         });
+
+        button = new TextButton("Asteroid (moving)", skin);
+        root.add(button);
+        button.addListener(new ChangeListener() {
+            public void changed(ChangeEvent event, Actor actor) {
+                controller.place(AsteroidRotating.class);
+            }
+        });
+        button = new TextButton("Spaceship", skin);
+        root.add(button);
+        button.addListener(new ChangeListener() {
+            public void changed(ChangeEvent event, Actor actor) {
+                controller.camera.position.set(controller.world.spaceShip.position.x, controller.world.spaceShip.position.y, 0);
+            }
+        });
+
     }
 
     @Override
