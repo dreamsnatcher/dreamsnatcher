@@ -13,7 +13,7 @@ public class AudioManager {
 //        private static final float MUSIC_VOLUME = 0.7f;
 
 
-        public static final float PLAYEMPTYTIME = 410;
+        public static final float PLAYEMPTYTIME = 41;
 
         public static float timer = 0;
         public static boolean playempty = false;
@@ -23,6 +23,7 @@ public class AudioManager {
         public static Sound move_slow;
         public static Music mainloop;
         public static Music fearloop;
+        public static Music havana;
         public static Sound ahit;
         public static Sound landing;
         public static Sound starting;
@@ -36,8 +37,10 @@ public class AudioManager {
 
         public static void init(){
             empty = Gdx.audio.newMusic(Gdx.files.internal("sounds/empty_planet.mp3"));
-		    mainloop = Gdx.audio.newMusic(Gdx.files.internal("sounds/mainloop.wav"));
+		    //mainloop = Gdx.audio.newMusic(Gdx.files.internal("sounds/mainloop.wav"));
+            mainloop = Gdx.audio.newMusic(Gdx.files.internal("sounds/ha.mp3"));
             fearloop = Gdx.audio.newMusic(Gdx.files.internal("sounds/fearloop.wav"));
+            havana = Gdx.audio.newMusic(Gdx.files.internal("sounds/havana.mp3"));
             mainloop.setLooping(true);
             fearloop.setLooping(true);
             // mainloop.setVolume(1f);
@@ -62,6 +65,7 @@ public class AudioManager {
         }
 
         public static void update(float deltaTime) {
+
             if(playempty){
                 timer+=deltaTime;
                 if(timer>=PLAYEMPTYTIME){
@@ -82,7 +86,15 @@ public class AudioManager {
             empty.play();
         }
 
-        public static void moveSlow(){
+        public static void havanaMusic(){
+            mainloop.stop();
+            empty.stop();
+            havana.setLooping(true);
+            havana.play();
+        }
+
+
+    public static void moveSlow(){
             move_regular.stop();
             move_fast.stop();
             move_slow.setPitch(move_slow.loop(soundvolume),0.7f);
@@ -108,6 +120,7 @@ public class AudioManager {
             mainloop.dispose();
             fearloop.dispose();
             empty.dispose();
+            havana.dispose();
             for(Sound sound: allSounds) {
                 sound.dispose();
             }
