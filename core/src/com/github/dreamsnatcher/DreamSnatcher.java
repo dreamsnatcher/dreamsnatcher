@@ -4,6 +4,7 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.github.dreamsnatcher.screens.GameScreen;
+import com.github.dreamsnatcher.screens.MainMenuScreen;
 import com.github.dreamsnatcher.screens.Screen;
 import com.github.dreamsnatcher.screens.ScreenManager;
 
@@ -14,7 +15,7 @@ public class DreamSnatcher implements ApplicationListener {
 	public void create () {
 		manager = new ScreenManager();
 		// SET START SCREEN HERE!
-		Screen screen = new GameScreen(manager);
+		Screen screen = new MainMenuScreen(manager);
 		manager.setScreen(screen);
 	}
 
