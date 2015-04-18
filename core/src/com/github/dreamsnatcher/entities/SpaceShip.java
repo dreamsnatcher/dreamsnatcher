@@ -128,6 +128,14 @@ public class SpaceShip extends GameObject {
             transistTime = 1f;
         }
 
+        if(destroyJoint){
+            destroyJoint = false;
+            if(joint!=null){
+                b2World.destroyJoint(joint);
+                joint = null;
+            }
+        }
+
         if(harvestStarted && currentPlanet != null){
             WeldJointDef jointDef = new WeldJointDef();
             jointDef.bodyA = b2Body;
@@ -150,13 +158,7 @@ public class SpaceShip extends GameObject {
                 }
             }
         }
-        if(destroyJoint){
-            destroyJoint = false;
-            if(joint!=null){
-                b2World.destroyJoint(joint);
-                joint = null;
-            }
-        }
+
         position = b2Body.getPosition();
         rotation = b2Body.getAngle() * MathUtils.radiansToDegrees;
     }
@@ -191,6 +193,9 @@ public class SpaceShip extends GameObject {
     }
 
     public void beginHarvest(Planet planet){
+        if(joint!=null){
+            destroyJoint = true;
+        }
         harvestStarted = true;
         Vector2 shipPos = b2Body.getWorldCenter();
         Vector2 thrustDir = new Vector2(shipPos.x - planet.getBody().getWorldCenter().x, shipPos.y - planet.getBody().getWorldCenter().y);
