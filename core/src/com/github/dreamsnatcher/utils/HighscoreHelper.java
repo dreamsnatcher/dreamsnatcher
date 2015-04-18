@@ -10,9 +10,9 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 public class HighscoreHelper {
 
     public static String readHighscore(String level) {
-        FileHandle fileHandle = Gdx.files.local(level + ".hsc");
         String score = "No highscore yet";
         try {
+            FileHandle fileHandle = Gdx.files.local(level + ".hsc");
             score = fileHandle.readString();
         } catch (GdxRuntimeException ex) {
             ex.printStackTrace();

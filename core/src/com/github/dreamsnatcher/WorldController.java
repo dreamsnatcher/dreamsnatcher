@@ -42,7 +42,7 @@ public class WorldController extends InputAdapter implements ContactListener {
     public WorldController(String level) {
         this.map = level;
         String highscore = HighscoreHelper.readHighscore(getMap());
-        this.highscore = highscore.contains("no") ? 0 : Long.parseLong(highscore);
+        this.highscore = highscore.contains("No") ? -1 : Long.parseLong(highscore);
         init();
     }
 
@@ -61,6 +61,10 @@ public class WorldController extends InputAdapter implements ContactListener {
 
     public String getMap(){
         return map.substring(0, map.lastIndexOf("."));
+    }
+
+    public long getHighscore(){
+        return highscore;
     }
 
     public void update(float deltaTime) {
@@ -181,7 +185,7 @@ public class WorldController extends InputAdapter implements ContactListener {
             spacebar.hasBeenLandedOn();
             AudioManager.havanaMusic();
             zoomIn = true;
-            if (timeElapsed <= highscore){
+            if (timeElapsed <= highscore || highscore == -1){
                 HighscoreHelper.writeHighscore(timeElapsed, getMap());
             }
         }
