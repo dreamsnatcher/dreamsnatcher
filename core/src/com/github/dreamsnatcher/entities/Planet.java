@@ -31,6 +31,7 @@ public class Planet extends GameObject {
     public transient  float cooldown = 0f;
     private transient float angleNew = 0f;
     public transient boolean doRotation = false;
+    float MAX_ENERGY_BONUS = 75f;
 
     private void initPhysics() {
         //create body definition
@@ -67,10 +68,10 @@ public class Planet extends GameObject {
             texture = Assets.planet;
             textureLow = Assets.planetLow;
             textureDead = Assets.planetDead;
-        }else if(MAX_ENERGY == 200f){
+        }else if(MAX_ENERGY == MAX_ENERGY_BONUS){
             texture = Assets.planetBonus;
             textureLow = Assets.planetBonusLow;
-            textureDead = Assets.planetDead;
+            textureDead = Assets.planetBonusDead;
         }
         center = new Vector2(position.x,position.y-RADIUS);
         b2World = world;
@@ -87,7 +88,7 @@ public class Planet extends GameObject {
         if(energy< MAX_ENERGY/2f){
             textureRegion = textureLow;
         }
-        if(energy <= 0f){
+        if(energy <= 1f){
             textureRegion = textureDead;
         }
 
