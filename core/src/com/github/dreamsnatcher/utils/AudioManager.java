@@ -12,6 +12,12 @@ public class AudioManager {
         public static boolean mute = false;
 //        private static final float MUSIC_VOLUME = 0.7f;
 
+
+        public static final float PLAYEMPTYTIME = 410;
+
+        public static float timer = 0;
+        public static boolean playempty = false;
+
         public static Sound move_fast;
         public static Sound move_regular;
         public static Sound move_slow;
@@ -20,6 +26,7 @@ public class AudioManager {
         public static Sound ahit;
         public static Sound landing;
         public static Sound starting;
+        public static Music empty;
 
         public static Array<Sound> allSounds = new Array<Sound>();
 
@@ -28,6 +35,7 @@ public class AudioManager {
 
 
         public static void init(){
+            empty = Gdx.audio.newMusic(Gdx.files.internal("sounds/empty_planet.wav"));
 		    mainloop = Gdx.audio.newMusic(Gdx.files.internal("sounds/mainloop.wav"));
             fearloop = Gdx.audio.newMusic(Gdx.files.internal("sounds/fearloop.wav"));
             mainloop.setLooping(true);
@@ -54,7 +62,24 @@ public class AudioManager {
         }
 
         public static void update(float deltaTime) {
+            if(playempty){
+                timer+=deltaTime;
+                if(timer>=PLAYEMPTYTIME){
+                    playempty = false;
+                    timer = 0;
+                    empty.stop();
+                    mainloop.play();
+                }
+            }
 
+        }
+
+
+        public static void suckDryMusic(){
+            timer = 0;
+            playempty = true;
+            mainloop.stop();
+            empty.play();
         }
 
         public static void moveSlow(){
@@ -82,6 +107,7 @@ public class AudioManager {
         public static void dispose() {
             mainloop.dispose();
             fearloop.dispose();
+            empty.dispose();
             for(Sound sound: allSounds) {
                 sound.dispose();
             }
