@@ -77,6 +77,20 @@ public class AudioManager {
         }
 
 
+        public static void noEnergy(){
+            mainloop.stop();
+            empty.stop();
+            fearloop.play();
+        }
+
+        public static void someEnergy(){
+            mainloop.play();
+            empty.stop();
+            fearloop.stop();
+        }
+
+
+
         public static void suckDryMusic(){
             timer = 0;
             playempty = true;

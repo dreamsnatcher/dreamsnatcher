@@ -116,9 +116,8 @@ public class Assets implements Disposable {
         finishWookie = new TextureRegion(new Texture("wookie.png"));
         finishWookie.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         nightmare = new TextureRegion(new Texture("nightmare.png"));
+        nightmare.flip(false, true);
         nightmare.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-
 
     }
 
