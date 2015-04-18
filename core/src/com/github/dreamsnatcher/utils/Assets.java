@@ -77,6 +77,7 @@ public class Assets implements Disposable {
         energyBar = new TextureRegion(new Texture("energybar_container.png"));
         energyPixel = new TextureRegion(new Texture("pixel.png"));
         indicator = new TextureRegion(new Texture("indicator.png"));
+        indicator.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         spaceBar = new TextureRegion(new Texture("spacebar.png"));
         spaceBar.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         spaceBarFinish = new TextureRegion(new Texture("spacebar_landed.png"));

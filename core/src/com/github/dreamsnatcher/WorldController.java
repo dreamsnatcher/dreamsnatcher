@@ -53,7 +53,9 @@ public class WorldController extends InputAdapter implements ContactListener {
     }
 
     public void update(float deltaTime) {
-        timeElapsed += deltaTime * 1000;
+        if(!finish) {
+            timeElapsed += deltaTime * 1000;
+        }
         cameraHelper.update(deltaTime);
         gameWorld.spaceShip.update(deltaTime);
         for (GameObject object : gameWorld.objects) {

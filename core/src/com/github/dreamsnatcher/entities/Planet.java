@@ -130,6 +130,9 @@ public class Planet extends GameObject {
 
             b2Body.setTransform(vector2, b2Body.getAngle());
         }
+        if(energy>=0){
+            gainEnergy();
+        }
     }
 
 
