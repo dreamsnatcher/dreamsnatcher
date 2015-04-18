@@ -34,7 +34,7 @@ public class WorldRenderer implements Disposable {
     private TextureRegion schaumkrone;
 
     private int[] rotation;
-    private BitmapFont finishFont;
+    private TextureRegion finishPicture;
 
     public int beercounter = 0;
     public float timer = 0;
@@ -74,8 +74,8 @@ public class WorldRenderer implements Disposable {
         cameraGUI.update();
 
         font = new BitmapFont(true); //default 15pt Arial
-        finishFont = new BitmapFont(true);
-        finishFont.setColor(Color.RED);
+        finishPicture = Assets.finishWookie;
+        finishPicture.flip(false, true);
     }
 
     public void renderGUI(SpriteBatch batch) {
@@ -95,7 +95,6 @@ public class WorldRenderer implements Disposable {
             }
         }
         if (worldController.isFinish()) {
-            finishFont.draw(batch, "GAME FINISHED", 500, 500);
             timer += Gdx.graphics.getDeltaTime();
             if (timer > MAXTIMER) {
                 timer = 0;
@@ -108,6 +107,11 @@ public class WorldRenderer implements Disposable {
             }
             batch.draw(new TextureRegion(schaumkrone), 755, 500 - beercounter - 3, 50, 20);
         }
+        if(beercounter >= 400) {
+            batch.draw(new TextureRegion(finishPicture), 100, 300, finishPicture.getRegionWidth(), finishPicture.getRegionHeight());
+            worldController.finalAnimationFinished = true;
+        }
+
         batch.end();
     }
 
