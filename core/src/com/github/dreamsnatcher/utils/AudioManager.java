@@ -85,17 +85,17 @@ public class AudioManager {
         public static void moveSlow(){
             move_regular.stop();
             move_fast.stop();
-            move_slow.loop(soundvolume);
+            move_slow.setPitch(move_slow.loop(soundvolume),0.7f);
         }
         public static void moveRegular(){
             move_slow.stop();
             move_fast.stop();
-            move_regular.loop(soundvolume);
+            move_regular.setPitch(move_regular.loop(soundvolume),0.7f);
         }
         public static void moveFast(){
             move_regular.stop();
             move_slow.stop();
-            move_fast.loop(soundvolume);
+            move_fast.setPitch(move_fast.loop(soundvolume),0.7f);
         }
         public static void stop(){
             move_regular.stop();
