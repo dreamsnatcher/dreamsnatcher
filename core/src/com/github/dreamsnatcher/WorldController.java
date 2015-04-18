@@ -127,6 +127,7 @@ public class WorldController extends InputAdapter implements ContactListener {
         Planet planet = CollisionObjectHelper.getPlanet(contact);
         if(planet!=null && spaceShip != null){
             spaceShip.getBody().setLinearVelocity(0,0);
+            spaceShip.beginHarvest(planet);
         }
     }
 

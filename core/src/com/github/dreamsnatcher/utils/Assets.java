@@ -23,6 +23,9 @@ public class Assets implements Disposable {
 
     public static TextureRegion energyBar;
     public static TextureRegion energyPixel;
+    public static TextureRegion spaceShipHarvest;
+    public static TextureRegion planetDead;
+    public static TextureRegion planetLow;
 
     public static void init(){
         spaceShip0 = new TextureRegion(new Texture("spaceship_speed0.png"));
@@ -33,8 +36,20 @@ public class Assets implements Disposable {
         spaceShip2.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         spaceShip3 = new TextureRegion(new Texture("spaceship_speed3.png"));
         spaceShip3.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+
+        spaceShipHarvest = new TextureRegion(new Texture("spaceship_extract_energy.png"));
+        spaceShipHarvest.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
         planet = new TextureRegion(new Texture("planet_high_pop.png"));
         planet.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        planetLow = new TextureRegion(new Texture("planet_small_pop.png"));
+        planetLow.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        planetDead = new TextureRegion(new Texture("dead_planet.png"));
+        planetDead.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
         stars0 = new TextureRegion(new Texture("space_1_v2.png"));
         stars0.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         stars1 = new TextureRegion(new Texture("space_2_v2.png"));
