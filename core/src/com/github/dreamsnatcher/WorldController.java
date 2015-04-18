@@ -35,7 +35,8 @@ public class WorldController extends InputAdapter implements ContactListener {
     private Vector2 curTouchPos;
     private String map = "map1.map";
 
-    public WorldController() {
+    public WorldController(String level) {
+        this.map = level;
         init();
     }
 

@@ -1,23 +1,25 @@
 package com.github.dreamsnatcher.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
-public class MainMenuScreen extends com.github.dreamsnatcher.screens.Screen {
+public class LevelsScreen extends Screen {
 
     private Stage stage;
     private Table table;
     private Skin skin;
 
-    public MainMenuScreen(ScreenManager manager) {
+    public LevelsScreen(ScreenManager manager) {
         super(manager);
         initUI();
     }
@@ -29,43 +31,25 @@ public class MainMenuScreen extends com.github.dreamsnatcher.screens.Screen {
         table = new Table();
         table.row();
 
+        FileHandle dirHandle = Gdx.files.internal("levels");
+        for(FileHandle entry : dirHandle.list()) {
+            System.out.println(entry.extension());
+            if(entry.extension().equals("map")) {
+                final TextButton finalButton = new TextButton(entry.nameWithoutExtension(), skin);
+                finalButton.addListener(new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        manager.setScreen(new GameScreen(manager, finalButton.getText().toString() + ".map"));
+                    }
+                });
 
-        TextButton button = new TextButton("Editor", skin);
-
-        button.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                manager.setScreen(new EditorScreen(manager));
+                table.add(finalButton).size(150, 60).pad(10);
             }
-        });
+        }
 
-        table.add(button).size(150, 60).pad(10);
 
-        button = new TextButton("Play", skin);
-        button.setColor(Color.GREEN);
-        button.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                //Same way we moved here from the Splash Screen
-                //We set it to new Splash because we got no other screens
-                //otherwise you put the screen there where you want to go
-                manager.setScreen(new LevelsScreen(manager));
-            }
-        });
-        table.add(button).size(150, 60).pad(10);
-
-        button = new TextButton("Exit", skin);
-        button.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                Gdx.app.exit();
-                // or System.exit(0);
-            }
-        });
-        table.add(button).size(150, 60).pad(10);
         table.setFillParent(true);
         stage.addActor(table);
-
         Texture texture = new Texture("mainscreen.png");
         TextureRegion region = new TextureRegion(texture, 0, 0, texture.getWidth(), texture.getHeight());
         table.setBackground(new TextureRegionDrawable(region));
