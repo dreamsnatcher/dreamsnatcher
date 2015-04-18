@@ -29,6 +29,8 @@ public class AudioManager {
         public static Sound starting;
         public static Music empty;
 
+        public static boolean fearloopplays = false;
+
         public static Array<Sound> allSounds = new Array<Sound>();
 
         public static float soundvolume = 0.2f;
@@ -78,15 +80,21 @@ public class AudioManager {
 
 
         public static void noEnergy(){
-            mainloop.stop();
-            empty.stop();
-            fearloop.play();
+            if(!fearloopplays) {
+                mainloop.stop();
+                empty.stop();
+                fearloop.play();
+                fearloopplays = true;
+            }
         }
 
         public static void someEnergy(){
-            mainloop.play();
-            empty.stop();
-            fearloop.stop();
+            if(fearloopplays) {
+                mainloop.play();
+                empty.stop();
+                fearloop.stop();
+                fearloopplays = false;
+            }
         }
 
 
@@ -127,6 +135,14 @@ public class AudioManager {
             move_slow.stop();
         }
 
+        public static void stopAll(){
+            for(Sound sound: allSounds) {
+                sound.stop();
+            }
+            havana.stop();
+            fearloop.stop();
+            mainloop.stop();
+        }
 
         public static void dispose() {
             mainloop.dispose();

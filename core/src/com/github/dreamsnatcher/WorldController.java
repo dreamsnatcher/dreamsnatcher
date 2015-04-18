@@ -12,6 +12,7 @@ import com.github.dreamsnatcher.screens.ScreenManager;
 import com.github.dreamsnatcher.utils.AudioManager;
 import com.github.dreamsnatcher.utils.CameraHelper;
 import com.github.dreamsnatcher.utils.CollisionObjectHelper;
+import com.github.dreamsnatcher.utils.HighscoreHelper;
 
 
 public class WorldController extends InputAdapter implements ContactListener {
@@ -36,9 +37,12 @@ public class WorldController extends InputAdapter implements ContactListener {
     private boolean debug = false;
     private Vector2 curTouchPos;
     private String map = "map1.map";
+    private long highscore;
 
     public WorldController(String level) {
         this.map = level;
+        String highscore = HighscoreHelper.readHighscore(getMap());
+        this.highscore = highscore.contains("no") ? 0 : Long.parseLong(highscore);
         init();
     }
 
@@ -55,8 +59,12 @@ public class WorldController extends InputAdapter implements ContactListener {
         cameraHelper.setTarget(gameWorld.spaceShip.getBody());
     }
 
+    public String getMap(){
+        return map.substring(0, map.lastIndexOf("."));
+    }
+
     public void update(float deltaTime) {
-        if(!finish) {
+        if (!finish) {
             timeElapsed += deltaTime * 1000;
         }
         cameraHelper.update(deltaTime);
@@ -70,6 +78,10 @@ public class WorldController extends InputAdapter implements ContactListener {
         }
         if (zoomIn) {
             cameraHelper.setZoom(cameraHelper.getZoom() - 0.002f);
+        }
+        if(gameWorld.spaceShip.getEnergy() <= 0f && gameWorld.spaceShip.getBody().getLinearVelocity().len() <= 0.01f ){
+            finalAnimationFinished = true;
+            AudioManager.stopAll();
         }
     }
 
@@ -95,7 +107,7 @@ public class WorldController extends InputAdapter implements ContactListener {
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         curTouchPos = new Vector2(screenX, screenY);
-        if(this.finalAnimationFinished) {
+        if (this.finalAnimationFinished) {
             this.switchToMainMenu = true;
             ScreenManager.multiplexer.removeProcessor(this);
         }
@@ -122,7 +134,7 @@ public class WorldController extends InputAdapter implements ContactListener {
     }
 
     private void accelerate(float screenX, float screenY) {
-        if(gameWorld.spaceShip.harvest || gameWorld.spaceShip.transist){
+        if (gameWorld.spaceShip.harvest || gameWorld.spaceShip.transist) {
             gameWorld.spaceShip.endHarvest();
         }
         Vector3 touch = worldRenderer.camera.unproject(new Vector3(screenX, screenY, 0));
@@ -137,7 +149,7 @@ public class WorldController extends InputAdapter implements ContactListener {
         }
     }
 
-    private void reset(){
+    private void reset() {
         SpaceShip spaceShip = gameWorld.spaceShip;
         spaceShip.getBody().setTransform(0, 0, 0);
         spaceShip.getBody().setLinearVelocity(0, 0);
@@ -151,7 +163,7 @@ public class WorldController extends InputAdapter implements ContactListener {
         Asteroid asteroid = CollisionObjectHelper.getAsteroid(contact);
         Spacebar spacebar = CollisionObjectHelper.getSpaceBar(contact);
 
-        if (planet != null && spaceShip != null && planet.getEnergy() > 1f && planet.cooldown <= 0 ) {
+        if (planet != null && spaceShip != null && planet.getEnergy() > 1f && planet.cooldown <= 0) {
             spaceShip.getBody().setLinearVelocity(0, 0);
             spaceShip.beginHarvest(planet);
             AudioManager.landing.play();
@@ -169,6 +181,9 @@ public class WorldController extends InputAdapter implements ContactListener {
             spacebar.hasBeenLandedOn();
             AudioManager.havanaMusic();
             zoomIn = true;
+            if (timeElapsed <= highscore){
+                HighscoreHelper.writeHighscore(timeElapsed, getMap());
+            }
         }
     }
 
