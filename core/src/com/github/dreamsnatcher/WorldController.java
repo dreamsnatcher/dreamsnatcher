@@ -73,7 +73,7 @@ public class WorldController extends InputAdapter implements ContactListener {
         }
         if(gameWorld.spaceShip.getEnergy() <= 0f && gameWorld.spaceShip.getBody().getLinearVelocity().len() <= 0.01f ){
             finalAnimationFinished = true;
-            AudioManager.stop();
+            AudioManager.stopAll();
         }
     }
 
