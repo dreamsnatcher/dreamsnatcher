@@ -68,9 +68,9 @@ public class WorldRenderer implements Disposable {
                 TimeUnit.MILLISECONDS.toSeconds(worldController.timeElapsed) % TimeUnit.MINUTES.toSeconds(1));
         font.draw(batch, mmss, 10, 10);
         batch.draw(new TextureRegion(energybar), 760, 1, 40, 200);
-        //for(int i = 1;i<=this.worldController.gameWorld.spaceShip.energy; i+=2){
-        //    batch.draw(new TextureRegion(energypixel), 760, i, 40, 2);
-        //}
+        for(int i = 1;i<=this.worldController.gameWorld.spaceShip.getEnergy(); i+=2){
+            batch.draw(new TextureRegion(energypixel), 760, i, 40, 2);
+        }
         batch.end();
     }
 
