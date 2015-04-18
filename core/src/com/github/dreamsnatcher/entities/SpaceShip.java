@@ -25,12 +25,15 @@ public class SpaceShip extends GameObject {
     private transient float angle;
     private transient boolean transist;
     private transient float transistTime;
+    private boolean harvest = false;
+    private TextureRegion textureHarvest;
 
     public void init(com.badlogic.gdx.physics.box2d.World world) {
         texture0 = Assets.spaceShip0;
         texture1 = Assets.spaceShip1;
         texture2 = Assets.spaceShip2;
         texture3 = Assets.spaceShip3;
+        textureHarvest = Assets.spaceShipHarvest;
         b2World = world;
         dimension.set(0.4f, 0.5f);
         energy = 50;
@@ -83,6 +86,10 @@ public class SpaceShip extends GameObject {
         if(b2Body.getLinearVelocity().len()>0.7f){
             textureRegion = texture3;
         }
+        if(harvest){
+            textureRegion = textureHarvest;
+
+        }
 
 
 
@@ -98,9 +105,13 @@ public class SpaceShip extends GameObject {
     public void update(float deltaTime) {
         if(transist){
             transistTime -= deltaTime;
-            b2Body.getAngle();
+            if(transistTime<= 0){
+                transist = false;
+                harvest = true;
+            }
+            b2Body.setTransform(b2Body.getPosition().x,b2Body.getPosition().y, angle );
         }else{
-            transistTime = 1000f;
+            transistTime = 1f;
         }
         position = b2Body.getPosition();
         rotation = b2Body.getAngle() * MathUtils.radiansToDegrees;
@@ -137,7 +148,10 @@ public class SpaceShip extends GameObject {
 
     public void beginHarvest(Planet planet){
         Vector2 shipPos = b2Body.getPosition();
-        Vector2 thrustDir = new Vector2(shipPos.x - planet.getBody().getPosition().x, shipPos.y - planet.getBody().getPosition().y);
-        thrustDir.angleRad();
+        Vector2 thrustDir = new Vector2(shipPos.x - planet.getBody().getWorldCenter().x, shipPos.y - planet.getBody().getWorldCenter().y);
+
+        angle = (float) (((b2Body.getAngle() % (2 * Math.PI) - Math.PI)));
+        transist = true;
+
     }
 }

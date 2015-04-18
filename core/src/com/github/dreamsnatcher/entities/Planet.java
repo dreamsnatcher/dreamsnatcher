@@ -15,8 +15,10 @@ public class Planet extends GameObject {
     // loaded when init is called by GameWorldSerializer
     // not saved to json
     private transient TextureRegion texture;
+    private transient TextureRegion textureDead;
     private transient com.badlogic.gdx.physics.box2d.World b2World;
     private transient Body b2Body;
+    private transient float energy = 100f;
 
     private void initPhysics() {
         //create body definition
@@ -48,6 +50,12 @@ public class Planet extends GameObject {
     @Override
     public void init(World world) {
         texture = Assets.planet;
+        if(energy< 50f){
+            textureDead = Assets.planetLow;
+        }
+        if(energy < 0f){
+            textureDead = Assets.planetDead;
+        }
         b2World = world;
         dimension.set(1f, 1f);
         origin.x = dimension.x / 2;
@@ -58,6 +66,11 @@ public class Planet extends GameObject {
 
     @Override
     public void render(SpriteBatch batch) {
+        TextureRegion textureRegion;
+        if(energy<= 0f){
+            textureRegion = textureDead;
+        }
+
         batch.draw(texture,
                 position.x - dimension.x / 2, position.y - dimension.y / 2,
                 origin.x, origin.y,
@@ -68,6 +81,7 @@ public class Planet extends GameObject {
 
 
     public void update(float deltaTime) {
+        energy -= 0.1f;
         position = b2Body.getPosition();
         rotation = b2Body.getAngle() * MathUtils.radiansToDegrees;
     }
