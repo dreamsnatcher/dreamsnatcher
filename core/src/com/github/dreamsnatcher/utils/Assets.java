@@ -19,6 +19,7 @@ public class Assets implements Disposable {
     public static TextureRegion asteroid0;
     public static TextureRegion asteroid1;
     public static TextureRegion spaceBar;
+    public static TextureRegion spaceBarFinish;
     public static TextureRegion asteroid2;
 
     public static TextureRegion energyBar;
@@ -67,6 +68,8 @@ public class Assets implements Disposable {
         indicator = new TextureRegion(new Texture("indicator.png"));
         spaceBar = new TextureRegion(new Texture("spacebar.png"));
         spaceBar.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        spaceBarFinish = new TextureRegion(new Texture("spacebar_landed.png"));
+        spaceBarFinish.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
     }
 
     @Override

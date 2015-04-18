@@ -20,7 +20,8 @@ public class WorldController extends InputAdapter implements ContactListener {
     public static final float DRAIN_ENERGY_STEP = 0.1f;
 
     public CameraHelper cameraHelper;
-    private boolean zoomIn =false;
+    private boolean zoomIn;
+    private boolean finish;
 
     public void setWorldRenderer(WorldRenderer worldRenderer) {
         this.worldRenderer = worldRenderer;
@@ -61,8 +62,8 @@ public class WorldController extends InputAdapter implements ContactListener {
         if (Gdx.input.isTouched() && gameWorld.spaceShip.getEnergy() > 0) {
             accelerate(curTouchPos.x, curTouchPos.y);
         }
-        if(zoomIn){
-            cameraHelper.setZoom(cameraHelper.getZoom()-0.002f);
+        if (zoomIn) {
+            cameraHelper.setZoom(cameraHelper.getZoom() - 0.002f);
         }
     }
 
@@ -131,31 +132,31 @@ public class WorldController extends InputAdapter implements ContactListener {
     public void beginContact(Contact contact) {
         SpaceShip spaceShip = CollisionObjectHelper.getSpaceship(contact);
         Planet planet = CollisionObjectHelper.getPlanet(contact);
-        Asteroid asteroid  = CollisionObjectHelper.getAsteroid(contact);
-        Spacebar spacebar  = CollisionObjectHelper.getSpaceBar(contact);
-        if(planet!=null && spaceShip != null && planet.getEnergy() >0f){
-            spaceShip.getBody().setLinearVelocity(0,0);
+        Asteroid asteroid = CollisionObjectHelper.getAsteroid(contact);
+        Spacebar spacebar = CollisionObjectHelper.getSpaceBar(contact);
+        if (planet != null && spaceShip != null && planet.getEnergy() > 0f) {
+            spaceShip.getBody().setLinearVelocity(0, 0);
             spaceShip.beginHarvest(planet);
             AudioManager.landing.play();
         }
-        if(asteroid!=null && spaceShip != null){
+        if (asteroid != null && spaceShip != null) {
             AudioManager.ahit.play();
-            spaceShip.setEnergy(spaceShip.getEnergy()-20f);
+            spaceShip.setEnergy(spaceShip.getEnergy() - 20f);
         }
 
-        if(spaceShip!=null && spacebar != null){
+        if (spaceShip != null && spacebar != null) {
             cameraHelper.setTarget(spacebar.getBody());
+            finish = true;
+            spacebar.hasLanded();
             zoomIn = true;
         }
-
-
     }
 
     @Override
     public void endContact(Contact contact) {
         SpaceShip spaceShip = CollisionObjectHelper.getSpaceship(contact);
         Planet planet = CollisionObjectHelper.getPlanet(contact);
-        if(planet!=null && spaceShip != null){
+        if (planet != null && spaceShip != null) {
             AudioManager.starting.play();
         }
     }
