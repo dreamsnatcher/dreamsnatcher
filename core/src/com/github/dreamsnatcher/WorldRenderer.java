@@ -107,7 +107,7 @@ public class WorldRenderer implements Disposable {
             }
             batch.draw(new TextureRegion(schaumkrone), 755, 500 - beercounter - 3, 50, 20);
         }
-        if(beercounter >= 400) {
+        if (beercounter >= 400) {
             batch.draw(new TextureRegion(finishPicture), 100, 300, finishPicture.getRegionWidth(), finishPicture.getRegionHeight());
             worldController.finalAnimationFinished = true;
         }
@@ -218,14 +218,10 @@ public class WorldRenderer implements Disposable {
 
     public void showNightmare(float energy) {
         float alpha = 0.0f;
-        if (energy < 20 && energy >= 15) {
-            alpha = 0.3f;
-        } else if (energy < 15 && energy >= 10) {
-            alpha = 0.5f;
-        } else if (energy < 10 && energy >= 5) {
-            alpha = 0.75f;
-        } else if (energy < 5) {
-            alpha = 1f;
+        if (!worldController.isFinish() && energy < 20) {
+            alpha = (20 - energy)/20f;
+        } else if (worldController.isFinish()){
+            alpha = 0.0f;
         }
         nightmareBatch.setProjectionMatrix(cameraGUI.combined);
         nightmareBatch.begin();
