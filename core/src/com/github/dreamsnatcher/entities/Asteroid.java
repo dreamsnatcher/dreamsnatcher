@@ -29,10 +29,12 @@ public class Asteroid extends GameObject {
         angleNew = (float) Math.random() * 360;
         double rand = Math.random();
         texture0 = Assets.asteroid0;
-        if(rand < 0.33f){
+        if(rand < 0.25f){
             texture0 = Assets.asteroid1;
-        }else if(rand > 0.66f){
+        }else if(rand >= 0.25f && rand < 0.5f){
             texture0 = Assets.asteroid2;
+        }else  if(rand>= 0.5f){
+            texture0 = Assets.asteroid3;
         }
         b2World = world;
         dimension.set(0.2f, 0.2f);
