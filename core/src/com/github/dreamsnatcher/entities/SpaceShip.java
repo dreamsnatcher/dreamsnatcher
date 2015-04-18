@@ -26,6 +26,7 @@ public class SpaceShip extends GameObject {
     private transient boolean harvestStarted = false;
     private transient Joint joint;
     private transient boolean destroyJoint;
+    private transient boolean landed;
 
     public void init(com.badlogic.gdx.physics.box2d.World world) {
         texture = Assets.spaceShip0;
@@ -84,6 +85,9 @@ public class SpaceShip extends GameObject {
         }
         if (harvest) {
             texture = Assets.spaceShipHarvest;
+        }
+        if(landed){
+            texture = Assets.spaceShipEmpty;
         }
         batch.draw(texture, position.x - dimension.x / 2, position.y - dimension.y / 2,
                 origin.x, origin.y,
@@ -208,6 +212,6 @@ public class SpaceShip extends GameObject {
     }
 
     public void hasLanded() {
-        texture = Assets.spaceShipEmpty;
+        landed = true;
     }
 }

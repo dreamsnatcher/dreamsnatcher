@@ -33,6 +33,7 @@ public class WorldController extends InputAdapter implements ContactListener {
     public GameWorld gameWorld;
     private boolean debug = false;
     private Vector2 curTouchPos;
+    private String map = "map1.map";
 
     public WorldController() {
         init();
@@ -46,7 +47,7 @@ public class WorldController extends InputAdapter implements ContactListener {
         // You can open this file and edit it via
         // Editor in the desktop project. You can of course
         // also create new files.
-        gameWorld = GameWorldSerializer.deserialize(Gdx.files.internal("map1.map"));
+        gameWorld = GameWorldSerializer.deserialize(Gdx.files.internal(map));
         gameWorld.init(b2World);
         cameraHelper.setTarget(gameWorld.spaceShip.getBody());
     }
