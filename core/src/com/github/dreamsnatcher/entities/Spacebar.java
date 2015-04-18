@@ -40,7 +40,6 @@ public class Spacebar extends GameObject {
 
             b2Body.createFixture(fixtureDef);
             b2Body.setLinearDamping(1f);
-
             circleShape.dispose(); //clean up!!
             b2Body.setUserData(this);
         }

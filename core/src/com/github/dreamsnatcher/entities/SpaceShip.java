@@ -70,6 +70,10 @@ public class SpaceShip extends GameObject {
         }
 
         if(b2Body.getLinearVelocity().len()>0.5f){
+            textureRegion = texture2;
+        }
+
+        if(b2Body.getLinearVelocity().len()>0.7f){
             textureRegion = texture3;
         }
 

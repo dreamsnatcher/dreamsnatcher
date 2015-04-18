@@ -3,7 +3,6 @@ package com.github.dreamsnatcher.entities;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.github.dreamsnatcher.utils.Assets;
 
@@ -21,7 +20,7 @@ public class Planet extends GameObject {
     private void initPhysics() {
         //create body definition
         BodyDef bodyDef = new BodyDef();
-        bodyDef.type = BodyDef.BodyType.StaticBody;
+        bodyDef.type = BodyDef.BodyType.KinematicBody;
         bodyDef.position.set(position.x, position.y);
 
         //create body in world
