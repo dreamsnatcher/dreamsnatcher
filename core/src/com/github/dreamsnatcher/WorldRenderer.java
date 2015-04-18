@@ -1,5 +1,6 @@
 package com.github.dreamsnatcher;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -27,10 +28,15 @@ public class WorldRenderer implements Disposable {
     private TextureRegion background3;
     private TextureRegion energybar;
     private TextureRegion energypixel;
-    private TextureRegion spaceBarIndicator;
+    private TextureRegion beerpixel;
+    private TextureRegion schaumkrone;
 
     private int[] rotation;
     private TextureRegion finishPicture;
+
+    public int beercounter = 0;
+    public float timer = 0;
+    public final float MAXTIMER = 0.02f;
 
     public WorldRenderer(WorldController worldController) {
         this.worldController = worldController;
@@ -55,7 +61,8 @@ public class WorldRenderer implements Disposable {
         background3 = Assets.stars3;
         energybar = Assets.energyBar;
         energypixel = Assets.energyPixel;
-        spaceBarIndicator = Assets.indicator;
+        beerpixel = Assets.bierpixel;
+        schaumkrone = Assets.schaumkrone;
 
         //GUI camera
         cameraGUI = new OrthographicCamera(Constants.VIEWPORT_GUI_WIDTH, Constants.VIEWPORT_GUI_HEIGHT);
@@ -74,13 +81,29 @@ public class WorldRenderer implements Disposable {
         String mmss = String.format("%02d:%02d", TimeUnit.MILLISECONDS.toMinutes(worldController.timeElapsed) % TimeUnit.HOURS.toMinutes(1),
                 TimeUnit.MILLISECONDS.toSeconds(worldController.timeElapsed) % TimeUnit.MINUTES.toSeconds(1));
         font.draw(batch, mmss, 10, 10);
-        batch.draw(new TextureRegion(spaceBarIndicator), 10, 20, spaceBarIndicator.getRegionWidth() / 2, spaceBarIndicator.getRegionHeight() / 2,
-                spaceBarIndicator.getRegionWidth(), spaceBarIndicator.getRegionHeight(), 0.5f, 0.5f, getCurrentIndicatorAngle());
+        batch.draw(Assets.indicator, 10, 20, Assets.indicator.getRegionWidth() / 2, Assets.indicator.getRegionHeight() / 2,
+                Assets.indicator.getRegionWidth(), Assets.indicator.getRegionHeight(), 0.5f, 0.5f, getCurrentIndicatorAngle());
 
-        batch.draw(new TextureRegion(energybar), 760, 100, 40, 400);
-        for (int i = 1; i <= this.worldController.gameWorld.spaceShip.getEnergy(); i++) {
-            batch.draw(new TextureRegion(energypixel), 760, 500 - i * 4, 40, 4);
+        batch.draw(energybar, 760, 100, 40, 400);
+
+        if(!worldController.isFinish()) {
+            for (int i = 1; i <= this.worldController.gameWorld.spaceShip.getEnergy(); i++) {
+                batch.draw(new TextureRegion(energypixel), 760, 500 - i * 4, 40, 4);
+            }
         }
+            if (worldController.isFinish()) {
+                timer += Gdx.graphics.getDeltaTime();
+                if (timer > MAXTIMER) {
+                    timer = 0;
+                    if (beercounter <= 400) {
+                        beercounter++;
+                    }
+                }
+                for (int i = 1; i <= beercounter; i++) {
+                    batch.draw(new TextureRegion(beerpixel), 760, 500 - i, 40, 4);
+                }
+                batch.draw(new TextureRegion(schaumkrone), 755, 500 - beercounter - 3, 50, 20);
+            }
         if(worldController.isFinish()){
             batch.draw(new TextureRegion(finishPicture), 100, 100, 400, 400);
         }
@@ -98,7 +121,6 @@ public class WorldRenderer implements Disposable {
         worldController.cameraHelper.applyTo(camera);
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
-
 
         int k = 0;
         for (int i = -20; i < 20; i++) {
@@ -186,6 +208,20 @@ public class WorldRenderer implements Disposable {
     public void resize(int width, int height) {
         camera.viewportWidth = (Constants.VIEWPORT_HEIGHT / height) * width; //calculate aspect ratio
         camera.update();
+    }
+
+    public void showNightmare(float energy) {
+        float alpha = 0f;
+        if (energy < 20 && energy >= 15) {
+            alpha = 75f;
+        } else if (energy < 15 && energy >= 10) {
+            alpha = 60f;
+        } else if (energy < 10 && energy >= 5) {
+            alpha = 30f;
+        } else if (energy < 5 && energy >= 0) {
+            alpha = 10f;
+        }
+        batch.draw(Assets.nightmare, 0, 0, Assets.nightmare.getRegionWidth(), Assets.nightmare.getRegionHeight());
     }
 
     @Override

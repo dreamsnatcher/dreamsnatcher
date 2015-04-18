@@ -35,7 +35,8 @@ public class WorldController extends InputAdapter implements ContactListener {
     private Vector2 curTouchPos;
     private String map = "map1.map";
 
-    public WorldController() {
+    public WorldController(String level) {
+        this.map = level;
         init();
     }
 
@@ -64,10 +65,16 @@ public class WorldController extends InputAdapter implements ContactListener {
         b2World.step(1 / 60f, 3, 8); //timeStep, velocityIteration, positionIteration
         if (Gdx.input.isTouched() && gameWorld.spaceShip.getEnergy() > 0 && !finish) {
             accelerate(curTouchPos.x, curTouchPos.y);
+        } else if(gameWorld.spaceShip. getEnergy() <= 0.1f){
+            renderDeathScreen();
         }
         if (zoomIn) {
             cameraHelper.setZoom(cameraHelper.getZoom() - 0.002f);
         }
+    }
+
+    private void renderDeathScreen() {
+
     }
 
     @Override
@@ -126,7 +133,9 @@ public class WorldController extends InputAdapter implements ContactListener {
         if (spaceShip.getBody().getLinearVelocity().len() < MAX_V) {
             spaceShip.getBody().applyForceToCenter(thrustNormed, true);
             spaceShip.getBody().setTransform(shipPos.x, shipPos.y, (thrustNormed.angle() - 90) * MathUtils.degreesToRadians);
-            spaceShip.drainEnergy();
+            if (spaceShip.drainEnergy() <= 20){
+                worldRenderer.showNightmare(spaceShip.getEnergy());
+            }
         }
     }
 
@@ -135,11 +144,6 @@ public class WorldController extends InputAdapter implements ContactListener {
         spaceShip.getBody().setTransform(0, 0, 0);
         spaceShip.getBody().setLinearVelocity(0, 0);
         spaceShip.setEnergy(100f);
-        // reinit gameobjects
-        spaceShip.init(getB2World());
-        for (GameObject object : gameWorld.objects) {
-            object.init(getB2World());
-        }
     }
 
     @Override

@@ -30,10 +30,13 @@ public class Assets implements Disposable {
     public static TextureRegion planetDead;
     public static TextureRegion planetLow;
     public static TextureRegion indicator;
+    public static TextureRegion planetBonusDead;
 
     public static TextureRegion bierpixel;
     public static TextureRegion schaumkrone;
     public static TextureRegion finishWookie;
+
+    public static TextureRegion nightmare;
 
     public static void init() {
         spaceShip0 = new TextureRegion(new Texture("spaceship_speed0.png"));
@@ -62,6 +65,9 @@ public class Assets implements Disposable {
 
         planetBonusLow = new TextureRegion(new Texture("planet_3_small_pop.png"));
         planetBonusLow.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        planetBonusDead = new TextureRegion(new Texture("dead_planet_3.png"));
+        planetBonusDead.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         planetDead = new TextureRegion(new Texture("dead_planet.png"));
         planetDead.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -95,7 +101,8 @@ public class Assets implements Disposable {
 
         finishWookie = new TextureRegion(new Texture("wookie.png"));
         finishWookie.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
+        nightmare = new TextureRegion(new Texture("bloodframe.png"));
+        nightmare.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
     }
 
@@ -107,7 +114,5 @@ public class Assets implements Disposable {
         stars1.getTexture().dispose();
         stars2.getTexture().dispose();
         stars3.getTexture().dispose();
-
-
     }
 }
