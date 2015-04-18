@@ -6,7 +6,7 @@ import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.*;
 import com.github.dreamsnatcher.entities.GameObject;
 import com.github.dreamsnatcher.entities.GameWorld;
 import com.github.dreamsnatcher.entities.GameWorldSerializer;
@@ -15,9 +15,10 @@ import com.github.dreamsnatcher.screens.ScreenManager;
 import com.github.dreamsnatcher.utils.CameraHelper;
 
 
-public class WorldController extends InputAdapter {
+public class WorldController extends InputAdapter implements ContactListener {
     public static final int MAX_ACCELERATION = 10;
-    private static float MAX_V = 1;
+    private static final float MAX_V = 1;
+    public static final float DRAIN_ENERGY_STEP = 5;
 
     public CameraHelper cameraHelper;
 
@@ -40,10 +41,11 @@ public class WorldController extends InputAdapter {
         ScreenManager.multiplexer.addProcessor(this);
         cameraHelper = new CameraHelper();
         b2World = new World(new Vector2(0, 0f), true);
+        b2World.setContactListener(this);
         // You can open this file and edit it via
         // Editor in the desktop project. You can of course
         // also create new files.
-        gameWorld = GameWorldSerializer.deserialize(Gdx.files.internal("test.map"));
+        gameWorld = GameWorldSerializer.deserialize(Gdx.files.internal("map1.map"));
         gameWorld.init(b2World);
         cameraHelper.setTarget(gameWorld.spaceShip.getBody());
     }
@@ -56,7 +58,7 @@ public class WorldController extends InputAdapter {
             object.update(deltaTime);
         }
         b2World.step(1 / 60f, 3, 8); //timeStep, velocityIteration, positionIteration
-        if (Gdx.input.isTouched()) {
+        if (Gdx.input.isTouched() && gameWorld.spaceShip.getEnergy() > 0) {
             accelerate(curTouchPos.x, curTouchPos.y);
         }
     }
@@ -117,7 +119,27 @@ public class WorldController extends InputAdapter {
         if (spaceShip.getBody().getLinearVelocity().len() < MAX_V) {
             spaceShip.getBody().applyForceToCenter(thrustNormed, true);
             spaceShip.getBody().setTransform(shipPos.x, shipPos.y, (thrustNormed.angle() - 90) * MathUtils.degreesToRadians);
+            spaceShip.drainEnergy();
         }
+    }
+
+    @Override
+    public void beginContact(Contact contact) {
+    }
+
+    @Override
+    public void endContact(Contact contact) {
+
+    }
+
+    @Override
+    public void preSolve(Contact contact, Manifold oldManifold) {
+
+    }
+
+    @Override
+    public void postSolve(Contact contact, ContactImpulse impulse) {
+
     }
 
 }
