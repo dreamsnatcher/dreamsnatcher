@@ -23,6 +23,7 @@ public class GameScreen extends Screen {
     @Override
     public void render() {
         worldController.update(Gdx.graphics.getDeltaTime());
+        AudioManager.update(Gdx.graphics.getDeltaTime());
         worldRenderer.render();
     }
 
