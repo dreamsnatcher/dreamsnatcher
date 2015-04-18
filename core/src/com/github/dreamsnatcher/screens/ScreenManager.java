@@ -46,6 +46,6 @@ public class ScreenManager {
 	}
 
     public void resize(int width, int height) {
-            current.resize(width,height);
+        current.resize(width,height);
     }
 }
