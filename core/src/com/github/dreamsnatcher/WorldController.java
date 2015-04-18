@@ -7,7 +7,10 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.World;
-import com.github.dreamsnatcher.entities.*;
+import com.github.dreamsnatcher.entities.GameObject;
+import com.github.dreamsnatcher.entities.GameWorld;
+import com.github.dreamsnatcher.entities.GameWorldSerializer;
+import com.github.dreamsnatcher.entities.SpaceShip;
 import com.github.dreamsnatcher.screens.ScreenManager;
 import com.github.dreamsnatcher.utils.CameraHelper;
 
