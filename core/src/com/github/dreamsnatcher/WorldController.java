@@ -141,7 +141,6 @@ public class WorldController extends InputAdapter implements ContactListener {
         Spacebar spacebar = CollisionObjectHelper.getSpaceBar(contact);
 
         if (planet != null && spaceShip != null && planet.getEnergy() > 1f && planet.cooldown <= 0 ) {
-            System.out.println(planet.getEnergy());
             spaceShip.getBody().setLinearVelocity(0, 0);
             spaceShip.beginHarvest(planet);
             AudioManager.landing.play();
