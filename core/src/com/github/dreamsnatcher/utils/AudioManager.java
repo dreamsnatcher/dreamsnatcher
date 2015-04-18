@@ -31,19 +31,17 @@ public class AudioManager {
 
         public static Array<Sound> allSounds = new Array<Sound>();
 
-        public static float soundvolume = 0.3f;
+        public static float soundvolume = 0.2f;
         public static float musicvolume = 1f;
 
 
         public static void init(){
             empty = Gdx.audio.newMusic(Gdx.files.internal("sounds/empty_planet.mp3"));
-		    //mainloop = Gdx.audio.newMusic(Gdx.files.internal("sounds/mainloop.wav"));
-            mainloop = Gdx.audio.newMusic(Gdx.files.internal("sounds/ha.mp3"));
+		    mainloop = Gdx.audio.newMusic(Gdx.files.internal("sounds/mainloop.wav"));
             fearloop = Gdx.audio.newMusic(Gdx.files.internal("sounds/fearloop.wav"));
             havana = Gdx.audio.newMusic(Gdx.files.internal("sounds/havana.mp3"));
             mainloop.setLooping(true);
             fearloop.setLooping(true);
-            // mainloop.setVolume(1f);
             mainloop.play();
 
             move_fast = Gdx.audio.newSound(Gdx.files.internal("sounds/ufo-move-oh-fast.wav"));
@@ -97,17 +95,17 @@ public class AudioManager {
     public static void moveSlow(){
             move_regular.stop();
             move_fast.stop();
-            move_slow.setPitch(move_slow.loop(soundvolume),0.7f);
+            move_slow.setPitch(move_slow.loop(soundvolume),0.4f);
         }
         public static void moveRegular(){
             move_slow.stop();
             move_fast.stop();
-            move_regular.setPitch(move_regular.loop(soundvolume),0.7f);
+            move_regular.setPitch(move_regular.loop(soundvolume),0.4f);
         }
         public static void moveFast(){
             move_regular.stop();
             move_slow.stop();
-            move_fast.setPitch(move_fast.loop(soundvolume),0.7f);
+            move_fast.setPitch(move_fast.loop(soundvolume),0.4f);
         }
         public static void stop(){
             move_regular.stop();
