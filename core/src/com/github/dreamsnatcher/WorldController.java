@@ -175,4 +175,7 @@ public class WorldController extends InputAdapter implements ContactListener {
 
     }
 
+    public boolean isFinish() {
+        return finish;
+    }
 }

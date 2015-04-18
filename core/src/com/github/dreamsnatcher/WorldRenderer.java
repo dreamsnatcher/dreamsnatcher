@@ -1,5 +1,6 @@
 package com.github.dreamsnatcher;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -29,6 +30,7 @@ public class WorldRenderer implements Disposable {
     private TextureRegion spaceBarIndicator;
 
     private int[] rotation;
+    private BitmapFont finishFont;
 
     public WorldRenderer(WorldController worldController) {
         this.worldController = worldController;
@@ -62,6 +64,8 @@ public class WorldRenderer implements Disposable {
         cameraGUI.update();
 
         font = new BitmapFont(true); //default 15pt Arial
+        finishFont = new BitmapFont(true);
+        finishFont.setColor(Color.RED);
     }
 
     public void renderGUI(SpriteBatch batch) {
@@ -76,6 +80,9 @@ public class WorldRenderer implements Disposable {
         batch.draw(new TextureRegion(energybar), 760, 100, 40, 400);
         for(int i = 1;i<=this.worldController.gameWorld.spaceShip.getEnergy(); i++){
             batch.draw(new TextureRegion(energypixel), 760, 500-i*4, 40, 4);
+        }
+        if(worldController.isFinish()){
+            finishFont.draw(batch, "GAME FINISHED", 500, 500);
         }
         batch.end();
     }
