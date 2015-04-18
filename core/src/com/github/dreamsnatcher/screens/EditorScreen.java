@@ -92,6 +92,14 @@ public class EditorScreen extends Screen {
             }
         });
 
+        button = new TextButton("Planet Bonus", skin);
+        root.add(button);
+        button.addListener(new ChangeListener() {
+            public void changed(ChangeEvent event, Actor actor) {
+                controller.place(PlanetBonus.class);
+            }
+        });
+
         button = new TextButton("Planet (rotating)", skin);
         root.add(button);
         button.addListener(new ChangeListener() {

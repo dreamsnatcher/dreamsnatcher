@@ -13,13 +13,15 @@ import com.github.dreamsnatcher.utils.Assets;
  */
 public class Planet extends GameObject {
 
-    public static final float MAX_ENERGY = 50f;
+    public float MAX_ENERGY = 50f;
     // loaded when init is called by GameWorldSerializer
     // not saved to json
     private transient TextureRegion texture;
+    private transient TextureRegion textureLow;
+    private transient TextureRegion textureDead;
     private transient com.badlogic.gdx.physics.box2d.World b2World;
     private transient Body b2Body;
-    private transient float energy = MAX_ENERGY;
+    private transient float energy;
     private static transient float RADIUS = 2f ;
     private static transient float RTT = 20f ;
     private transient Vector2 center;
@@ -59,8 +61,17 @@ public class Planet extends GameObject {
 
     @Override
     public void init(World world) {
+        energy = MAX_ENERGY;
         angleNew = (float) Math.random() * 360;
-        texture = Assets.planet;
+        if(MAX_ENERGY == 50f){
+            texture = Assets.planet;
+            textureLow = Assets.planetLow;
+            textureDead = Assets.planetDead;
+        }else if(MAX_ENERGY == 200f){
+            texture = Assets.planetBonus;
+            textureLow = Assets.planetBonusLow;
+            textureDead = Assets.planetDead;
+        }
         center = new Vector2(position.x,position.y-RADIUS);
         b2World = world;
         dimension.set(1f, 1f);
@@ -72,12 +83,12 @@ public class Planet extends GameObject {
 
     @Override
     public void render(SpriteBatch batch) {
-        TextureRegion textureRegion = Assets.planet;
+        TextureRegion textureRegion = texture;
         if(energy< MAX_ENERGY/2f){
-            textureRegion = Assets.planetLow;
+            textureRegion = textureLow;
         }
         if(energy <= 0f){
-            textureRegion = Assets.planetDead;
+            textureRegion = textureDead;
         }
 
         batch.draw(textureRegion,
