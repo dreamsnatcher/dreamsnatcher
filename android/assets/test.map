@@ -1,62 +1,10 @@
 {
 objects: [
 	{
-		class: com.github.dreamsnatcher.entities.Asteroid
-		position: {
-			x: 0.78125
-			y: 1.5312499
-		}
-		dimension: {
-			x: 0.2
-			y: 0.2
-		}
-		origin: {
-			x: 0.1
-			y: 0.1
-		}
-	}
-	{
-		class: com.github.dreamsnatcher.entities.Asteroid
-		position: {
-			x: -1.375
-			y: 0.6354165
-		}
-		dimension: {
-			x: 0.2
-			y: 0.2
-		}
-		origin: {
-			x: 0.1
-			y: 0.1
-		}
-	}
-	{
-		class: com.github.dreamsnatcher.entities.Asteroid
-		position: {
-			x: 1.2265625
-			y: -0.54166675
-		}
-		dimension: {
-			x: 0.2
-			y: 0.2
-		}
-		origin: {
-			x: 0.1
-			y: 0.1
-		}
-	}
-	{
-		class: com.github.dreamsnatcher.entities.Spacebar
-		position: {
-			x: -0.60937494
-			y: 1.25
-		}
-	}
-	{
 		class: com.github.dreamsnatcher.entities.Planet
 		position: {
-			x: -0.96875
-			y: -1.3125
+			x: 0.43984556
+			y: 0.68333375
 		}
 		dimension: {
 			x: 0.8
@@ -70,8 +18,45 @@ objects: [
 	{
 		class: com.github.dreamsnatcher.entities.Planet
 		position: {
-			x: 1.890625
-			y: 0.5937499
+			x: 0.4226581
+			y: -0.50833327
+		}
+		dimension: {
+			x: 0.8
+			y: 0.4
+		}
+		origin: {
+			x: 0.4
+			y: 0.2
+		}
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Spacebar
+		position: {
+			x: 1.814063
+			y: 3.2062502
+		}
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Planet
+		position: {
+			x: 1.9093773
+			y: 0.95833397
+		}
+		dimension: {
+			x: 0.8
+			y: 0.4
+		}
+		origin: {
+			x: 0.4
+			y: 0.2
+		}
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Planet
+		position: {
+			x: 3.2242215
+			y: 0.21354195
 		}
 		dimension: {
 			x: 0.8
@@ -84,13 +69,17 @@ objects: [
 	}
 ]
 spaceShip: {
+	position: {
+		x: 1.4343766
+		y: 0.26875025
+	}
 	dimension: {
 		x: 0.4
-		y: 0.5
+		y: 0.22500001
 	}
 	origin: {
 		x: 0.2
-		y: 0.25
+		y: 0.112500004
 	}
 }
 }
