@@ -9,24 +9,20 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.github.dreamsnatcher.utils.Assets;
 
-public class SpaceShip extends GameObject {
+public class Asteroid extends GameObject {
 
     // loaded when init is called by GameWorldSerializer
     // not saved to json
     private transient TextureRegion texture0;
     private transient TextureRegion texture1;
-    private transient TextureRegion texture2;
-    private transient TextureRegion texture3;
     private transient com.badlogic.gdx.physics.box2d.World b2World;
     private transient Body b2Body;
 
     public void init(com.badlogic.gdx.physics.box2d.World world) {
-        texture0 = Assets.spaceShip0;
-        texture1 = Assets.spaceShip1;
-        texture2 = Assets.spaceShip2;
-        texture3 = Assets.spaceShip3;
+        texture0 = Assets.asteroid0;
+        texture1 = Assets.asteroid1;
         b2World = world;
-        dimension.set(0.4f, 0.5f);
+        dimension.set(0.2f, 0.2f);
         origin.x = dimension.x / 2;
         origin.y = dimension.y / 2;
         initPhysics();
@@ -53,7 +49,7 @@ public class SpaceShip extends GameObject {
         fixtureDef.restitution = 0;
 
         b2Body.createFixture(fixtureDef);
-        b2Body.setLinearDamping(1f);
+        b2Body.setLinearDamping(0.5f);
         b2Body.setAngularDamping(1f);
         b2Body.setBullet(true);
 
@@ -64,18 +60,7 @@ public class SpaceShip extends GameObject {
 
     @Override
     public void render(SpriteBatch batch) {
-        TextureRegion textureRegion = texture0;
-        if(b2Body.getLinearVelocity().len()>0.2f){
-            textureRegion = texture1;
-        }
-
-        if(b2Body.getLinearVelocity().len()>0.5f){
-            textureRegion = texture3;
-        }
-
-
-
-        batch.draw(textureRegion,
+        batch.draw(texture0,
                 position.x - dimension.x / 2, position.y - dimension.y / 2,
                 origin.x, origin.y,
                 dimension.x, dimension.y,
