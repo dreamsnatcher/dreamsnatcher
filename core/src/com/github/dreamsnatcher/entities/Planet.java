@@ -48,7 +48,7 @@ public class Planet extends GameObject {
     public void init(World world) {
         texture = Assets.planet;
         b2World = world;
-        dimension.set(0.8f, 0.4f);
+        dimension.set(1f, 1f);
         origin.x = dimension.x / 2;
         origin.y = dimension.y / 2;
         initPhysics();
