@@ -2,6 +2,7 @@ package com.github.dreamsnatcher.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -12,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.github.dreamsnatcher.utils.AudioManager;
 
 public class LevelsScreen extends Screen {
 
@@ -50,6 +52,19 @@ public class LevelsScreen extends Screen {
                 table.add(finalButton).size(150, 60).pad(10);
             }
         }
+
+        table.row();
+
+        TextButton finalButton = new TextButton("Back", skin);
+        finalButton.setColor(Color.GREEN);
+        finalButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                manager.setScreen(new MainMenuScreen(manager));
+            }
+        });
+
+        table.add(finalButton).size(150, 60).pad(10);
 
 
         table.setFillParent(true);
