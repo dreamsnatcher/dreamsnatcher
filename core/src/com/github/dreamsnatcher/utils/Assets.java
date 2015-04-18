@@ -32,5 +32,11 @@ public class Assets implements Disposable {
     public void dispose() {
         spaceShip.getTexture().dispose();
         planet.getTexture().dispose();
+        stars0.getTexture().dispose();
+        stars1.getTexture().dispose();
+        stars2.getTexture().dispose();
+        stars3.getTexture().dispose();
+
+
     }
 }
