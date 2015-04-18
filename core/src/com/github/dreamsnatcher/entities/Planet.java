@@ -58,6 +58,7 @@ public class Planet extends GameObject {
 
     @Override
     public void init(World world) {
+        angleNew = (float) Math.random() * 360;
         texture = Assets.planet;
         center = new Vector2(position.x,position.y-RADIUS);
         b2World = world;

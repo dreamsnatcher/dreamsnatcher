@@ -3,6 +3,7 @@ package com.github.dreamsnatcher.entities;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
@@ -16,8 +17,15 @@ public class Asteroid extends GameObject {
     private transient TextureRegion texture0;
     private transient com.badlogic.gdx.physics.box2d.World b2World;
     private transient Body b2Body;
+    private float angleNew = 0f;
+    private static transient float RADIUS = .00002f ;
+    private static transient float RTT = 40f ;
+    private transient Vector2 center;
+    public boolean doRotation;
+
 
     public void init(com.badlogic.gdx.physics.box2d.World world) {
+        angleNew = (float) Math.random() * 360;
         double rand = Math.random();
         texture0 = Assets.asteroid0;
         if(rand < 0.33f){
@@ -29,6 +37,7 @@ public class Asteroid extends GameObject {
         dimension.set(0.2f, 0.2f);
         origin.x = dimension.x / 2;
         origin.y = dimension.y / 2;
+        center = new Vector2(position.x,position.y-RADIUS);
         initPhysics();
     }
 
@@ -77,6 +86,16 @@ public class Asteroid extends GameObject {
     public void update(float deltaTime) {
         position = b2Body.getPosition();
         rotation = b2Body.getAngle() * MathUtils.radiansToDegrees;
+        if(doRotation) {
+
+            angleNew += (float) (deltaTime * (2 * Math.PI / RTT));
+            float cos = MathUtils.cos(angleNew);
+            float sin = MathUtils.sin(angleNew);
+            Vector2 vector2 = new Vector2(center.x + cos, center.y + sin);
+            vector2.setLength(center.len() + RADIUS);
+
+            b2Body.setTransform(vector2, b2Body.getAngle());
+        }
     }
 
 
