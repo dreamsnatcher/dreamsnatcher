@@ -20,6 +20,9 @@ public class Assets implements Disposable {
     public static TextureRegion spaceBar;
     public static TextureRegion asteroid2;
 
+    public static TextureRegion energyBar;
+    public static TextureRegion energyPixel;
+
 
     public static void init(){
         spaceShip0 = new TextureRegion(new Texture("spaceship_speed0.png"));
@@ -44,6 +47,8 @@ public class Assets implements Disposable {
         asteroid0 = new TextureRegion(new Texture("asteriod_small01.png"));
         asteroid1 = new TextureRegion(new Texture("asteriod_small02.png"));
         asteroid2 = new TextureRegion(new Texture("asteriod_big01.png"));
+        energyBar = new TextureRegion(new Texture("energybar_container.png"));
+        energyPixel = new TextureRegion(new Texture("pixel.png"));
         spaceBar = new TextureRegion(new Texture("spacebar.png"));
         spaceBar.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
     }

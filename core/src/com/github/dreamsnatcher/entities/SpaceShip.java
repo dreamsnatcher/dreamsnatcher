@@ -7,6 +7,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.github.dreamsnatcher.WorldController;
 import com.github.dreamsnatcher.utils.Assets;
 
 public class SpaceShip extends GameObject {
@@ -19,6 +20,7 @@ public class SpaceShip extends GameObject {
     private transient TextureRegion texture3;
     private transient com.badlogic.gdx.physics.box2d.World b2World;
     private transient Body b2Body;
+    private volatile transient float energy;
 
     public void init(com.badlogic.gdx.physics.box2d.World world) {
         texture0 = Assets.spaceShip0;
@@ -27,6 +29,7 @@ public class SpaceShip extends GameObject {
         texture3 = Assets.spaceShip3;
         b2World = world;
         dimension.set(0.4f, 0.5f);
+        energy = 50;
         origin.x = dimension.x / 2;
         origin.y = dimension.y / 2;
         initPhysics();
@@ -96,5 +99,25 @@ public class SpaceShip extends GameObject {
 
     public Body getBody() {
         return b2Body;
+    }
+
+    public float getEnergy() {
+        return energy;
+    }
+
+    public float drainEnergy() {
+        energy -= WorldController.DRAIN_ENERGY_STEP;
+        if (energy < 0) {
+            energy = 0;
+        }
+        return energy;
+    }
+
+    public float gainEnergy() {
+        energy += WorldController.DRAIN_ENERGY_STEP;
+        if (energy > 100) {
+            energy = 100;
+        }
+        return energy;
     }
 }
