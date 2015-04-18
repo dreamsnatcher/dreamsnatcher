@@ -10,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.github.dreamsnatcher.WorldController;
 import com.github.dreamsnatcher.utils.Assets;
+import com.github.dreamsnatcher.utils.AudioManager;
 
 public class SpaceShip extends GameObject {
 
@@ -77,17 +78,26 @@ public class SpaceShip extends GameObject {
         TextureRegion textureRegion = texture0;
         if(b2Body.getLinearVelocity().len()>0.2f){
             textureRegion = texture1;
+            AudioManager.moveSlow();
         }
 
         if(b2Body.getLinearVelocity().len()>0.5f){
             textureRegion = texture2;
+            AudioManager.moveRegular();
         }
 
         if(b2Body.getLinearVelocity().len()>0.7f){
             textureRegion = texture3;
+            AudioManager.moveFast();
+        }
+        if(b2Body.getLinearVelocity().len()<=0.1f){
+            AudioManager.stop();
         }
         if(harvest){
             textureRegion = textureHarvest;
+            AudioManager.stop();
+            //AudioManager.harvest();
+
 
         }
 
@@ -109,7 +119,7 @@ public class SpaceShip extends GameObject {
                 transist = false;
                 harvest = true;
             }
-            b2Body.setTransform(b2Body.getPosition().x,b2Body.getPosition().y, angle );
+            b2Body.setTransform(b2Body.getPosition().x, b2Body.getPosition().y, angle);
         }else{
             transistTime = 1f;
         }
