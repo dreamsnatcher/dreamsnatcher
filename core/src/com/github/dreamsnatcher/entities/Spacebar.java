@@ -17,6 +17,8 @@ public class Spacebar extends GameObject {
     private transient TextureRegion texture;
     private transient com.badlogic.gdx.physics.box2d.World b2World;
     private transient Body b2Body;
+    private boolean hasBeenLandedOn = false;
+    private float elapse =0;
 
     private void initPhysics() {
         //create body definition
@@ -56,6 +58,9 @@ public class Spacebar extends GameObject {
 
     @Override
     public void render(SpriteBatch batch) {
+        if(hasBeenLandedOn){
+            texture = Assets.spaceBarFinish.getKeyFrame(elapse,true);
+        }
         batch.draw(texture, position.x - dimension.x / 2, position.y - dimension.y / 2,
                 origin.x, origin.y,
                 dimension.x, dimension.y,
@@ -64,6 +69,7 @@ public class Spacebar extends GameObject {
     }
 
     public void update(float deltaTime) {
+        elapse+=deltaTime;
         position = b2Body.getPosition();
         rotation = b2Body.getAngle() * MathUtils.radiansToDegrees;
     }
@@ -73,7 +79,7 @@ public class Spacebar extends GameObject {
     }
 
     public void hasBeenLandedOn(){
-        texture = Assets.spaceBarFinish;
+        hasBeenLandedOn = true;
     }
 }
 

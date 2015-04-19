@@ -21,7 +21,7 @@ public class Assets implements Disposable {
     public static TextureRegion asteroid0;
     public static TextureRegion asteroid1;
     public static TextureRegion spaceBar;
-    public static TextureRegion spaceBarFinish;
+    public static Animation spaceBarFinish;
     public static TextureRegion asteroid2;
     public static TextureRegion asteroid3;
 
@@ -30,11 +30,11 @@ public class Assets implements Disposable {
     public static TextureRegion penaltyPixel;
     public static TextureRegion spaceShipHarvest;
     public static TextureRegion spaceShipCruzerHarvest;
-    public static TextureRegion planetDead;
+    public static Animation planetDead;
     public static TextureRegion planetLow;
     public static TextureRegion indicator;
     public static TextureRegion back;
-    public static TextureRegion planetBonusDead;
+    public static Animation planetBonusDead;
 
     public static TextureRegion bierpixel;
     public static TextureRegion schaumkrone;
@@ -64,6 +64,11 @@ public class Assets implements Disposable {
 
 
     public static void init() {
+
+        planetBonusDead =  loadAnimation("animations/dead_planet_3_", 2, 0.3f);
+        planetDead =  loadAnimation("animations/dead_planet_1_", 2, 0.3f);
+        spaceBarFinish = loadAnimation("animations/spacebar_landed_",3,0.3f);
+
         shipAnimationSpeed1 = loadAnimation("animations/spaceship_speed_0_", 3, 0.3f);
         shipAnimationSpeed2 = loadAnimation("animations/spaceship_speed_1_", 3, 0.3f);
         shipAnimationSpeed3 = loadAnimation("animations/spaceship_speed_2_", 3, 0.3f);
@@ -113,12 +118,6 @@ public class Assets implements Disposable {
         planetBonusLow = new TextureRegion(new Texture("planet_3_small_pop.png"));
         planetBonusLow.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-        planetBonusDead = new TextureRegion(new Texture("dead_planet_3.png"));
-        planetBonusDead.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-        planetDead = new TextureRegion(new Texture("dead_planet.png"));
-        planetDead.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
         stars0 = new TextureRegion(new Texture("space_1_v2.png"));
         stars0.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         stars1 = new TextureRegion(new Texture("space_2_v2.png"));
@@ -142,8 +141,6 @@ public class Assets implements Disposable {
         back.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         spaceBar = new TextureRegion(new Texture("spacebar.png"));
         spaceBar.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        spaceBarFinish = new TextureRegion(new Texture("spacebar_landed.png"));
-        spaceBarFinish.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         bierpixel = new TextureRegion(new Texture("bierpixel.png"));
         bierpixel.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);

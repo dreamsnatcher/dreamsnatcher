@@ -1,5 +1,6 @@
 package com.github.dreamsnatcher.entities;
 
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
@@ -18,7 +19,7 @@ public class Planet extends GameObject {
     // not saved to json
     private transient TextureRegion texture;
     private transient TextureRegion textureLow;
-    private transient TextureRegion textureDead;
+    private transient Animation textureDead;
     private transient com.badlogic.gdx.physics.box2d.World b2World;
     private transient Body b2Body;
     private transient float energy;
@@ -32,6 +33,7 @@ public class Planet extends GameObject {
     private transient float angleNew = 0f;
     public transient boolean doRotation = false;
     float MAX_ENERGY_BONUS = 75f;
+    private float elapsed = 0;
 
     private void initPhysics() {
         //create body definition
@@ -89,7 +91,7 @@ public class Planet extends GameObject {
             textureRegion = textureLow;
         }
         if(energy <= 1f){
-            textureRegion = textureDead;
+            textureRegion = textureDead.getKeyFrame(elapsed,true);
         }
 
         batch.draw(textureRegion,
@@ -118,6 +120,7 @@ public class Planet extends GameObject {
 
 
     public void update(float deltaTime) {
+        elapsed += deltaTime;
         if(cooldown>=0){
             cooldown -= deltaTime;
         }
