@@ -10,9 +10,6 @@ public class Assets implements Disposable {
     //DO THIS WITH ASSETMANAGER LATER TODO
     public static TextureRegion spaceShip0;
     public static TextureRegion spaceShipCruzer0;
-    public static TextureRegion spaceShip1;
-    public static TextureRegion spaceShip2;
-    public static TextureRegion spaceShip3;
     public static TextureRegion spaceShipEmpty;
     public static TextureRegion planet;
     public static TextureRegion planetBonus;
@@ -67,7 +64,7 @@ public class Assets implements Disposable {
         shipCruzerAnimationSpeed3 = loadAnimation("animations/spaceship_cruzer_speed_2_", 3, 0.3f);
 
 
-        spaceShip0 = new TextureRegion(new Texture("spaceship_cruzer_speed0.png"));
+        spaceShip0 = new TextureRegion(new Texture("spaceship_speed0.png"));
         spaceShipCruzer0 = new TextureRegion(new Texture("spaceship_cruzer_speed0.png"));
         spaceShip0.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         spaceShipCruzer0.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
