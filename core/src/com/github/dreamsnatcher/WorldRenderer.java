@@ -143,10 +143,23 @@ public class WorldRenderer implements Disposable {
         worldController.cameraHelper.applyTo(camera);
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
+        renderBackground();
+        for (GameObject object : worldController.gameWorld.objects) {
+            object.render(batch);
+        }
+        worldController.gameWorld.spaceShip.render(batch);
+        batch.end();
+        showNightmare(worldController.gameWorld.spaceShip.getEnergy());
+        renderGUI(batch);
+        if (worldController.isDebug()) {
+            debugRenderer.render(worldController.getB2World(), camera.combined);
+        }
+    }
 
+    private void renderBackground() {
         int k = 0;
-        for (int i = -20; i < 20; i++) {
-            for (int j = -20; j < 20; j++) {
+        for (int i = -20; i < 40; i++) {
+            for (int j = -20; j < 40; j++) {
                 TextureRegion textureRegion;
                 switch (rotation[k % rotation.length]) {
                     case 1:
@@ -215,16 +228,6 @@ public class WorldRenderer implements Disposable {
                 k++;
                 batch.draw(textureRegion, i, j, 1, 1);
             }
-        }
-        for (GameObject object : worldController.gameWorld.objects) {
-            object.render(batch);
-        }
-        worldController.gameWorld.spaceShip.render(batch);
-        batch.end();
-        showNightmare(worldController.gameWorld.spaceShip.getEnergy());
-        renderGUI(batch);
-        if (worldController.isDebug()) {
-            debugRenderer.render(worldController.getB2World(), camera.combined);
         }
     }
 
