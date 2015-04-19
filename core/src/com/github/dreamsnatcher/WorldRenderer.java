@@ -33,6 +33,8 @@ public class WorldRenderer implements Disposable {
     private TextureRegion penaltypixel;
     private TextureRegion schaumkrone;
 
+    private TextureRegion[][] bgs;
+
     private int[] rotation;
     private TextureRegion finishPicture;
 
@@ -41,10 +43,10 @@ public class WorldRenderer implements Disposable {
     public final float MAXTIMER = 0.02f;
 
 
-    int minX =-10;
-    int minY =-10;
-    int maxX =10;
-    int maxY =10;
+    int minX = -10;
+    int minY = -10;
+    int maxX = 10;
+    int maxY = 10;
 
 
     public WorldRenderer(WorldController worldController) {
@@ -91,18 +93,18 @@ public class WorldRenderer implements Disposable {
         finishPicture.flip(false, true);
     }
 
-    public void calculateBackground(){
-        for(GameObject o : worldController.gameWorld.objects){
-            if(o.position.x< minX){
+    public void calculateBackground() {
+        for (GameObject o : worldController.gameWorld.objects) {
+            if (o.position.x < minX) {
                 minX = (int) o.position.x;
             }
-            if(o.position.y< minY){
+            if (o.position.y < minY) {
                 minY = (int) o.position.y;
             }
-            if(o.position.y > maxY){
+            if (o.position.y > maxY) {
                 maxY = (int) o.position.y;
             }
-            if(o.position.x > maxX){
+            if (o.position.x > maxX) {
                 maxX = (int) o.position.x;
             }
         }
@@ -110,6 +112,81 @@ public class WorldRenderer implements Disposable {
         minY -= 10;
         maxX += 10;
         maxY += 10;
+
+
+        bgs = new TextureRegion[maxX - minX][maxY - minY];
+        int k = 0;
+        TextureRegion textureRegion;
+        for (int i = 0; i < bgs.length; i++) {
+            for (int j = 0; j < bgs[i].length; j++) {
+                k++;
+                switch (rotation[k % rotation.length]) {
+                    case 1:
+                        textureRegion = new TextureRegion(background0);
+                        break;
+                    case 2:
+                        textureRegion = new TextureRegion(background0);
+                        textureRegion.flip(true, false);
+                        break;
+                    case 3:
+                        textureRegion = new TextureRegion(background0);
+                        textureRegion.flip(true, true);
+                        break;
+                    case 4:
+                        textureRegion = new TextureRegion(background0);
+                        textureRegion.flip(false, true);
+                        break;
+                    case 5:
+                        textureRegion = new TextureRegion(background1);
+                        break;
+                    case 6:
+                        textureRegion = new TextureRegion(background1);
+                        textureRegion.flip(true, false);
+                        break;
+                    case 7:
+                        textureRegion = new TextureRegion(background1);
+                        textureRegion.flip(true, true);
+                        break;
+                    case 8:
+                        textureRegion = new TextureRegion(background1);
+                        textureRegion.flip(false, true);
+                        break;
+                    case 9:
+                        textureRegion = new TextureRegion(background2);
+                        break;
+                    case 10:
+                        textureRegion = new TextureRegion(background2);
+                        textureRegion.flip(true, false);
+                        break;
+                    case 11:
+                        textureRegion = new TextureRegion(background2);
+                        textureRegion.flip(true, true);
+                        break;
+                    case 12:
+                        textureRegion = new TextureRegion(background2);
+                        textureRegion.flip(false, true);
+                        break;
+                    case 13:
+                        textureRegion = new TextureRegion(background3);
+                        break;
+                    case 14:
+                        textureRegion = new TextureRegion(background3);
+                        textureRegion.flip(true, false);
+                        break;
+                    case 15:
+                        textureRegion = new TextureRegion(background3);
+                        textureRegion.flip(true, true);
+                        break;
+                    case 16:
+                        textureRegion = new TextureRegion(background3);
+                        textureRegion.flip(false, true);
+                        break;
+                    default:
+                        textureRegion = background0;
+                }
+                bgs[i][j] = textureRegion;
+            }
+        }
     }
 
     public void renderGUI(SpriteBatch batch) {
@@ -189,76 +266,9 @@ public class WorldRenderer implements Disposable {
     }
 
     private void renderBackground() {
-        int k = 0;
-        for (int i = minX; i < maxX; i++) {
-            for (int j = minY; j < maxY; j++) {
-                TextureRegion textureRegion;
-                switch (rotation[k % rotation.length]) {
-                    case 1:
-                        textureRegion = new TextureRegion(background0);
-                        break;
-                    case 2:
-                        textureRegion = new TextureRegion(background0);
-                        textureRegion.flip(true, false);
-                        break;
-                    case 3:
-                        textureRegion = new TextureRegion(background0);
-                        textureRegion.flip(true, true);
-                        break;
-                    case 4:
-                        textureRegion = new TextureRegion(background0);
-                        textureRegion.flip(false, true);
-                        break;
-                    case 5:
-                        textureRegion = new TextureRegion(background1);
-                        break;
-                    case 6:
-                        textureRegion = new TextureRegion(background1);
-                        textureRegion.flip(true, false);
-                        break;
-                    case 7:
-                        textureRegion = new TextureRegion(background1);
-                        textureRegion.flip(true, true);
-                        break;
-                    case 8:
-                        textureRegion = new TextureRegion(background1);
-                        textureRegion.flip(false, true);
-                        break;
-                    case 9:
-                        textureRegion = new TextureRegion(background2);
-                        break;
-                    case 10:
-                        textureRegion = new TextureRegion(background2);
-                        textureRegion.flip(true, false);
-                        break;
-                    case 11:
-                        textureRegion = new TextureRegion(background2);
-                        textureRegion.flip(true, true);
-                        break;
-                    case 12:
-                        textureRegion = new TextureRegion(background2);
-                        textureRegion.flip(false, true);
-                        break;
-                    case 13:
-                        textureRegion = new TextureRegion(background3);
-                        break;
-                    case 14:
-                        textureRegion = new TextureRegion(background3);
-                        textureRegion.flip(true, false);
-                        break;
-                    case 15:
-                        textureRegion = new TextureRegion(background3);
-                        textureRegion.flip(true, true);
-                        break;
-                    case 16:
-                        textureRegion = new TextureRegion(background3);
-                        textureRegion.flip(false, true);
-                        break;
-                    default:
-                        textureRegion = background0;
-                }
-                k++;
-                batch.draw(textureRegion, i, j, 1, 1);
+        for (int i = 0; i < maxX-minX; i++) {
+            for (int j = 0; j < maxY-minY; j++) {
+                batch.draw(bgs[i][j], i+minX, j+minY, 1, 1);
             }
         }
     }
