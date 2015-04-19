@@ -83,15 +83,11 @@ public class Assets implements Disposable {
 
         spaceShipFast0= new TextureRegion(new Texture("spaceship_speeder_speed0.png"));
         spaceShipFast0.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-
         spaceShipFastHarvest = new TextureRegion(new Texture("spaceship_speeder_extract_energy.png"));
         spaceShipFastHarvest.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-
         spaceShipFastEmpty = new TextureRegion(new Texture("spaceship_speeder_empty.png"));
         spaceShipFastEmpty.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
 
         spaceShipEmpty = new TextureRegion(new Texture("spaceship_empty.png"));
         spaceShipEmpty.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -166,7 +162,7 @@ public class Assets implements Disposable {
     private static Animation loadAnimation(String path, int frames, float frameDuration) {
         TextureRegion[] regions = new TextureRegion[frames];
 
-        for(int i = 0; i < frames; i++) {
+        for (int i = 0; i < frames; i++) {
             Texture tex = new Texture(Gdx.files.internal(path + i + ".png"));
             regions[i] = new TextureRegion(tex);
         }
