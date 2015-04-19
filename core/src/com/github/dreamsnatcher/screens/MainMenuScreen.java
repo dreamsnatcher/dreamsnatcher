@@ -6,11 +6,13 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
 
 public class MainMenuScreen extends com.github.dreamsnatcher.screens.Screen {
 
@@ -32,7 +34,7 @@ public class MainMenuScreen extends com.github.dreamsnatcher.screens.Screen {
 
 
         TextButton button = new TextButton("Editor", skin);
-        if(Gdx.app.getType() == Application.ApplicationType.Desktop) {
+        if (Gdx.app.getType() == Application.ApplicationType.Desktop) {
 
             button.addListener(new ClickListener() {
                 @Override
@@ -57,6 +59,17 @@ public class MainMenuScreen extends com.github.dreamsnatcher.screens.Screen {
         });
         table.add(button).size(150, 60).pad(10);
 
+        button = new TextButton("Credits", skin);
+        button.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                manager.setScreen(new CreditScreen(manager));
+            }
+        });
+        table.add(button).size(150, 60).pad(10);
+
+        table.row();
+        table.add(new Actor()).size(150, 60).pad(10);
         button = new TextButton("Exit", skin);
         button.addListener(new ClickListener() {
             @Override
@@ -65,11 +78,12 @@ public class MainMenuScreen extends com.github.dreamsnatcher.screens.Screen {
                 // or System.exit(0);
             }
         });
-        table.add(button).size(150, 60).pad(10);
+        table.add(button).size(100, 50).pad(10);
         table.setFillParent(true);
         stage.addActor(table);
 
         Texture texture = new Texture("mainscreen.png");
+        texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         TextureRegion region = new TextureRegion(texture, 0, 0, texture.getWidth(), texture.getHeight());
         table.setBackground(new TextureRegionDrawable(region));
 
