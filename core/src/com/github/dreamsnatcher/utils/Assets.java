@@ -47,6 +47,8 @@ public class Assets implements Disposable {
     public static Animation shipAnimationSpeed2;
     public static Animation shipAnimationSpeed3;
 
+    public static Animation wookieAnimation;
+
 
     public static Animation shipCruzerAnimationSpeed1;
     public static Animation shipCruzerAnimationSpeed2;
@@ -72,6 +74,8 @@ public class Assets implements Disposable {
         shipAnimationSpeed1 = loadAnimation("animations/spaceship_speed_0_", 3, 0.3f);
         shipAnimationSpeed2 = loadAnimation("animations/spaceship_speed_1_", 3, 0.3f);
         shipAnimationSpeed3 = loadAnimation("animations/spaceship_speed_2_", 3, 0.3f);
+
+        wookieAnimation = loadAnimation("animations/wookie_",3 ,0.3f);
 
         shipCruzerAnimationSpeed1 = loadAnimation("animations/spaceship_cruzer_speed_0_", 3, 0.3f);
         shipCruzerAnimationSpeed2 = loadAnimation("animations/spaceship_cruzer_speed_1_", 3, 0.3f);
@@ -136,7 +140,7 @@ public class Assets implements Disposable {
         penaltyPixel = new TextureRegion(new Texture("penaltypixel.png"));
         indicator = new TextureRegion(new Texture("indicator.png"));
         back = new TextureRegion(new Texture("button_back.png"));
-        back.flip(false,true);
+        back.flip(false, true);
         indicator.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         back.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         spaceBar = new TextureRegion(new Texture("spacebar.png"));
@@ -148,8 +152,8 @@ public class Assets implements Disposable {
         schaumkrone.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
 
-        finishWookie = new TextureRegion(new Texture("wookie.png"));
-        finishWookie.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+//        finishWookie = new TextureRegion(new Texture("wookie.png"));
+//        finishWookie.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         nightmare = new TextureRegion(new Texture("nightmare.png"));
         nightmare.flip(false, true);
         nightmare.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
