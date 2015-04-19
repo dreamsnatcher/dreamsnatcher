@@ -113,9 +113,14 @@ public class EditorScreen extends Screen {
             });
         }
 
-        actions.row().left();
+        Table ships = new Table();
+        ships.setFillParent(true);
+        stage.addActor(ships);
+
+        ships.right().pad(5).defaults().space(5);
+        ships.row().right();
         button = new TextButton("Spaceship", skin);
-        actions.add(button);
+        ships.add(button);
         button.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
                 controller.camera.position.set(controller.world.spaceShip.position.x, controller.world.spaceShip.position.y, 0);
@@ -124,9 +129,9 @@ public class EditorScreen extends Screen {
             }
         });
 
-        actions.row().left();
+        ships.row().right();
         button = new TextButton("SpaceCruZer", skin);
-        actions.add(button);
+        ships.add(button);
         button.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
                 controller.camera.position.set(controller.world.spaceShip.position.x, controller.world.spaceShip.position.y, 0);
