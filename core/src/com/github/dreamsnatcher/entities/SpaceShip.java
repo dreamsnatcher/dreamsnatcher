@@ -35,20 +35,21 @@ public class SpaceShip extends GameObject {
     protected transient Joint joint;
     protected transient boolean destroyJoint;
     protected transient boolean landed;
+    public boolean mute = false;
     protected float counter = 0;
 
     private float penaltyTime = 0f;
 
     public void init(com.badlogic.gdx.physics.box2d.World world) {
-        if (!(this instanceof SpaceShipBig)) {
-            texture = Assets.spaceShip0;
-            textureStop = Assets.spaceShip0;
-            textureHarvest = Assets.spaceShipHarvest;
-            textureEmpty = Assets.spaceShipEmpty;
-            animationSpeed1 = Assets.shipAnimationSpeed1;
-            animationSpeed2 = Assets.shipAnimationSpeed2;
-            animationSpeed3 = Assets.shipAnimationSpeed3;
-        } else {
+        if (this instanceof SpaceShipFast) {
+            texture = Assets.spaceShipFast0;
+            textureStop = Assets.spaceShipFast0;
+            textureHarvest = Assets.spaceShipFastHarvest;
+            textureEmpty = Assets.spaceShipFastEmpty;
+            animationSpeed1 = Assets.shipFastAnimationSpeed1;
+            animationSpeed2 = Assets.shipFastAnimationSpeed2;
+            animationSpeed3 = Assets.shipFastAnimationSpeed3;
+        } else if(this instanceof SpaceShipBig) {
             texture = Assets.spaceShipCruzer0;
             textureStop = Assets.spaceShipCruzer0;
             textureHarvest = Assets.spaceShipCruzerHarvest;
@@ -56,6 +57,14 @@ public class SpaceShip extends GameObject {
             animationSpeed1 = Assets.shipCruzerAnimationSpeed1;
             animationSpeed2 = Assets.shipCruzerAnimationSpeed2;
             animationSpeed3 = Assets.shipCruzerAnimationSpeed3;
+        } else{
+            texture = Assets.spaceShip0;
+            textureStop = Assets.spaceShip0;
+            textureHarvest = Assets.spaceShipHarvest;
+            textureEmpty = Assets.spaceShipEmpty;
+            animationSpeed1 = Assets.shipAnimationSpeed1;
+            animationSpeed2 = Assets.shipAnimationSpeed2;
+            animationSpeed3 = Assets.shipAnimationSpeed3;
         }
 
         b2World = world;
@@ -132,14 +141,17 @@ public class SpaceShip extends GameObject {
 
     public void update(float deltaTime) {
         if (b2Body.getLinearVelocity().len() > 0.2f) {
-            AudioManager.moveSlow();
+            if(!mute)
+                AudioManager.moveSlow();
         }
 
         if (b2Body.getLinearVelocity().len() > 0.5f) {
+            if(!mute)
             AudioManager.moveRegular();
         }
 
         if (b2Body.getLinearVelocity().len() > 0.7f) {
+            if(!mute)
             AudioManager.moveFast();
         }
         if (b2Body.getLinearVelocity().len() <= 0.1f) {
@@ -187,6 +199,7 @@ public class SpaceShip extends GameObject {
                     if (currentPlanet.getEnergy() == 0) {
                         energy = 4 * energy / 5;
                         penaltyTime = penaltyTime > 0 ? penaltyTime + 2f : 2f;
+                        if(!mute)
                         AudioManager.suckDryMusic();
                     }
                     endHarvest();
@@ -249,11 +262,13 @@ public class SpaceShip extends GameObject {
             currentPlanet = null;
         }
         AudioManager.landing.stop();
-        AudioManager.starting.play();
+        if(!mute)
+            AudioManager.starting.play();
     }
 
     public void hasLanded() {
         landed = true;
+        mute = true;
     }
 
     public float getPenaltyTime() {

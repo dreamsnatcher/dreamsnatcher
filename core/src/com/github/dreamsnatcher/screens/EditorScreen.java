@@ -140,6 +140,17 @@ public class EditorScreen extends Screen {
             }
         });
 
+        ships.row().right();
+        button = new TextButton("SpaceSpeeder", skin);
+        ships.add(button);
+        button.addListener(new ChangeListener() {
+            public void changed(ChangeEvent event, Actor actor) {
+                controller.camera.position.set(controller.world.spaceShip.position.x, controller.world.spaceShip.position.y, 0);
+                controller.world.spaceShip = new SpaceShipFast();
+                controller.world.spaceShip.init(controller.b2World);
+            }
+        });
+
     }
 
     @Override
