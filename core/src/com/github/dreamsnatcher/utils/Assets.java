@@ -11,9 +11,9 @@ public class Assets implements Disposable {
     public static TextureRegion spaceShip0;
     public static TextureRegion spaceShipCruzer0;
     public static TextureRegion spaceShipEmpty;
-    public static TextureRegion planet;
-    public static TextureRegion planetBonus;
-    public static TextureRegion planetBonusLow;
+    public static Animation planet;
+    public static Animation planetBonus;
+    public static Animation planetBonusLow;
     public static TextureRegion stars0;
     public static TextureRegion stars1;
     public static TextureRegion stars2;
@@ -31,7 +31,7 @@ public class Assets implements Disposable {
     public static TextureRegion spaceShipHarvest;
     public static TextureRegion spaceShipCruzerHarvest;
     public static Animation planetDead;
-    public static TextureRegion planetLow;
+    public static Animation planetLow;
     public static TextureRegion indicator;
     public static TextureRegion back;
     public static Animation planetBonusDead;
@@ -81,6 +81,11 @@ public class Assets implements Disposable {
         shipFastAnimationSpeed2 = loadAnimation("animations/spaceship_speeder_speed_1_", 3, 0.3f);
         shipFastAnimationSpeed3 = loadAnimation("animations/spaceship_speeder_speed_2_", 3, 0.3f);
 
+        planet = loadAnimation("animations/planet_high_pop_", 2, 0.3f);
+        planetLow = loadAnimation("animations/planet_small_pop_", 2, 0.3f);
+        planetBonus = loadAnimation("animations/planet_3_high_pop_", 2, 0.3f);
+        planetBonusLow = loadAnimation("animations/planet_3_small_pop_", 2, 0.3f);
+
         spaceShip0 = new TextureRegion(new Texture("spaceship_speed0.png"));
         spaceShipCruzer0 = new TextureRegion(new Texture("spaceship_cruzer_speed0.png"));
         spaceShip0.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -106,17 +111,6 @@ public class Assets implements Disposable {
         spaceShipCruzerHarvest = new TextureRegion(new Texture("spaceship_cruzer_extract_energy.png"));
         spaceShipCruzerHarvest.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
-        planet = new TextureRegion(new Texture("planet_high_pop.png"));
-        planet.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-        planetLow = new TextureRegion(new Texture("planet_small_pop.png"));
-        planetLow.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-        planetBonus = new TextureRegion(new Texture("planet_3_high_pop.png"));
-        planetBonus.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-
-        planetBonusLow = new TextureRegion(new Texture("planet_3_small_pop.png"));
-        planetBonusLow.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         stars0 = new TextureRegion(new Texture("space_1_v2.png"));
         stars0.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -169,7 +163,6 @@ public class Assets implements Disposable {
     @Override
     public void dispose() {
         spaceShip0.getTexture().dispose();
-        planet.getTexture().dispose();
         stars0.getTexture().dispose();
         stars1.getTexture().dispose();
         stars2.getTexture().dispose();

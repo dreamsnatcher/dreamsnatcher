@@ -17,8 +17,8 @@ public class Planet extends GameObject {
     public float MAX_ENERGY = 50f;
     // loaded when init is called by GameWorldSerializer
     // not saved to json
-    private transient TextureRegion texture;
-    private transient TextureRegion textureLow;
+    private transient Animation texture;
+    private transient Animation textureLow;
     private transient Animation textureDead;
     private transient com.badlogic.gdx.physics.box2d.World b2World;
     private transient Body b2Body;
@@ -86,9 +86,9 @@ public class Planet extends GameObject {
 
     @Override
     public void render(SpriteBatch batch) {
-        TextureRegion textureRegion = texture;
+        TextureRegion textureRegion = texture.getKeyFrame(elapsed, true);
         if(energy< MAX_ENERGY/2f){
-            textureRegion = textureLow;
+            textureRegion = textureLow.getKeyFrame(elapsed, true);
         }
         if(energy <= 1f){
             textureRegion = textureDead.getKeyFrame(elapsed,true);
