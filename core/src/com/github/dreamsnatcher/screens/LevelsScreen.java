@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -13,7 +14,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.github.dreamsnatcher.utils.AudioManager;
 
 public class LevelsScreen extends Screen {
 
@@ -31,13 +31,13 @@ public class LevelsScreen extends Screen {
         skin = new Skin(Gdx.files.internal("editor/uiskin.json"));
         stage = new Stage();
         table = new Table();
-        table.row();
 
         FileHandle dirHandle = Gdx.files.internal("levels");
         int i = 0;
         for (FileHandle entry : dirHandle.list()) {
             if (entry.extension().equals("map")) {
-                if (i % 5 >= 4) {
+                System.out.println(i);
+                if (i % 4 == 0) {
                     table.row();
                 }
                 i++;
@@ -52,8 +52,10 @@ public class LevelsScreen extends Screen {
                 table.add(finalButton).size(150, 60).pad(10);
             }
         }
-
         table.row();
+        table.add(new Actor());
+        table.add(new Actor());
+        table.add(new Actor());
 
         TextButton finalButton = new TextButton("Back", skin);
         finalButton.setColor(Color.GREEN);
