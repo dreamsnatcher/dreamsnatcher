@@ -41,6 +41,12 @@ public class WorldRenderer implements Disposable {
     public final float MAXTIMER = 0.02f;
 
 
+    int minX =-10;
+    int minY =-10;
+    int maxX =10;
+    int maxY =10;
+
+
     public WorldRenderer(WorldController worldController) {
         this.worldController = worldController;
         init();
@@ -83,6 +89,27 @@ public class WorldRenderer implements Disposable {
         font.setColor(Color.GREEN);
         finishPicture = Assets.finishWookie;
         finishPicture.flip(false, true);
+    }
+
+    public void calculateBackground(){
+        for(GameObject o : worldController.gameWorld.objects){
+            if(o.position.x< minX){
+                minX = (int) o.position.x;
+            }
+            if(o.position.y< minY){
+                minY = (int) o.position.y;
+            }
+            if(o.position.y > maxY){
+                maxY = (int) o.position.y;
+            }
+            if(o.position.x > maxX){
+                maxX = (int) o.position.x;
+            }
+        }
+        minX -= 10;
+        minY -= 10;
+        maxX += 10;
+        maxY += 10;
     }
 
     public void renderGUI(SpriteBatch batch) {
@@ -163,8 +190,8 @@ public class WorldRenderer implements Disposable {
 
     private void renderBackground() {
         int k = 0;
-        for (int i = -20; i < 40; i++) {
-            for (int j = -20; j < 40; j++) {
+        for (int i = minX; i < maxX; i++) {
+            for (int j = minY; j < maxY; j++) {
                 TextureRegion textureRegion;
                 switch (rotation[k % rotation.length]) {
                     case 1:

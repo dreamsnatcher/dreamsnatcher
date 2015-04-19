@@ -27,7 +27,9 @@ public class WorldController extends InputAdapter implements ContactListener {
     public boolean switchToMainMenu;
 
     public void setWorldRenderer(WorldRenderer worldRenderer) {
+
         this.worldRenderer = worldRenderer;
+        worldRenderer.calculateBackground();
     }
 
     public WorldRenderer worldRenderer;
