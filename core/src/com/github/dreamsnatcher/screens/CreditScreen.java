@@ -22,16 +22,13 @@ public class CreditScreen extends Screen {
 
     private static final String credits = "TEAM\n" +
             "Lukas Knoch [Programming]\nThomas Grafenauer [Artwork]\nLorenz Schmoliner [Programming]\nVeit Frick [Programming]\nChristian Zellot [Artwork|Programming]\n\n" +
-            "IDEA and GAMEDESIGN\nall of them :)\n\nSPECIAL THANX TO\nMario Zechner [Technical Consultant]\nMathias Lux [Sound]\nChristina Lukasser [Logo-Design]";
-
-    private static final String mario = "Mario Zechner";
-    private static final String zelle = "Christian Zellot";
-    private static final String thomas = "Thomas Grafenauer";
-    private static final String lukas = "Lukas Knoch";
-    private static final String lorenz = "Lorenz Schmoliner";
-    private static final String lux = "Mathias Lux";
-    private static final String veit = "Veit Frick";
-
+            "IDEA and GAMEDESIGN\nall of them :)\n\n" +
+            "SPECIAL THANKS TO\nMario Zechner [Technical Consultant]\nMathias Lux [Sound]\nChristina Lukasser [Logo-Design]\n\n" +
+            "Dream Snatcher was developed during the\n" +
+            "2nd Klagenfurt Gamejam 2015, Klagenfurt, AT\n\n" +
+            "A big THANK YOU to all who have contributed to the game - in whatever way,\n" +
+            "to AAU Klagenfurt for organizing stuff, food, beer and COFFEE\n\n" +
+            "#klujam";
 
     public CreditScreen(ScreenManager manager) {
         super(manager);
@@ -44,14 +41,6 @@ public class CreditScreen extends Screen {
         final Skin skin = new Skin(Gdx.files.internal("editor/uiskin.json"));
 
         Table scrollTable = new Table();
-
-        Texture texture = new Texture("name.png");
-        texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        TextureRegion region = new TextureRegion(texture, 0, 0, texture.getWidth(), texture.getHeight());
-
-        Image image = new Image(region);
-        scrollTable.add(image);
-        scrollTable.row();
 
         Label text = new Label("powered by libGDX\n", skin);
         scrollTable.add(text);
@@ -75,6 +64,14 @@ public class CreditScreen extends Screen {
 
         Table table = new Table();
         table.setFillParent(true);
+
+        Texture texture = new Texture("name.png");
+        texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        TextureRegion region = new TextureRegion(texture, 0, 0, texture.getWidth(), texture.getHeight());
+
+        Image image = new Image(region);
+        table.add(image);
+        table.row();
         table.add(scrollPane).fill().expand().row();
         table.add(button).size(150, 60).pad(10);
 
