@@ -70,11 +70,6 @@ public class Assets implements Disposable {
         spaceShipCruzer0.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
 
-
-
-
-
-
         spaceShipEmpty = new TextureRegion(new Texture("spaceship_empty.png"));
         spaceShipEmpty.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
@@ -145,7 +140,7 @@ public class Assets implements Disposable {
     private static Animation loadAnimation(String path, int frames, float frameDuration) {
         TextureRegion[] regions = new TextureRegion[frames];
 
-        for(int i = 0; i < frames; i++) {
+        for (int i = 0; i < frames; i++) {
             Texture tex = new Texture(Gdx.files.internal(path + i + ".png"));
             regions[i] = new TextureRegion(tex);
         }
