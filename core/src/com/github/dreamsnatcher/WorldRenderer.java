@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 
 public class WorldRenderer implements Disposable {
     public OrthographicCamera camera;
-    private OrthographicCamera cameraGUI;
+    public OrthographicCamera cameraGUI;
     private SpriteBatch batch;
     private SpriteBatch nightmareBatch;
     private WorldController worldController;
