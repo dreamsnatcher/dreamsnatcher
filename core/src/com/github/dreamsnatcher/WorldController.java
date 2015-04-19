@@ -186,6 +186,7 @@ public class WorldController extends InputAdapter implements ContactListener {
             finish = true;
             spaceShip.hasLanded();
             spacebar.hasBeenLandedOn();
+            AudioManager.stop();
             AudioManager.havanaMusic();
             zoomIn = true;
             if (timeElapsed <= highscore || highscore == -1){
