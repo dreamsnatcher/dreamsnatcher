@@ -1,0 +1,26 @@
+{
+objects: [
+	{
+		class: com.github.dreamsnatcher.entities.Spacebar
+		position: {
+			x: -0.19374996
+			y: 1.1583334
+		}
+		origin: {
+			x: 0.5
+			y: 0.5
+		}
+	}
+]
+spaceShip: {
+	dimension: {
+		x: 0.4
+		y: 0.5
+	}
+	origin: {
+		x: 0.2
+		y: 0.25
+	}
+	counter: 8.992858
+}
+}
