@@ -37,7 +37,9 @@ public class WorldRenderer implements Disposable {
     private TextureRegion finishPicture;
 
     public int beercounter = 0;
-    public float timer = 0;
+    public float beerTimer = 0;
+    public float globalTimer = 0;
+
     public final float MAXTIMER = 0.02f;
 
 
@@ -87,8 +89,8 @@ public class WorldRenderer implements Disposable {
         font = new BitmapFont(Gdx.files.internal("fonts/candlestick.fnt"),
                 Gdx.files.internal("fonts/candlestick.png"), true);
         font.setColor(Color.GREEN);
-        finishPicture = Assets.finishWookie;
-        finishPicture.flip(false, true);
+
+        //finishPicture.flip(false, true);
     }
 
     public void calculateBackground(){
@@ -143,9 +145,9 @@ public class WorldRenderer implements Disposable {
             }
         }
         if (worldController.isFinish()) {
-            timer += Gdx.graphics.getDeltaTime();
-            if (timer > MAXTIMER) {
-                timer = 0;
+            beerTimer += Gdx.graphics.getDeltaTime();
+            if (beerTimer > MAXTIMER) {
+                beerTimer = 0;
                 if (beercounter <= 400) {
                     beercounter++;
                 }
@@ -156,6 +158,9 @@ public class WorldRenderer implements Disposable {
             batch.draw(new TextureRegion(schaumkrone), 755, 500 - beercounter - 3, 50, 20);
         }
         if (beercounter >= 400) {
+            globalTimer+=Gdx.graphics.getDeltaTime();
+            finishPicture = Assets.wookieAnimation.getKeyFrame(globalTimer, true);
+            finishPicture.flip(false,true);
             batch.draw(new TextureRegion(finishPicture), 100, 300, finishPicture.getRegionWidth(), finishPicture.getRegionHeight());
             worldController.finalAnimationFinished = true;
         }
