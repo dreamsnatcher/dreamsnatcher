@@ -1,5 +1,6 @@
 package com.github.dreamsnatcher;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -252,7 +253,9 @@ public class WorldRenderer implements Disposable {
         worldController.cameraHelper.applyTo(camera);
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
-        renderBackground();
+        if(Gdx.app.getType() != Application.ApplicationType.Android) {
+            renderBackground();
+        }
         for (GameObject object : worldController.gameWorld.objects) {
             object.render(batch);
         }
