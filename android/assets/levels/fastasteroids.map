@@ -1,0 +1,790 @@
+{
+objects: [
+	{
+		class: com.github.dreamsnatcher.entities.Planet
+		position: {
+			x: 4.1124988
+			y: 3.7099988
+		}
+		origin: {
+			x: 0.5
+			y: 0.5
+		}
+		scale: {
+			x: 1.3
+			y: 1.3
+		}
+	}
+	{
+		class: com.github.dreamsnatcher.entities.PlanetRotating
+		position: {
+			x: 0.36000124
+			y: 10.7633295
+		}
+		origin: {
+			x: 0.5
+			y: 0.5
+		}
+		scale: {
+			x: 1.3
+			y: 1.3
+		}
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Planet
+		position: {
+			x: 11.377498
+			y: 15.096656
+		}
+		origin: {
+			x: 0.5
+			y: 0.5
+		}
+		scale: {
+			x: 1.3
+			y: 1.3
+		}
+	}
+	{
+		class: com.github.dreamsnatcher.entities.PlanetBonus
+		position: {
+			x: 17.064995
+			y: 6.8633256
+		}
+		origin: {
+			x: 0.5
+			y: 0.5
+		}
+		scale: {
+			x: 1.3
+			y: 1.3
+		}
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Spacebar
+		position: {
+			x: 22.557487
+			y: 18.216654
+		}
+		origin: {
+			x: 0.5
+			y: 0.5
+		}
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Asteroid
+		position: {
+			x: 17.29249
+			y: 18.73666
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 125.207466
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Asteroid
+		position: {
+			x: 17.94249
+			y: 17.609995
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 95.019485
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Asteroid
+		position: {
+			x: 19.144989
+			y: 16.049995
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 118.171165
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Asteroid
+		position: {
+			x: 19.794989
+			y: 15.399995
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 15.200533
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Asteroid
+		position: {
+			x: 20.737488
+			y: 13.839995
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 275.43124
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Asteroid
+		position: {
+			x: 20.769989
+			y: 15.573328
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 209.40297
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Asteroid
+		position: {
+			x: 20.087488
+			y: 17.17666
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 80.69936
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Asteroid
+		position: {
+			x: 19.04749
+			y: 16.91666
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 233.25845
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Asteroid
+		position: {
+			x: 18.10499
+			y: 15.269995
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 36.180225
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Asteroid
+		position: {
+			x: 19.144989
+			y: 14.663329
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 249.30266
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Asteroid
+		position: {
+			x: 19.66499
+			y: 10.936663
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 191.46768
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Asteroid
+		position: {
+			x: 18.68999
+			y: 12.713329
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 114.63963
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Asteroid
+		position: {
+			x: 20.31499
+			y: 12.539996
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 9.190329
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Asteroid
+		position: {
+			x: 18.33249
+			y: 13.406663
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 170.17299
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Asteroid
+		position: {
+			x: 16.80499
+			y: 12.45333
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 175.8401
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Asteroid
+		position: {
+			x: 17.974989
+			y: 11.629996
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 65.71692
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Asteroid
+		position: {
+			x: 18.10499
+			y: 11.803329
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 7.0386877
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Asteroid
+		position: {
+			x: 17.32499
+			y: 13.579996
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 279.2449
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Asteroid
+		position: {
+			x: 16.67499
+			y: 14.923328
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 233.56563
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Asteroid
+		position: {
+			x: 16.38249
+			y: 15.269995
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 108.72963
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Asteroid
+		position: {
+			x: 17.12999
+			y: 15.486661
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 67.79309
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Asteroid
+		position: {
+			x: 17.71499
+			y: 15.529995
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 111.472534
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Asteroid
+		position: {
+			x: 17.55249
+			y: 16.743328
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 179.7426
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Asteroid
+		position: {
+			x: 16.54499
+			y: 17.04666
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 78.51742
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Asteroid
+		position: {
+			x: 15.504991
+			y: 16.699995
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 277.79874
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Asteroid
+		position: {
+			x: 15.24499
+			y: 14.923328
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 100.687035
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Asteroid
+		position: {
+			x: 15.959991
+			y: 10.546663
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 311.18582
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Asteroid
+		position: {
+			x: 16.83749
+			y: 11.933329
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 187.97736
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Asteroid
+		position: {
+			x: 16.47999
+			y: 13.9699955
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 129.63348
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Asteroid
+		position: {
+			x: 16.08999
+			y: 13.493329
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 45.48963
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Asteroid
+		position: {
+			x: 17.617487
+			y: 13.319996
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 270.22757
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Asteroid
+		position: {
+			x: 15.439987
+			y: 12.9299965
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 32.26274
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Asteroid
+		position: {
+			x: 15.309986
+			y: 13.319997
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 339.41434
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Asteroid
+		position: {
+			x: 15.244986
+			y: 14.533329
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 187.9842
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Asteroid
+		position: {
+			x: 15.309987
+			y: 14.44666
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 147.843
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Asteroid
+		position: {
+			x: 15.147489
+			y: 14.533329
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 120.42532
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Asteroid
+		position: {
+			x: 15.179988
+			y: 15.703329
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 144.89207
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Asteroid
+		position: {
+			x: 14.432489
+			y: 16.049995
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 199.11917
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Asteroid
+		position: {
+			x: 14.399989
+			y: 15.486661
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 286.1921
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Asteroid
+		position: {
+			x: 14.49749
+			y: 13.926662
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 100.54745
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Asteroid
+		position: {
+			x: 15.667486
+			y: 13.623329
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 270.13397
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Asteroid
+		position: {
+			x: 16.349985
+			y: 12.19333
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 104.57626
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Asteroid
+		position: {
+			x: 17.064985
+			y: 11.673329
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 321.35895
+	}
+	{
+		class: com.github.dreamsnatcher.entities.Asteroid
+		position: {
+			x: 15.244986
+			y: 18.866661
+		}
+		dimension: {
+			x: 0.2
+			y: 0.2
+		}
+		origin: {
+			x: 0.1
+			y: 0.1
+		}
+		angleNew: 213.21805
+	}
+]
+spaceShip: {
+	dimension: {
+		x: 0.4
+		y: 0.5
+	}
+	origin: {
+		x: 0.2
+		y: 0.25
+	}
+	counter: 93.24635
+}
+}

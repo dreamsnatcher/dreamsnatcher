@@ -75,7 +75,12 @@ public class WorldRenderer implements Disposable {
         cameraGUI.setToOrtho(true); //flip y-axis
         cameraGUI.update();
 
-        font = new BitmapFont(true); //default 15pt Arial
+        font = new BitmapFont(Gdx.files.internal("fonts/superfont.fnt"),
+                Gdx.files.internal("fonts/superfont.png"), true);
+
+        font = new BitmapFont(Gdx.files.internal("fonts/candlestick.fnt"),
+                Gdx.files.internal("fonts/candlestick.png"), true);
+        font.setColor(Color.GREEN);
         finishPicture = Assets.finishWookie;
         finishPicture.flip(false, true);
     }
@@ -92,7 +97,7 @@ public class WorldRenderer implements Disposable {
                     TimeUnit.MILLISECONDS.toSeconds(highScoreVal) % TimeUnit.MINUTES.toSeconds(1));
         }
         font.draw(batch, mmss, 10, 10);
-        font.draw(batch, "Highscore: " + lastHighscore, 50, 10);
+        font.draw(batch, "Highscore: " + lastHighscore, 100, 10);
         batch.draw(Assets.indicator, 10, 20, Assets.indicator.getRegionWidth() / 2, Assets.indicator.getRegionHeight() / 2,
                 Assets.indicator.getRegionWidth(), Assets.indicator.getRegionHeight(), 0.5f, 0.5f, getCurrentIndicatorAngle());
 
