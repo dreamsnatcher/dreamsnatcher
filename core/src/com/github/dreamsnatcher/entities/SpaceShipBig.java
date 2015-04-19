@@ -32,7 +32,7 @@ public class SpaceShipBig extends SpaceShip {
         fixtureDef.restitution = 0;
 
         b2Body.createFixture(fixtureDef);
-        b2Body.setLinearDamping(0.5f);
+        b2Body.setLinearDamping(0.2f);
         b2Body.setAngularDamping(1f);
         b2Body.setBullet(true);
         b2Body.setSleepingAllowed(false);
