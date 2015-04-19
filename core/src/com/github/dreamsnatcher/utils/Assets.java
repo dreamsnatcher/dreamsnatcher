@@ -159,6 +159,7 @@ public class Assets implements Disposable {
 
         for (int i = 0; i < frames; i++) {
             Texture tex = new Texture(Gdx.files.internal(path + i + ".png"));
+            tex.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
             regions[i] = new TextureRegion(tex);
         }
         return new Animation(frameDuration, regions);
