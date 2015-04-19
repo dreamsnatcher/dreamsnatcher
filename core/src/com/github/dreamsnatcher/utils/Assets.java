@@ -52,6 +52,14 @@ public class Assets implements Disposable {
     public static Animation shipCruzerAnimationSpeed2;
     public static Animation shipCruzerAnimationSpeed3;
     public static TextureRegion spaceShipCruzerEmpty;
+
+
+    public static TextureRegion spaceShipFast0;
+    public static TextureRegion spaceShipFastHarvest;
+    public static TextureRegion spaceShipFastEmpty;
+    public static Animation shipFastAnimationSpeed1;
+    public static Animation shipFastAnimationSpeed2;
+    public static Animation shipFastAnimationSpeed3;
     //static Array<Animation> allAnimations = new Array<Animation>();
 
 
@@ -64,16 +72,25 @@ public class Assets implements Disposable {
         shipCruzerAnimationSpeed2 = loadAnimation("animations/spaceship_cruzer_speed_1_", 3, 0.3f);
         shipCruzerAnimationSpeed3 = loadAnimation("animations/spaceship_cruzer_speed_2_", 3, 0.3f);
 
+        shipFastAnimationSpeed1 = loadAnimation("animations/spaceship_speeder_speed_0_", 3, 0.3f);
+        shipFastAnimationSpeed2 = loadAnimation("animations/spaceship_speeder_speed_1_", 3, 0.3f);
+        shipFastAnimationSpeed3 = loadAnimation("animations/spaceship_speeder_speed_2_", 3, 0.3f);
 
         spaceShip0 = new TextureRegion(new Texture("spaceship_speed0.png"));
         spaceShipCruzer0 = new TextureRegion(new Texture("spaceship_cruzer_speed0.png"));
         spaceShip0.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         spaceShipCruzer0.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
+        spaceShipFast0= new TextureRegion(new Texture("spaceship_speeder_speed0.png"));
+        spaceShipFast0.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
 
+        spaceShipFastHarvest = new TextureRegion(new Texture("spaceship_speeder_extract_energy.png"));
+        spaceShipFastHarvest.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
 
+        spaceShipFastEmpty = new TextureRegion(new Texture("spaceship_speeder_empty.png"));
+        spaceShipFastEmpty.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
 
         spaceShipEmpty = new TextureRegion(new Texture("spaceship_empty.png"));
