@@ -15,20 +15,20 @@ public class SpaceShip extends GameObject {
 
     // loaded when init is called by GameWorldSerializer
     // not saved to json
-    private transient TextureRegion texture;
-    private transient com.badlogic.gdx.physics.box2d.World b2World;
-    private transient Body b2Body;
-    private volatile transient float energy;
-    private transient float angle;
+    protected transient TextureRegion texture;
+    protected transient com.badlogic.gdx.physics.box2d.World b2World;
+    protected transient Body b2Body;
+    protected volatile transient float energy;
+    protected transient float angle;
     public transient boolean transist;
-    private transient float transistTime;
+    protected transient float transistTime;
     public transient boolean harvest = false;
-    private transient Planet currentPlanet;
-    private transient boolean harvestStarted = false;
-    private transient Joint joint;
-    private transient boolean destroyJoint;
-    private transient boolean landed;
-    private float counter = 0;
+    protected transient Planet currentPlanet;
+    protected transient boolean harvestStarted = false;
+    protected transient Joint joint;
+    protected transient boolean destroyJoint;
+    protected transient boolean landed;
+    protected float counter = 0;
 
     private float penaltyTime = 0f;
 
@@ -42,7 +42,7 @@ public class SpaceShip extends GameObject {
         initPhysics();
     }
 
-    private void initPhysics() {
+    protected void initPhysics() {
         //create body definition
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
@@ -63,7 +63,7 @@ public class SpaceShip extends GameObject {
         fixtureDef.restitution = 0;
 
         b2Body.createFixture(fixtureDef);
-        b2Body.setLinearDamping(1f);
+        b2Body.setLinearDamping(0.5f);
         b2Body.setAngularDamping(1f);
         b2Body.setBullet(true);
         b2Body.setSleepingAllowed(false);
@@ -218,7 +218,7 @@ public class SpaceShip extends GameObject {
     }
 
     public void endHarvest(){
-        if(harvestStarted){
+        if(transist){
             return;
         }
         destroyJoint = true;

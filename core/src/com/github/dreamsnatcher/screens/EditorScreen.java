@@ -119,6 +119,19 @@ public class EditorScreen extends Screen {
         button.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
                 controller.camera.position.set(controller.world.spaceShip.position.x, controller.world.spaceShip.position.y, 0);
+                controller.world.spaceShip = new SpaceShip();
+                controller.world.spaceShip.init(controller.b2World);
+            }
+        });
+
+        actions.row().left();
+        button = new TextButton("SpaceCruZer", skin);
+        actions.add(button);
+        button.addListener(new ChangeListener() {
+            public void changed(ChangeEvent event, Actor actor) {
+                controller.camera.position.set(controller.world.spaceShip.position.x, controller.world.spaceShip.position.y, 0);
+                controller.world.spaceShip = new SpaceShipBig();
+                controller.world.spaceShip.init(controller.b2World);
             }
         });
 

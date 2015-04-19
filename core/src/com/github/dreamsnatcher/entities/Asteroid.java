@@ -60,7 +60,7 @@ public class Asteroid extends GameObject {
         //create fixture to attach shape to body
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = circleShape;
-        fixtureDef.density = 1f;
+        fixtureDef.density = 0.1f;
         fixtureDef.friction = 1f;
         fixtureDef.restitution = 0;
 

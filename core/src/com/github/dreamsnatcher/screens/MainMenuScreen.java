@@ -1,5 +1,6 @@
 package com.github.dreamsnatcher.screens;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -31,15 +32,17 @@ public class MainMenuScreen extends com.github.dreamsnatcher.screens.Screen {
 
 
         TextButton button = new TextButton("Editor", skin);
+        if(Gdx.app.getType() == Application.ApplicationType.Desktop) {
 
-        button.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                manager.setScreen(new EditorScreen(manager));
-            }
-        });
+            button.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    manager.setScreen(new EditorScreen(manager));
+                }
+            });
 
-        table.add(button).size(150, 60).pad(10);
+            table.add(button).size(150, 60).pad(10);
+        }
 
         button = new TextButton("Play", skin);
         button.setColor(Color.GREEN);
