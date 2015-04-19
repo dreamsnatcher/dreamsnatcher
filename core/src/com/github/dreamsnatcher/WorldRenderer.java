@@ -160,7 +160,7 @@ public class WorldRenderer implements Disposable {
             worldController.finalAnimationFinished = true;
         }
 
-        batch.draw(Assets.back, 710, 2, Assets.back.getRegionWidth() / 2, Assets.back.getRegionHeight() / 2);
+        font.draw(batch, "BACK",  710, 10);
         batch.end();
     }
 

@@ -61,11 +61,11 @@ public class WorldController extends InputAdapter implements ContactListener {
         cameraHelper.setTarget(gameWorld.spaceShip.getBody());
     }
 
-    public String getMap(){
+    public String getMap() {
         return map.substring(0, map.lastIndexOf("."));
     }
 
-    public long getHighscore(){
+    public long getHighscore() {
         return highscore;
     }
 
@@ -114,8 +114,8 @@ public class WorldController extends InputAdapter implements ContactListener {
             ScreenManager.multiplexer.removeProcessor(this);
         }
 
-        Vector3 touchGUI = worldRenderer.cameraGUI.unproject(new Vector3(screenX,screenY,0));
-        if(touchGUI.x> 700 && touchGUI.y < 50){
+        Vector3 touchGUI = worldRenderer.cameraGUI.unproject(new Vector3(screenX, screenY, 0));
+        if (touchGUI.x >= 710 && touchGUI.y < 32) {
             this.switchToMainMenu = true;
             ScreenManager.multiplexer.removeProcessor(this);
             AudioManager.stopAll();
@@ -179,7 +179,7 @@ public class WorldController extends InputAdapter implements ContactListener {
         }
         if (asteroid != null && spaceShip != null) {
             AudioManager.ahit.play();
-            spaceShip.setEnergy(Math.max(spaceShip.getEnergy() - 20f,0f));
+            spaceShip.setEnergy(Math.max(spaceShip.getEnergy() - 20f, 0f));
             asteroid.hit();
         }
 
@@ -191,7 +191,7 @@ public class WorldController extends InputAdapter implements ContactListener {
             AudioManager.stop();
             AudioManager.havanaMusic();
             zoomIn = true;
-            if (timeElapsed <= highscore || highscore == -1){
+            if (timeElapsed <= highscore || highscore == -1) {
                 HighscoreHelper.writeHighscore(timeElapsed, getMap());
             }
         }
