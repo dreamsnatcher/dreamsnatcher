@@ -1,6 +1,7 @@
 package com.github.dreamsnatcher.entities;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
@@ -16,6 +17,12 @@ public class SpaceShip extends GameObject {
     // loaded when init is called by GameWorldSerializer
     // not saved to json
     protected transient TextureRegion texture;
+    protected transient TextureRegion textureStop;
+    protected transient TextureRegion textureHarvest;
+    protected transient TextureRegion textureEmpty;
+    protected transient Animation animationSpeed1;
+    protected transient Animation animationSpeed2;
+    protected transient Animation animationSpeed3;
     protected transient com.badlogic.gdx.physics.box2d.World b2World;
     protected transient Body b2Body;
     protected volatile transient float energy;
@@ -33,7 +40,24 @@ public class SpaceShip extends GameObject {
     private float penaltyTime = 0f;
 
     public void init(com.badlogic.gdx.physics.box2d.World world) {
-        texture = Assets.spaceShip0;
+        if (!(this instanceof SpaceShipBig)) {
+            texture = Assets.spaceShip0;
+            textureStop = Assets.spaceShip0;
+            textureHarvest = Assets.spaceShipHarvest;
+            textureEmpty = Assets.spaceShipEmpty;
+            animationSpeed1 = Assets.shipAnimationSpeed1;
+            animationSpeed2 = Assets.shipAnimationSpeed2;
+            animationSpeed3 = Assets.shipAnimationSpeed3;
+        } else {
+            texture = Assets.spaceShipCruzer0;
+            textureStop = Assets.spaceShipCruzer0;
+            textureHarvest = Assets.spaceShipCruzerHarvest;
+            textureEmpty = Assets.spaceShipCruzerEmpty;
+            animationSpeed1 = Assets.shipCruzerAnimationSpeed1;
+            animationSpeed2 = Assets.shipCruzerAnimationSpeed2;
+            animationSpeed3 = Assets.shipCruzerAnimationSpeed3;
+        }
+
         b2World = world;
         dimension.set(0.4f, 0.5f);
         energy = 50f;
@@ -75,31 +99,28 @@ public class SpaceShip extends GameObject {
 
     @Override
     public void render(SpriteBatch batch) {
-        counter+=Gdx.graphics.getDeltaTime();
-        if(counter>=95415613840f){
-            counter=0;
+        counter += Gdx.graphics.getDeltaTime();
+        if (counter >= 95415613840f) {
+            counter = 0;
         }
-        texture = Assets.spaceShip0;
+        texture = textureStop;
         if (b2Body.getLinearVelocity().len() > 0.2f) {
-            //texture = Assets.spaceShip1;
-            texture = Assets.shipAnimationSpeed1.getKeyFrame(counter, true);
+            texture = animationSpeed1.getKeyFrame(counter, true);
         }
 
         if (b2Body.getLinearVelocity().len() > 0.5f) {
-            //texture = Assets.spaceShip2;
-            texture = Assets.shipAnimationSpeed2.getKeyFrame(counter, true);
+            texture = animationSpeed2.getKeyFrame(counter, true);
 
         }
 
         if (b2Body.getLinearVelocity().len() > 0.7f) {
-            //texture = Assets.spaceShip3;
-            texture = Assets.shipAnimationSpeed3.getKeyFrame(counter, true);
+            texture = animationSpeed3.getKeyFrame(counter, true);
         }
         if (harvest) {
-            texture = Assets.spaceShipHarvest;
+            texture = textureHarvest;
         }
-        if(landed){
-            texture = Assets.spaceShipEmpty;
+        if (landed) {
+            texture = textureEmpty;
         }
         batch.draw(texture, position.x - dimension.x / 2, position.y - dimension.y / 2,
                 origin.x, origin.y,
@@ -140,31 +161,31 @@ public class SpaceShip extends GameObject {
             transistTime = 1f;
         }
 
-        if(destroyJoint){
+        if (destroyJoint) {
             destroyJoint = false;
-            if(joint!=null){
+            if (joint != null) {
                 b2World.destroyJoint(joint);
                 joint = null;
             }
         }
 
-        if(harvestStarted && currentPlanet != null){
+        if (harvestStarted && currentPlanet != null) {
             WeldJointDef jointDef = new WeldJointDef();
             jointDef.bodyA = b2Body;
             jointDef.bodyB = currentPlanet.getBody();
-            Vector2 v = new Vector2(b2Body.getWorldCenter().x-currentPlanet.getBody().getWorldCenter().x, b2Body.getWorldCenter().y - currentPlanet.getBody().getWorldCenter().y);
+            Vector2 v = new Vector2(b2Body.getWorldCenter().x - currentPlanet.getBody().getWorldCenter().x, b2Body.getWorldCenter().y - currentPlanet.getBody().getWorldCenter().y);
             jointDef.localAnchorB.set(v);
             joint = b2World.createJoint(jointDef);
             harvestStarted = false;
         }
-        if(harvest){
-            b2Body.setTransform(b2Body.getPosition().x,b2Body.getPosition().y, (float) (angle - Math.PI /2f));
-            if(currentPlanet!=null){
-                if(currentPlanet.drainEnergy() > 0 && energy <= 99f ){
+        if (harvest) {
+            b2Body.setTransform(b2Body.getPosition().x, b2Body.getPosition().y, (float) (angle - Math.PI / 2f));
+            if (currentPlanet != null) {
+                if (currentPlanet.drainEnergy() > 0 && energy <= 99f) {
                     gainEnergy();
-                }else{
-                    if(currentPlanet.getEnergy() == 0){
-                        energy = 4*energy / 5;
+                } else {
+                    if (currentPlanet.getEnergy() == 0) {
+                        energy = 4 * energy / 5;
                         penaltyTime = penaltyTime > 0 ? penaltyTime + 2f : 2f;
                         AudioManager.suckDryMusic();
                     }
@@ -206,7 +227,7 @@ public class SpaceShip extends GameObject {
         this.energy = energy;
     }
 
-    public void beginHarvest(Planet planet){
+    public void beginHarvest(Planet planet) {
         harvestStarted = true;
         Vector2 shipPos = b2Body.getWorldCenter();
         Vector2 thrustDir = new Vector2(shipPos.x - planet.getBody().getWorldCenter().x, shipPos.y - planet.getBody().getWorldCenter().y);
@@ -217,8 +238,8 @@ public class SpaceShip extends GameObject {
 
     }
 
-    public void endHarvest(){
-        if(transist){
+    public void endHarvest() {
+        if (transist) {
             return;
         }
         destroyJoint = true;
@@ -244,6 +265,6 @@ public class SpaceShip extends GameObject {
     }
 
     public void lowerPenaltyTime(float penaltyTime) {
-        this.penaltyTime =  this.penaltyTime - penaltyTime < 0 ? 0f : this.penaltyTime - penaltyTime;
+        this.penaltyTime = this.penaltyTime - penaltyTime < 0 ? 0f : this.penaltyTime - penaltyTime;
     }
 }

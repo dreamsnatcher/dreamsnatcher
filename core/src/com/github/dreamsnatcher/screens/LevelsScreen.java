@@ -36,7 +36,6 @@ public class LevelsScreen extends Screen {
         int i = 0;
         for (FileHandle entry : dirHandle.list()) {
             if (entry.extension().equals("map")) {
-                System.out.println(i);
                 if (i % 4 == 0) {
                     table.row();
                 }

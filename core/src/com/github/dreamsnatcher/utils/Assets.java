@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.Disposable;
 public class Assets implements Disposable {
     //DO THIS WITH ASSETMANAGER LATER TODO
     public static TextureRegion spaceShip0;
+    public static TextureRegion spaceShipCruzer0;
     public static TextureRegion spaceShip1;
     public static TextureRegion spaceShip2;
     public static TextureRegion spaceShip3;
@@ -31,6 +32,7 @@ public class Assets implements Disposable {
     public static TextureRegion energyPixel;
     public static TextureRegion penaltyPixel;
     public static TextureRegion spaceShipHarvest;
+    public static TextureRegion spaceShipCruzerHarvest;
     public static TextureRegion planetDead;
     public static TextureRegion planetLow;
     public static TextureRegion indicator;
@@ -46,6 +48,12 @@ public class Assets implements Disposable {
     public static Animation shipAnimationSpeed1;
     public static Animation shipAnimationSpeed2;
     public static Animation shipAnimationSpeed3;
+
+
+    public static Animation shipCruzerAnimationSpeed1;
+    public static Animation shipCruzerAnimationSpeed2;
+    public static Animation shipCruzerAnimationSpeed3;
+    public static TextureRegion spaceShipCruzerEmpty;
     //static Array<Animation> allAnimations = new Array<Animation>();
 
 
@@ -53,8 +61,16 @@ public class Assets implements Disposable {
         shipAnimationSpeed1 = loadAnimation("animations/spaceship_speed_0_", 3, 0.3f);
         shipAnimationSpeed2 = loadAnimation("animations/spaceship_speed_1_", 3, 0.3f);
         shipAnimationSpeed3 = loadAnimation("animations/spaceship_speed_2_", 3, 0.3f);
-        spaceShip0 = new TextureRegion(new Texture("spaceship_speed0.png"));
+
+        shipCruzerAnimationSpeed1 = loadAnimation("animations/spaceship_cruzer_speed_0_", 3, 0.3f);
+        shipCruzerAnimationSpeed2 = loadAnimation("animations/spaceship_cruzer_speed_1_", 3, 0.3f);
+        shipCruzerAnimationSpeed3 = loadAnimation("animations/spaceship_cruzer_speed_2_", 3, 0.3f);
+
+
+        spaceShip0 = new TextureRegion(new Texture("spaceship_cruzer_speed0.png"));
+        spaceShipCruzer0 = new TextureRegion(new Texture("spaceship_cruzer_speed0.png"));
         spaceShip0.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        spaceShipCruzer0.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
 
 
@@ -65,8 +81,14 @@ public class Assets implements Disposable {
         spaceShipEmpty = new TextureRegion(new Texture("spaceship_empty.png"));
         spaceShipEmpty.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
+        spaceShipCruzerEmpty = new TextureRegion(new Texture("spaceship_cruzer_empty.png"));
+        spaceShipCruzerEmpty.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
         spaceShipHarvest = new TextureRegion(new Texture("spaceship_extract_energy.png"));
         spaceShipHarvest.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+
+        spaceShipCruzerHarvest = new TextureRegion(new Texture("spaceship_cruzer_extract_energy.png"));
+        spaceShipCruzerHarvest.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         planet = new TextureRegion(new Texture("planet_high_pop.png"));
         planet.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
