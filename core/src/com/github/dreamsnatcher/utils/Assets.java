@@ -123,7 +123,8 @@ public class Assets implements Disposable {
         energyPixel = new TextureRegion(new Texture("pixel.png"));
         penaltyPixel = new TextureRegion(new Texture("penaltypixel.png"));
         indicator = new TextureRegion(new Texture("indicator.png"));
-        back = new TextureRegion(new Texture("indicator_ignite.png"));
+        back = new TextureRegion(new Texture("button_back.png"));
+        back.flip(false,true);
         indicator.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         back.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         spaceBar = new TextureRegion(new Texture("spacebar.png"));
