@@ -10,10 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-import com.github.dreamsnatcher.entities.GameObject;
-import com.github.dreamsnatcher.entities.GameWorld;
-import com.github.dreamsnatcher.entities.GameWorldSerializer;
-import com.github.dreamsnatcher.entities.SpaceShip;
+import com.github.dreamsnatcher.entities.*;
 
 import javax.swing.*;
 import java.io.File;
@@ -211,6 +208,18 @@ public class EditorController extends InputAdapter {
             world.objects.remove(selected);
             selected = null;
             action = EditorAction.None;
+        }
+        if(keycode == Input.Keys.A){
+            place(Asteroid.class);
+        }
+        if(keycode == Input.Keys.R){
+            place(AsteroidRotating.class);
+        }
+        if(keycode == Input.Keys.P){
+            place(Planet.class);
+        }
+        if(keycode == Input.Keys.B){
+            place(PlanetBonus.class);
         }
         return true;
     }

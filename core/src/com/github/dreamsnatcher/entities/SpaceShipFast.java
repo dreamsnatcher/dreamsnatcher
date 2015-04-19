@@ -5,10 +5,10 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.github.dreamsnatcher.WorldController;
 
-public class SpaceShipBig extends SpaceShip {
+public class SpaceShipFast extends SpaceShip {
 
 
-    public static final float CRUZER_DAMPENER = 0.5f;
+    public static final float SPEEDER_DAMPEMER = 1.5f;
 
     @Override
     protected void initPhysics() {
@@ -27,12 +27,12 @@ public class SpaceShipBig extends SpaceShip {
         //create fixture to attach shape to body
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = circleShape;
-        fixtureDef.density = 1f;
+        fixtureDef.density = 0.1f;
         fixtureDef.friction = 0.5f;
         fixtureDef.restitution = 0;
 
         b2Body.createFixture(fixtureDef);
-        b2Body.setLinearDamping(0.2f);
+        b2Body.setLinearDamping(0.1f);
         b2Body.setAngularDamping(1f);
         b2Body.setBullet(true);
         b2Body.setSleepingAllowed(false);
@@ -45,7 +45,7 @@ public class SpaceShipBig extends SpaceShip {
 
     @Override
     public float drainEnergy() {
-        energy -= WorldController.DRAIN_ENERGY_STEP * CRUZER_DAMPENER;
+        energy -= WorldController.DRAIN_ENERGY_STEP * SPEEDER_DAMPEMER;
         if (energy < 0) {
             energy = 0;
         }
@@ -54,7 +54,7 @@ public class SpaceShipBig extends SpaceShip {
 
     @Override
     public float gainEnergy() {
-        energy += WorldController.DRAIN_ENERGY_STEP * CRUZER_DAMPENER;
+        energy += WorldController.DRAIN_ENERGY_STEP * SPEEDER_DAMPEMER;
         if (energy > 100) {
             energy = 100;
         }

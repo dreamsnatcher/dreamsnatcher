@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 
 public class WorldRenderer implements Disposable {
     public OrthographicCamera camera;
-    private OrthographicCamera cameraGUI;
+    public OrthographicCamera cameraGUI;
     private SpriteBatch batch;
     private SpriteBatch nightmareBatch;
     private WorldController worldController;
@@ -39,6 +39,12 @@ public class WorldRenderer implements Disposable {
     public int beercounter = 0;
     public float timer = 0;
     public final float MAXTIMER = 0.02f;
+
+
+    int minX =-10;
+    int minY =-10;
+    int maxX =10;
+    int maxY =10;
 
 
     public WorldRenderer(WorldController worldController) {
@@ -75,9 +81,35 @@ public class WorldRenderer implements Disposable {
         cameraGUI.setToOrtho(true); //flip y-axis
         cameraGUI.update();
 
-        font = new BitmapFont(true); //default 15pt Arial
+        font = new BitmapFont(Gdx.files.internal("fonts/superfont.fnt"),
+                Gdx.files.internal("fonts/superfont.png"), true);
+
+        font = new BitmapFont(Gdx.files.internal("fonts/candlestick.fnt"),
+                Gdx.files.internal("fonts/candlestick.png"), true);
+        font.setColor(Color.GREEN);
         finishPicture = Assets.finishWookie;
         finishPicture.flip(false, true);
+    }
+
+    public void calculateBackground(){
+        for(GameObject o : worldController.gameWorld.objects){
+            if(o.position.x< minX){
+                minX = (int) o.position.x;
+            }
+            if(o.position.y< minY){
+                minY = (int) o.position.y;
+            }
+            if(o.position.y > maxY){
+                maxY = (int) o.position.y;
+            }
+            if(o.position.x > maxX){
+                maxX = (int) o.position.x;
+            }
+        }
+        minX -= 10;
+        minY -= 10;
+        maxX += 10;
+        maxY += 10;
     }
 
     public void renderGUI(SpriteBatch batch) {
@@ -92,7 +124,7 @@ public class WorldRenderer implements Disposable {
                     TimeUnit.MILLISECONDS.toSeconds(highScoreVal) % TimeUnit.MINUTES.toSeconds(1));
         }
         font.draw(batch, mmss, 10, 10);
-        font.draw(batch, "Highscore: " + lastHighscore, 50, 10);
+        font.draw(batch, "Highscore: " + lastHighscore, 100, 10);
         batch.draw(Assets.indicator, 10, 20, Assets.indicator.getRegionWidth() / 2, Assets.indicator.getRegionHeight() / 2,
                 Assets.indicator.getRegionWidth(), Assets.indicator.getRegionHeight(), 0.5f, 0.5f, getCurrentIndicatorAngle());
 
@@ -128,6 +160,7 @@ public class WorldRenderer implements Disposable {
             worldController.finalAnimationFinished = true;
         }
 
+        batch.draw(Assets.back, 710, 2, Assets.back.getRegionWidth() / 2, Assets.back.getRegionHeight() / 2);
         batch.end();
     }
 
@@ -142,10 +175,23 @@ public class WorldRenderer implements Disposable {
         worldController.cameraHelper.applyTo(camera);
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
+        renderBackground();
+        for (GameObject object : worldController.gameWorld.objects) {
+            object.render(batch);
+        }
+        worldController.gameWorld.spaceShip.render(batch);
+        batch.end();
+        showNightmare(worldController.gameWorld.spaceShip.getEnergy());
+        renderGUI(batch);
+        if (worldController.isDebug()) {
+            debugRenderer.render(worldController.getB2World(), camera.combined);
+        }
+    }
 
+    private void renderBackground() {
         int k = 0;
-        for (int i = -20; i < 20; i++) {
-            for (int j = -20; j < 20; j++) {
+        for (int i = minX; i < maxX; i++) {
+            for (int j = minY; j < maxY; j++) {
                 TextureRegion textureRegion;
                 switch (rotation[k % rotation.length]) {
                     case 1:
@@ -215,16 +261,6 @@ public class WorldRenderer implements Disposable {
                 batch.draw(textureRegion, i, j, 1, 1);
             }
         }
-        for (GameObject object : worldController.gameWorld.objects) {
-            object.render(batch);
-        }
-        worldController.gameWorld.spaceShip.render(batch);
-        batch.end();
-        renderGUI(batch);
-        if (worldController.isDebug()) {
-            debugRenderer.render(worldController.getB2World(), camera.combined);
-        }
-        showNightmare(worldController.gameWorld.spaceShip.getEnergy());
     }
 
     public void resize(int width, int height) {

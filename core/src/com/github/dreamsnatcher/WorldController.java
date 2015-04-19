@@ -27,7 +27,9 @@ public class WorldController extends InputAdapter implements ContactListener {
     public boolean switchToMainMenu;
 
     public void setWorldRenderer(WorldRenderer worldRenderer) {
+
         this.worldRenderer = worldRenderer;
+        worldRenderer.calculateBackground();
     }
 
     public WorldRenderer worldRenderer;
@@ -83,10 +85,6 @@ public class WorldController extends InputAdapter implements ContactListener {
         if (zoomIn) {
             cameraHelper.setZoom(cameraHelper.getZoom() - 0.002f);
         }
-        if(gameWorld.spaceShip.getEnergy() <= 0f && gameWorld.spaceShip.getBody().getLinearVelocity().len() <= 0.001f ){
-            finalAnimationFinished = true;
-            AudioManager.stopAll();
-        }
     }
 
     @Override
@@ -114,6 +112,13 @@ public class WorldController extends InputAdapter implements ContactListener {
         if (this.finalAnimationFinished) {
             this.switchToMainMenu = true;
             ScreenManager.multiplexer.removeProcessor(this);
+        }
+
+        Vector3 touchGUI = worldRenderer.cameraGUI.unproject(new Vector3(screenX,screenY,0));
+        if(touchGUI.x> 700 && touchGUI.y < 50){
+            this.switchToMainMenu = true;
+            ScreenManager.multiplexer.removeProcessor(this);
+            AudioManager.stopAll();
         }
         return true;
     }
@@ -183,6 +188,7 @@ public class WorldController extends InputAdapter implements ContactListener {
             finish = true;
             spaceShip.hasLanded();
             spacebar.hasBeenLandedOn();
+            AudioManager.stop();
             AudioManager.havanaMusic();
             zoomIn = true;
             if (timeElapsed <= highscore || highscore == -1){
