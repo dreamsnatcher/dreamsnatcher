@@ -54,7 +54,7 @@ public class SpaceShipFast extends SpaceShip {
 
     @Override
     public float gainEnergy() {
-        energy += WorldController.DRAIN_ENERGY_STEP * SPEEDER_DAMPEMER;
+        energy += WorldController.DRAIN_ENERGY_STEP ;
         if (energy > 100) {
             energy = 100;
         }

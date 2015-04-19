@@ -33,6 +33,8 @@ public class WorldRenderer implements Disposable {
     private TextureRegion penaltypixel;
     private TextureRegion schaumkrone;
 
+    private TextureRegion[][] bgs;
+
     private int[] rotation;
     private TextureRegion finishPicture;
 
@@ -43,10 +45,10 @@ public class WorldRenderer implements Disposable {
     public final float MAXTIMER = 0.02f;
 
 
-    int minX =-10;
-    int minY =-10;
-    int maxX =10;
-    int maxY =10;
+    int minX = -10;
+    int minY = -10;
+    int maxX = 10;
+    int maxY = 10;
 
 
     public WorldRenderer(WorldController worldController) {
@@ -93,18 +95,18 @@ public class WorldRenderer implements Disposable {
         //finishPicture.flip(false, true);
     }
 
-    public void calculateBackground(){
-        for(GameObject o : worldController.gameWorld.objects){
-            if(o.position.x< minX){
+    public void calculateBackground() {
+        for (GameObject o : worldController.gameWorld.objects) {
+            if (o.position.x < minX) {
                 minX = (int) o.position.x;
             }
-            if(o.position.y< minY){
+            if (o.position.y < minY) {
                 minY = (int) o.position.y;
             }
-            if(o.position.y > maxY){
+            if (o.position.y > maxY) {
                 maxY = (int) o.position.y;
             }
-            if(o.position.x > maxX){
+            if (o.position.x > maxX) {
                 maxX = (int) o.position.x;
             }
         }
@@ -112,92 +114,14 @@ public class WorldRenderer implements Disposable {
         minY -= 10;
         maxX += 10;
         maxY += 10;
-    }
 
-    public void renderGUI(SpriteBatch batch) {
-        batch.setProjectionMatrix(cameraGUI.combined);
-        batch.begin();
-        String mmss = String.format("%02d:%02d", TimeUnit.MILLISECONDS.toMinutes(worldController.timeElapsed) % TimeUnit.HOURS.toMinutes(1),
-                TimeUnit.MILLISECONDS.toSeconds(worldController.timeElapsed) % TimeUnit.MINUTES.toSeconds(1));
-        String lastHighscore = "No highscore yet";
-        long highScoreVal = worldController.getHighscore();
-        if (highScoreVal > -1) {
-            lastHighscore = String.format("%02d:%02d", TimeUnit.MILLISECONDS.toMinutes(highScoreVal) % TimeUnit.HOURS.toMinutes(1),
-                    TimeUnit.MILLISECONDS.toSeconds(highScoreVal) % TimeUnit.MINUTES.toSeconds(1));
-        }
-        font.draw(batch, mmss, 10, 10);
-        font.draw(batch, "Highscore: " + lastHighscore, 100, 10);
-        batch.draw(Assets.indicator, 10, 20, Assets.indicator.getRegionWidth() / 2, Assets.indicator.getRegionHeight() / 2,
-                Assets.indicator.getRegionWidth(), Assets.indicator.getRegionHeight(), 0.5f, 0.5f, getCurrentIndicatorAngle());
 
-        batch.draw(energybar, 760, 100, 40, 400);
-
-        if (!worldController.isFinish()) {
-            for (int i = 1; i <= this.worldController.gameWorld.spaceShip.getEnergy(); i++) {
-                if (this.worldController.gameWorld.spaceShip.getPenaltyTime() <= 0) {
-                    batch.draw(new TextureRegion(energypixel), 760, 500 - i * 4, 40, 4);
-                } else {
-                    batch.draw(new TextureRegion(penaltypixel), 760, 500 - i * 4, 40, 4);
-                }
-            }
-            if (this.worldController.gameWorld.spaceShip.getPenaltyTime() > 0) {
-                this.worldController.gameWorld.spaceShip.lowerPenaltyTime(Gdx.graphics.getDeltaTime());
-            }
-        }
-        if (worldController.isFinish()) {
-            beerTimer += Gdx.graphics.getDeltaTime();
-            if (beerTimer > MAXTIMER) {
-                beerTimer = 0;
-                if (beercounter <= 400) {
-                    beercounter++;
-                }
-            }
-            for (int i = 1; i <= beercounter; i++) {
-                batch.draw(new TextureRegion(beerpixel), 760, 500 - i, 40, 4);
-            }
-            batch.draw(new TextureRegion(schaumkrone), 755, 500 - beercounter - 3, 50, 20);
-        }
-        if (beercounter >= 400) {
-            globalTimer+=Gdx.graphics.getDeltaTime();
-            finishPicture = Assets.wookieAnimation.getKeyFrame(globalTimer, true);
-            finishPicture.flip(false,true);
-            batch.draw(new TextureRegion(finishPicture), 100, 300, finishPicture.getRegionWidth(), finishPicture.getRegionHeight());
-            worldController.finalAnimationFinished = true;
-        }
-
-        batch.draw(Assets.back, 710, 2, Assets.back.getRegionWidth() / 2, Assets.back.getRegionHeight() / 2);
-        batch.end();
-    }
-
-    private float getCurrentIndicatorAngle() {
-        Vector2 shipPos = worldController.gameWorld.spaceShip.getBody().getPosition();
-        Vector2 barPos = worldController.gameWorld.spacebar.getBody().getPosition();
-        Vector2 shipBarDistance = new Vector2(shipPos.x - barPos.x, shipPos.y - barPos.y);
-        return 180 - shipBarDistance.angle();
-    }
-
-    public void render() {
-        worldController.cameraHelper.applyTo(camera);
-        batch.setProjectionMatrix(camera.combined);
-        batch.begin();
-        renderBackground();
-        for (GameObject object : worldController.gameWorld.objects) {
-            object.render(batch);
-        }
-        worldController.gameWorld.spaceShip.render(batch);
-        batch.end();
-        showNightmare(worldController.gameWorld.spaceShip.getEnergy());
-        renderGUI(batch);
-        if (worldController.isDebug()) {
-            debugRenderer.render(worldController.getB2World(), camera.combined);
-        }
-    }
-
-    private void renderBackground() {
+        bgs = new TextureRegion[maxX - minX][maxY - minY];
         int k = 0;
-        for (int i = minX; i < maxX; i++) {
-            for (int j = minY; j < maxY; j++) {
-                TextureRegion textureRegion;
+        TextureRegion textureRegion;
+        for (int i = 0; i < bgs.length; i++) {
+            for (int j = 0; j < bgs[i].length; j++) {
+                k++;
                 switch (rotation[k % rotation.length]) {
                     case 1:
                         textureRegion = new TextureRegion(background0);
@@ -262,8 +186,94 @@ public class WorldRenderer implements Disposable {
                     default:
                         textureRegion = background0;
                 }
-                k++;
-                batch.draw(textureRegion, i, j, 1, 1);
+                bgs[i][j] = textureRegion;
+            }
+        }
+    }
+
+    public void renderGUI(SpriteBatch batch) {
+        batch.setProjectionMatrix(cameraGUI.combined);
+        batch.begin();
+        String mmss = String.format("%02d:%02d", TimeUnit.MILLISECONDS.toMinutes(worldController.timeElapsed) % TimeUnit.HOURS.toMinutes(1),
+                TimeUnit.MILLISECONDS.toSeconds(worldController.timeElapsed) % TimeUnit.MINUTES.toSeconds(1));
+        String lastHighscore = "No highscore yet";
+        long highScoreVal = worldController.getHighscore();
+        if (highScoreVal > -1) {
+            lastHighscore = String.format("%02d:%02d", TimeUnit.MILLISECONDS.toMinutes(highScoreVal) % TimeUnit.HOURS.toMinutes(1),
+                    TimeUnit.MILLISECONDS.toSeconds(highScoreVal) % TimeUnit.MINUTES.toSeconds(1));
+        }
+        font.draw(batch, mmss, 10, 10);
+        font.draw(batch, "Highscore: " + lastHighscore, 100, 10);
+        batch.draw(Assets.indicator, 10, 20, Assets.indicator.getRegionWidth() / 2, Assets.indicator.getRegionHeight() / 2,
+                Assets.indicator.getRegionWidth(), Assets.indicator.getRegionHeight(), 0.5f, 0.5f, getCurrentIndicatorAngle());
+
+        batch.draw(energybar, 760, 100, 40, 400);
+
+        if (!worldController.isFinish()) {
+            for (int i = 1; i <= this.worldController.gameWorld.spaceShip.getEnergy(); i++) {
+                if (this.worldController.gameWorld.spaceShip.getPenaltyTime() <= 0) {
+                    batch.draw(new TextureRegion(energypixel), 760, 500 - i * 4, 40, 4);
+                } else {
+                    batch.draw(new TextureRegion(penaltypixel), 760, 500 - i * 4, 40, 4);
+                }
+            }
+            if (this.worldController.gameWorld.spaceShip.getPenaltyTime() > 0) {
+                this.worldController.gameWorld.spaceShip.lowerPenaltyTime(Gdx.graphics.getDeltaTime());
+            }
+        }
+        if (worldController.isFinish()) {
+            beerTimer += Gdx.graphics.getDeltaTime();
+            if (beerTimer > MAXTIMER) {
+                beerTimer = 0;
+                if (beercounter <= 400) {
+                    beercounter++;
+                }
+            }
+            for (int i = 1; i <= beercounter; i++) {
+                batch.draw(new TextureRegion(beerpixel), 760, 500 - i, 40, 4);
+            }
+            batch.draw(new TextureRegion(schaumkrone), 755, 500 - beercounter - 3, 50, 20);
+        }
+        if (beercounter >= 400) {
+            globalTimer+=Gdx.graphics.getDeltaTime();
+            finishPicture = Assets.wookieAnimation.getKeyFrame(globalTimer, true);
+            finishPicture.flip(false,true);
+            batch.draw(new TextureRegion(finishPicture), 100, 300, finishPicture.getRegionWidth(), finishPicture.getRegionHeight());
+            worldController.finalAnimationFinished = true;
+        }
+
+        font.draw(batch, "BACK",  710, 10);
+        batch.end();
+    }
+
+    private float getCurrentIndicatorAngle() {
+        Vector2 shipPos = worldController.gameWorld.spaceShip.getBody().getPosition();
+        Vector2 barPos = worldController.gameWorld.spacebar.getBody().getPosition();
+        Vector2 shipBarDistance = new Vector2(shipPos.x - barPos.x, shipPos.y - barPos.y);
+        return 180 - shipBarDistance.angle();
+    }
+
+    public void render() {
+        worldController.cameraHelper.applyTo(camera);
+        batch.setProjectionMatrix(camera.combined);
+        batch.begin();
+        renderBackground();
+        for (GameObject object : worldController.gameWorld.objects) {
+            object.render(batch);
+        }
+        worldController.gameWorld.spaceShip.render(batch);
+        batch.end();
+        showNightmare(worldController.gameWorld.spaceShip.getEnergy());
+        renderGUI(batch);
+        if (worldController.isDebug()) {
+            debugRenderer.render(worldController.getB2World(), camera.combined);
+        }
+    }
+
+    private void renderBackground() {
+        for (int i = 0; i < maxX-minX; i++) {
+            for (int j = 0; j < maxY-minY; j++) {
+                batch.draw(bgs[i][j], i+minX, j+minY, 1, 1);
             }
         }
     }
