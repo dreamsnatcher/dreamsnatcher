@@ -237,7 +237,6 @@ public class WorldRenderer implements Disposable {
         if (beercounter >= 400) {
             globalTimer+=Gdx.graphics.getDeltaTime();
             finishPicture = Assets.wookieAnimation.getKeyFrame(globalTimer, true);
-            finishPicture.flip(false,true);
             batch.draw(new TextureRegion(finishPicture), 100, 300, finishPicture.getRegionWidth(), finishPicture.getRegionHeight());
             worldController.finalAnimationFinished = true;
         }
