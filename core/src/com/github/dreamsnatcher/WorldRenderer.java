@@ -128,6 +128,7 @@ public class WorldRenderer implements Disposable {
             worldController.finalAnimationFinished = true;
         }
 
+        batch.draw(Assets.back, 710, 2, Assets.back.getRegionWidth() / 2, Assets.back.getRegionHeight() / 2);
         batch.end();
     }
 
@@ -220,11 +221,11 @@ public class WorldRenderer implements Disposable {
         }
         worldController.gameWorld.spaceShip.render(batch);
         batch.end();
+        showNightmare(worldController.gameWorld.spaceShip.getEnergy());
         renderGUI(batch);
         if (worldController.isDebug()) {
             debugRenderer.render(worldController.getB2World(), camera.combined);
         }
-        showNightmare(worldController.gameWorld.spaceShip.getEnergy());
     }
 
     public void resize(int width, int height) {

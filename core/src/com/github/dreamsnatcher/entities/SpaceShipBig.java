@@ -45,7 +45,7 @@ public class SpaceShipBig extends SpaceShip {
 
     @Override
     public float drainEnergy() {
-        energy -= WorldController.DRAIN_ENERGY_STEP* CRUZER_DAMPENER;
+        energy -= WorldController.DRAIN_ENERGY_STEP * CRUZER_DAMPENER;
         if (energy < 0) {
             energy = 0;
         }
