@@ -24,7 +24,7 @@ public class GameScreen extends Screen {
         AudioManager.update(Gdx.graphics.getDeltaTime());
         worldRenderer.render();
         if(worldController.switchToMainMenu){
-            AudioManager.havana.stop();
+            AudioManager.stopAll();
             AudioManager.init();
             manager.setScreen(new MainMenuScreen(manager));
         }

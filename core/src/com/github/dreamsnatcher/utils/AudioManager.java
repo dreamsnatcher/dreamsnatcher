@@ -18,16 +18,16 @@ public class AudioManager {
         public static float timer = 0;
         public static boolean playempty = false;
 
-        public static Sound move_fast;
-        public static Sound move_regular;
-        public static Sound move_slow;
-        public static Music mainloop;
-        public static Music fearloop;
-        public static Music havana;
-        public static Sound ahit;
-        public static Sound landing;
-        public static Sound starting;
-        public static Music empty;
+        private static Sound move_fast;
+        private static Sound move_regular;
+        private static Sound move_slow;
+        private static Music mainloop;
+        private static Music fearloop;
+        private static Music havana;
+        private static Sound ahit;
+        private static Sound landing;
+        private static Sound starting;
+        private static Music empty;
 
         public static boolean fearloopplays = false;
 
@@ -72,6 +72,7 @@ public class AudioManager {
                     playempty = false;
                     timer = 0;
                     empty.stop();
+                    mainloop.setVolume(musicvolume);
                     mainloop.play();
                 }
             }
@@ -83,6 +84,7 @@ public class AudioManager {
             if(!fearloopplays) {
                 mainloop.stop();
                 empty.stop();
+                fearloop.setVolume(musicvolume + 0.3f);
                 fearloop.play();
                 fearloopplays = true;
             }
@@ -90,6 +92,7 @@ public class AudioManager {
 
         public static void someEnergy(){
             if(fearloopplays) {
+                mainloop.setVolume(musicvolume);
                 mainloop.play();
                 empty.stop();
                 fearloop.stop();
@@ -129,7 +132,7 @@ public class AudioManager {
             move_slow.stop();
             move_fast.setPitch(move_fast.loop(soundvolume),0.4f);
         }
-        public static void stop(){
+        public static void stopSounds(){
             move_regular.stop();
             move_fast.stop();
             move_slow.stop();
@@ -144,6 +147,15 @@ public class AudioManager {
             mainloop.stop();
         }
 
+        public static void land(){
+            stopSounds();
+            landing.play();
+        }
+        public static void start(){
+            stopSounds();
+            starting.play();
+        }
+
         public static void dispose() {
             mainloop.dispose();
             fearloop.dispose();
@@ -155,4 +167,8 @@ public class AudioManager {
         }
 
 
+    public static void asteroidHit() {
+        ahit.stop(); //Klingt das gut?
+        ahit.play();
+    }
 }

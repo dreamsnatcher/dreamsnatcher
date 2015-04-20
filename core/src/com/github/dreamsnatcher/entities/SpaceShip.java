@@ -159,10 +159,10 @@ public class SpaceShip extends GameObject {
             AudioManager.moveFast();
         }
         if (b2Body.getLinearVelocity().len() <= 0.1f) {
-            AudioManager.stop();
+            AudioManager.stopSounds(); //stop()? or stopSounds?
         }
         if (harvest) {
-            AudioManager.stop();
+            AudioManager.stopSounds(); //stop()? or stopSounds?
             //AudioManager.harvest();
 
         }
@@ -265,9 +265,8 @@ public class SpaceShip extends GameObject {
             currentPlanet.setCooldown(2f);
             currentPlanet = null;
         }
-        AudioManager.landing.stop();
         if(!mute)
-            AudioManager.starting.play();
+            AudioManager.start();
     }
 
     public void hasLanded() {
