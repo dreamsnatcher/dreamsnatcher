@@ -175,10 +175,10 @@ public class WorldController extends InputAdapter implements ContactListener {
         if (planet != null && spaceShip != null && planet.getEnergy() > 1f && planet.cooldown <= 0) {
             spaceShip.getBody().setLinearVelocity(0, 0);
             spaceShip.beginHarvest(planet);
-            AudioManager.landing.play();
+            AudioManager.land();
         }
         if (asteroid != null && spaceShip != null) {
-            AudioManager.ahit.play();
+            AudioManager.asteroidHit();
             spaceShip.setEnergy(Math.max(spaceShip.getEnergy() - 20f, 0f));
             asteroid.hit();
         }
@@ -188,7 +188,7 @@ public class WorldController extends InputAdapter implements ContactListener {
             finish = true;
             spaceShip.hasLanded();
             spacebar.hasBeenLandedOn();
-            AudioManager.stop();
+            AudioManager.stopAll(); //Funktioniert das?
             AudioManager.havanaMusic();
             zoomIn = true;
             if (timeElapsed <= highscore || highscore == -1) {
