@@ -35,7 +35,6 @@ public class SpaceShip extends GameObject {
     protected transient Joint joint;
     protected transient boolean destroyJoint;
     protected transient boolean landed;
-    public boolean mute = false;
     protected float counter = 0;
 
     private float penaltyTime = 0f;
@@ -145,25 +144,21 @@ public class SpaceShip extends GameObject {
 
     public void update(float deltaTime) {
         if (b2Body.getLinearVelocity().len() > 0.2f) {
-            if(!mute)
                 AudioManager.moveSlow();
         }
 
         if (b2Body.getLinearVelocity().len() > 0.5f) {
-            if(!mute)
             AudioManager.moveRegular();
         }
 
         if (b2Body.getLinearVelocity().len() > 0.7f) {
-            if(!mute)
             AudioManager.moveFast();
         }
         if (b2Body.getLinearVelocity().len() <= 0.1f) {
-            AudioManager.stopSounds(); //stop()? or stopSounds?
+            AudioManager.dontMove();
         }
         if (harvest) {
-            AudioManager.stopSounds(); //stop()? or stopSounds?
-            //AudioManager.harvest();
+            AudioManager.stopSounds();
 
         }
         if (transist) {
@@ -203,7 +198,6 @@ public class SpaceShip extends GameObject {
                     if (currentPlanet.getEnergy() == 0) {
                         energy = 4 * energy / 5;
                         penaltyTime = penaltyTime > 0 ? penaltyTime + 2f : 2f;
-                        if(!mute)
                         AudioManager.suckDryMusic();
                     }
                     endHarvest();
@@ -265,13 +259,11 @@ public class SpaceShip extends GameObject {
             currentPlanet.setCooldown(2f);
             currentPlanet = null;
         }
-        if(!mute)
             AudioManager.start();
     }
 
     public void hasLanded() {
         landed = true;
-        mute = true;
     }
 
     public float getPenaltyTime() {

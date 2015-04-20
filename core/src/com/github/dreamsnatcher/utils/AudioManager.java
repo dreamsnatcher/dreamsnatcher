@@ -10,8 +10,6 @@ import com.badlogic.gdx.utils.Array;
  */
 public class AudioManager {
         public static boolean mute = false;
-//        private static final float MUSIC_VOLUME = 0.7f;
-
 
         public static final float PLAYEMPTYTIME = 5;
 
@@ -28,6 +26,8 @@ public class AudioManager {
         private static Sound landing;
         private static Sound starting;
         private static Music empty;
+        public static State state = State.IDLE;
+
 
         public static boolean fearloopplays = false;
 
@@ -73,9 +73,12 @@ public class AudioManager {
                     timer = 0;
                     empty.stop();
                     mainloop.setVolume(musicvolume);
-                    mainloop.play();
+                    if(!mute)
+                        mainloop.play();
                 }
             }
+            if(mute)
+                stopAll();
 
         }
 
@@ -84,8 +87,10 @@ public class AudioManager {
             if(!fearloopplays) {
                 mainloop.stop();
                 empty.stop();
-                fearloop.setVolume(musicvolume + 0.3f);
-                fearloop.play();
+                soundvolume = 0.02f;
+                fearloop.setVolume(musicvolume + 0.5f);
+                if(!mute)
+                    fearloop.play();
                 fearloopplays = true;
             }
         }
@@ -93,9 +98,11 @@ public class AudioManager {
         public static void someEnergy(){
             if(fearloopplays) {
                 mainloop.setVolume(musicvolume);
-                mainloop.play();
+                if(!mute)
+                    mainloop.play();
                 empty.stop();
                 fearloop.stop();
+                soundvolume = 0.2f;
                 fearloopplays = false;
             }
         }
@@ -106,32 +113,57 @@ public class AudioManager {
             timer = 0;
             playempty = true;
             mainloop.stop();
-            empty.play();
+            if(!mute)
+                empty.play();
         }
 
         public static void havanaMusic(){
             mainloop.stop();
             empty.stop();
             havana.setLooping(true);
-            havana.play();
+            if(!mute)
+                havana.play();
         }
 
 
     public static void moveSlow(){
-            move_regular.stop();
-            move_fast.stop();
-            move_slow.setPitch(move_slow.loop(soundvolume),0.4f);
+            if(state != State.SLOW) {
+                state = State.SLOW;
+                move_regular.stop();
+                move_fast.stop();
+                if(!mute)
+                    move_slow.setPitch(move_slow.loop(soundvolume), 0.4f);
+            }
         }
         public static void moveRegular(){
-            move_slow.stop();
-            move_fast.stop();
-            move_regular.setPitch(move_regular.loop(soundvolume),0.4f);
+            if(state != State.REGULAR) {
+                state = State.REGULAR;
+                move_slow.stop();
+                move_fast.stop();
+                if(!mute)
+                    move_regular.setPitch(move_regular.loop(soundvolume), 0.4f);
+            }
         }
         public static void moveFast(){
-            move_regular.stop();
-            move_slow.stop();
-            move_fast.setPitch(move_fast.loop(soundvolume),0.4f);
+            if(state != State.FAST) {
+                state = State.FAST;
+                move_regular.stop();
+                move_slow.stop();
+                if(!mute)
+                    move_fast.setPitch(move_fast.loop(soundvolume), 0.4f);
+            }
         }
+
+        public static void dontMove() {
+            if(state != State.IDLE) {
+                state = State.IDLE;
+                move_slow.stop();
+                move_regular.stop();
+                move_fast.stop();
+
+            }
+        }
+
         public static void stopSounds(){
             move_regular.stop();
             move_fast.stop();
@@ -149,11 +181,13 @@ public class AudioManager {
 
         public static void land(){
             stopSounds();
-            landing.play();
+            if(!mute)
+                landing.play();
         }
         public static void start(){
             stopSounds();
-            starting.play();
+            if(!mute)
+                starting.play();
         }
 
         public static void dispose() {
@@ -168,7 +202,14 @@ public class AudioManager {
 
 
     public static void asteroidHit() {
-        ahit.stop(); //Klingt das gut?
-        ahit.play();
+        ahit.stop();
+        if(!mute)
+            ahit.play();
+    }
+
+
+
+    public static enum State {
+        IDLE, SLOW, FAST, REGULAR
     }
 }

@@ -12,6 +12,7 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.Disposable;
 import com.github.dreamsnatcher.entities.GameObject;
 import com.github.dreamsnatcher.utils.Assets;
+import com.github.dreamsnatcher.utils.AudioManager;
 import com.github.dreamsnatcher.utils.Constants;
 
 import java.util.concurrent.TimeUnit;
@@ -269,6 +270,12 @@ public class WorldRenderer implements Disposable {
         renderGUI(batch);
         if (worldController.isDebug()) {
             debugRenderer.render(worldController.getB2World(), camera.combined);
+        }
+        if(worldController.gameWorld.spaceShip.getEnergy()<20){
+            AudioManager.noEnergy();
+        }
+        else{
+            AudioManager.someEnergy();
         }
     }
 
