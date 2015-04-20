@@ -209,14 +209,14 @@ public class WorldRenderer implements Disposable {
         batch.draw(Assets.indicator, 10, 20, Assets.indicator.getRegionWidth() / 2, Assets.indicator.getRegionHeight() / 2,
                 Assets.indicator.getRegionWidth(), Assets.indicator.getRegionHeight(), 0.5f, 0.5f, getCurrentIndicatorAngle());
 
-        batch.draw(energybar, 760, 100, 40, 400);
+        batch.draw(energybar, cameraGUI.viewportWidth-40f, 100, 40, 400);
 
         if (!worldController.isFinish()) {
             for (int i = 1; i <= this.worldController.gameWorld.spaceShip.getEnergy(); i++) {
                 if (this.worldController.gameWorld.spaceShip.getPenaltyTime() <= 0) {
-                    batch.draw(new TextureRegion(energypixel), 760, 500 - i * 4, 40, 4);
+                    batch.draw(new TextureRegion(energypixel), cameraGUI.viewportWidth-40f, 500 - i * 4, 40, 4);
                 } else {
-                    batch.draw(new TextureRegion(penaltypixel), 760, 500 - i * 4, 40, 4);
+                    batch.draw(new TextureRegion(penaltypixel), cameraGUI.viewportWidth-40f, 500 - i * 4, 40, 4);
                 }
             }
             if (this.worldController.gameWorld.spaceShip.getPenaltyTime() > 0) {
@@ -232,9 +232,9 @@ public class WorldRenderer implements Disposable {
                 }
             }
             for (int i = 1; i <= beercounter; i++) {
-                batch.draw(new TextureRegion(beerpixel), 760, 500 - i, 40, 4);
+                batch.draw(new TextureRegion(beerpixel), cameraGUI.viewportWidth-40f, 500 - i, 40, 4);
             }
-            batch.draw(new TextureRegion(schaumkrone), 755, 500 - beercounter - 3, 50, 20);
+            batch.draw(new TextureRegion(schaumkrone), cameraGUI.viewportWidth- 45f, 500 - beercounter - 3, 50, 20);
         }
         if (beercounter >= 400) {
             globalTimer+=Gdx.graphics.getDeltaTime();
@@ -243,7 +243,7 @@ public class WorldRenderer implements Disposable {
             worldController.finalAnimationFinished = true;
         }
 
-        font.draw(batch, "BACK",  710, 10);
+        font.draw(batch, "BACK",  cameraGUI.viewportWidth-80f, 10);
         batch.end();
     }
 
@@ -288,9 +288,11 @@ public class WorldRenderer implements Disposable {
     }
 
     public void resize(int width, int height) {
-        camera.viewportWidth = (Constants.VIEWPORT_HEIGHT / height) * width; //calculate aspect ratio
+        camera.viewportWidth = (Constants.VIEWPORT_HEIGHT / (float) height) * (float) width; //calculate aspect ratio
         camera.update();
-        cameraGUI.viewportWidth = (Constants.VIEWPORT_GUI_HEIGHT / height) * width; //calculate aspect ratio
+        cameraGUI.viewportHeight = Constants.VIEWPORT_GUI_HEIGHT;
+        cameraGUI.viewportWidth = (Constants.VIEWPORT_GUI_HEIGHT / (float) height) * (float) width; //calculate aspect ratio
+        cameraGUI.position.set(cameraGUI.viewportWidth/2, cameraGUI.viewportHeight/2,0);
         cameraGUI.update();
     }
 
