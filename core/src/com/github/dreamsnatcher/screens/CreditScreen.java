@@ -89,4 +89,9 @@ public class CreditScreen extends Screen {
     public void dispose() {
         stage.dispose();
     }
+
+    @Override
+    public void resize(int width, int height) {
+        stage.getViewport().update(width, height);
+    }
 }
