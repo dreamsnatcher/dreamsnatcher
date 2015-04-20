@@ -39,6 +39,7 @@ public class SpaceShip extends GameObject {
     protected float counter = 0;
 
     private float penaltyTime = 0f;
+    private float asteriodEnergyReduce = 0f;
 
     public void init(com.badlogic.gdx.physics.box2d.World world) {
         if (this instanceof SpaceShipFast) {
@@ -49,6 +50,7 @@ public class SpaceShip extends GameObject {
             animationSpeed1 = Assets.shipFastAnimationSpeed1;
             animationSpeed2 = Assets.shipFastAnimationSpeed2;
             animationSpeed3 = Assets.shipFastAnimationSpeed3;
+            asteriodEnergyReduce = 30f;
         } else if(this instanceof SpaceShipBig) {
             texture = Assets.spaceShipCruzer0;
             textureStop = Assets.spaceShipCruzer0;
@@ -57,6 +59,7 @@ public class SpaceShip extends GameObject {
             animationSpeed1 = Assets.shipCruzerAnimationSpeed1;
             animationSpeed2 = Assets.shipCruzerAnimationSpeed2;
             animationSpeed3 = Assets.shipCruzerAnimationSpeed3;
+            asteriodEnergyReduce = 5f;
         } else{
             texture = Assets.spaceShip0;
             textureStop = Assets.spaceShip0;
@@ -65,6 +68,7 @@ public class SpaceShip extends GameObject {
             animationSpeed1 = Assets.shipAnimationSpeed1;
             animationSpeed2 = Assets.shipAnimationSpeed2;
             animationSpeed3 = Assets.shipAnimationSpeed3;
+            asteriodEnergyReduce = 20f;
         }
 
         b2World = world;
@@ -281,5 +285,9 @@ public class SpaceShip extends GameObject {
 
     public void lowerPenaltyTime(float penaltyTime) {
         this.penaltyTime = this.penaltyTime - penaltyTime < 0 ? 0f : this.penaltyTime - penaltyTime;
+    }
+
+    public void asteriodHit() {
+        setEnergy(Math.max(getEnergy() - asteriodEnergyReduce, 0f));
     }
 }

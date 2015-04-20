@@ -179,7 +179,7 @@ public class WorldController extends InputAdapter implements ContactListener {
         }
         if (asteroid != null && spaceShip != null) {
             AudioManager.ahit.play();
-            spaceShip.setEnergy(Math.max(spaceShip.getEnergy() - 20f, 0f));
+            spaceShip.asteriodHit();
             asteroid.hit();
         }
 
