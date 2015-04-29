@@ -1,5 +1,7 @@
 package com.github.dreamsnatcher;
 
+import box2dLight.ConeLight;
+import box2dLight.RayHandler;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -7,10 +9,12 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.Disposable;
 import com.github.dreamsnatcher.entities.GameObject;
+import com.github.dreamsnatcher.entities.SpaceShip;
 import com.github.dreamsnatcher.utils.Assets;
 import com.github.dreamsnatcher.utils.AudioManager;
 import com.github.dreamsnatcher.utils.Constants;
@@ -33,24 +37,26 @@ public class WorldRenderer implements Disposable {
     private TextureRegion energypixel;
     private TextureRegion beerpixel;
     private TextureRegion penaltypixel;
+    public RayHandler rayHandler;
+
     private TextureRegion schaumkrone;
 
     private TextureRegion[][] bgs;
-
     private int[] rotation;
-    private TextureRegion finishPicture;
 
+    private TextureRegion finishPicture;
     public int beercounter = 0;
     public float beerTimer = 0;
+
     public float globalTimer = 0;
 
+
     public final float MAXTIMER = 0.02f;
-
-
     int minX = -10;
     int minY = -10;
     int maxX = 10;
     int maxY = 10;
+    private ConeLight light;
 
 
     public WorldRenderer(WorldController worldController) {
@@ -93,6 +99,10 @@ public class WorldRenderer implements Disposable {
         font = new BitmapFont(Gdx.files.internal("fonts/candlestick.fnt"),
                 Gdx.files.internal("fonts/candlestick.png"), true);
         font.setColor(Color.GREEN);
+
+        rayHandler = new RayHandler(worldController.getB2World());
+        rayHandler.setAmbientLight(new Color(0.1f,0.1f,0.1f,1f));
+        light = new ConeLight(rayHandler, 128, new Color(0.1f,0.1f,0.1f,1), 100, camera.position.x, camera.position.y,0,50f);
 
         //finishPicture.flip(false, true);
     }
@@ -255,6 +265,9 @@ public class WorldRenderer implements Disposable {
     }
 
     public void render() {
+        SpaceShip spaceShip = worldController.gameWorld.spaceShip;
+        light.setPosition(spaceShip.getBody().getWorldCenter().x,spaceShip.getBody().getWorldCenter().y);
+        light.setDirection((worldController.gameWorld.spaceShip.getBody().getAngle() * MathUtils.radiansToDegrees)+90);
         worldController.cameraHelper.applyTo(camera);
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
@@ -267,6 +280,8 @@ public class WorldRenderer implements Disposable {
         worldController.gameWorld.spaceShip.render(batch);
         batch.end();
         showNightmare(worldController.gameWorld.spaceShip.getEnergy());
+        rayHandler.setCombinedMatrix(camera.combined);
+        rayHandler.updateAndRender();
         renderGUI(batch);
         if (worldController.isDebug()) {
             debugRenderer.render(worldController.getB2World(), camera.combined);
@@ -317,5 +332,6 @@ public class WorldRenderer implements Disposable {
     @Override
     public void dispose() {
         batch.dispose();
+        rayHandler.dispose();
     }
 }
