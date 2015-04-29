@@ -102,6 +102,7 @@ public class MainMenuScreen extends com.github.dreamsnatcher.screens.Screen {
 
     @Override
     public void resize(int width, int height) {
+        stage.getViewport().update(width, height, true);
     }
 
     @Override
