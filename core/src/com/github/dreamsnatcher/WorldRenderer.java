@@ -281,7 +281,9 @@ public class WorldRenderer implements Disposable {
         batch.end();
         showNightmare(worldController.gameWorld.spaceShip.getEnergy());
         rayHandler.setCombinedMatrix(camera.combined);
-        rayHandler.updateAndRender();
+        if(!spaceShip.harvest && !spaceShip.transist){
+            rayHandler.updateAndRender();
+        }
         renderGUI(batch);
         if (worldController.isDebug()) {
             debugRenderer.render(worldController.getB2World(), camera.combined);
